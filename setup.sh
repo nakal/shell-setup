@@ -15,7 +15,7 @@ git_init_dir()
 	fi
 }
 
-echo Looking for my installation directory...
+echo "[shell-setup] Looking for my installation directory..."
 SCRIPT_HOME=`dirname $0`
 SCRIPT_HOME=`realpath "$SCRIPT_HOME"`
 if [ -x "$SCRIPT_HOME/setup.sh" ]; then
@@ -25,7 +25,7 @@ else
 	exit 1
 fi
 
-echo Checking packages...
+echo "[shell-setup] Checking packages..."
 pkg info vim git tmux fish \
 	> /dev/null
 if [ $? -ne 0 ]; then
@@ -48,14 +48,14 @@ done
 
 # remove old stuff
 cd $HOME
-echo Removing old softlinks...
+echo "[shell-setup] Removing old softlinks..."
 rm -f $REMOVE_FILES
 echo Moving vim configuration out of the way...
 mv .vim .vim-bak-`date +%s` 2> /dev/null
 mv .vimrc .vimrc-bak-`date +%s` 2> /dev/null
 
 # prepare conf in user's home
-echo Reinstalling softlinks...
+echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
 ln -s $SCRIPT_HOME/misc/.indent.pro .
@@ -67,7 +67,7 @@ if [ -r "$HOME/.tmux.local" ]; then
 	echo "Already exists (skipping)."
 else
 	grep "set -g status-style " "$HOME/.tmux.conf" | sed 's/^/#/' > "$HOME/.tmux.local"
-	echo "-> Installed. You can change tmux status bar color there."
+	echo "-> Installed. You can change tmux status bar color in $HOME/.tmux.local."
 fi
 
 echo Preparing fish shell...
@@ -99,5 +99,7 @@ git clone https://github.com/gosukiwi/vim-atom-dark.git
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
 cd ../..
+
+echo "[shell-setup] Finished successfully."
 
 exit 0
