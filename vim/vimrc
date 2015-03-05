@@ -26,22 +26,22 @@ set nomodeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
-set number
 
 set printdevice=192.168.0.50
 set printoptions=paper:a4
 set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '\ -P'\ .\ &printdevice)\ .\ '\ '\ .\ v:fname_in)\ .\ delete(v:fname_in)\ +\ v:shell_error
 
-autocmd BufRead *.[ch] :call FreeBSD_Style()
-autocmd BufRead *.cpp :call FreeBSD_Style()
+autocmd BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
 
 " Follow the FreeBSD style(9).
 function! FreeBSD_Style()
-    setlocal cindent
-    setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
-    setlocal indentexpr=IgnoreParenIndent()
-    setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
-    setlocal textwidth=80
+	setlocal cindent
+	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
+	setlocal indentexpr=IgnoreParenIndent()
+	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
+	setlocal textwidth=80
+	highlight SpecialKey ctermbg=yellow guibg=yellow
+	au BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
 endfun
 
 let mapleader = '\'
@@ -54,7 +54,6 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 highlight ColorColumn ctermbg=darkred
 call matchadd('ColorColumn', '\%81v', 100)
-
 
 " ******** PLUGINS ********
 
