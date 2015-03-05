@@ -57,6 +57,10 @@ function get_git_status -d "Git status on the right side"
 			set_color -b 288
 			set_color white
 		end
+		if [ -z "$ref" ]
+			set_color -b 882
+			set ref "(???)"
+		end
 		echo "$ref"
 		set_color normal
 	end

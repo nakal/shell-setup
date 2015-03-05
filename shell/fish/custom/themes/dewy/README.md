@@ -19,5 +19,6 @@ some annoyances.
 	* Shows branch in cyan without status info, if the repository would
 		slow down the prompt too much.
 	* Shows pink branch name while rebase is in progress
+	* Shows yellow `(???)` on unnamed heads (detached, etc.)
 
 [screenshot]: https://lh3.googleusercontent.com/-RCKrxVbW7uk/VPD97XVYhLI/AAAAAAAAGNo/JmP7KsQNc4o/w732-h84-no/fish_dewy_theme.png
