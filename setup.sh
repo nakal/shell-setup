@@ -37,7 +37,7 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig \
 	.config/fish/config.fish .config/fish/custom \
-	.config/fish/functions .zshrc .zsh \
+	.config/fish/functions .zshrc \
 	"
 
 for df in $REMOVE_FILES; do
@@ -50,9 +50,18 @@ done
 cd $HOME
 echo "[shell-setup] Removing old softlinks..."
 rm -f $REMOVE_FILES
-echo Moving vim configuration out of the way...
+echo "Moving vim configuration out of the way..."
 mv .vim .vim-bak-`date +%s` 2> /dev/null
 mv .vimrc .vimrc-bak-`date +%s` 2> /dev/null
+echo "Inspecting zsh configuration..."
+if [ -f $HOME/.zsh/.by-nakal ]; then
+	echo "It's my own zsh configuration. Removing..."
+	rm -rf $HOME/.zsh
+else
+	echo "ERROR: directory $HOME/.zsh are not familiar to me."
+	echo "Please move it away to a safe location!"
+	exit 1
+fi
 
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
@@ -70,12 +79,19 @@ else
 	echo "-> Installed. You can change tmux status bar color in $HOME/.tmux.local."
 fi
 
-echo Preparing zsh...
+echo "[shell-setup] Preparing zsh..."
+mkdir -p $HOME/.zsh/modules
+touch $HOME/.zsh/.by-nakal
 ln -s $SCRIPT_HOME/shell/zsh/.zshrc .
-ln -s $SCRIPT_HOME/shell/zsh/.zsh .
+cd $HOME/.zsh
+ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
+cd modules
+git clone https://github.com/tarruda/zsh-autosuggestions.git
 
 echo Preparing vim and plugins...
+cd $HOME
 mkdir -p .vim/bundle .vim/autoload .vim/colors
+touch $HOME/.vim/.by-nakal
 cd .vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 ln -s $SCRIPT_HOME/vim/update-plugins.sh .
