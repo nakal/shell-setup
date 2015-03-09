@@ -1,19 +1,54 @@
 #!/bin/sh
 
+# Repositories from github
+
+ZSH_MODULES="tarruda/zsh-autosuggestions"
+VIM_BUNDLES="\
+	Shougo/unite.vim tsukkee/unite-tag tpope/vim-fugitive \
+	tpope/vim-unimpaired altercation/vim-colors-solarized \
+	bling/vim-airline"
+
+
 # Git repo helper
-# git_init_dir()
-# {
-# 	REPOPATH="$1"
-# 	REPODIR="$2"
-# 	if [ -d "$REPODIR" ]; then
-# 		OLDDIR=`pwd`
-# 		cd "$REPODIR"
-# 		git pull
-# 		cd "$OLDDIR"
-# 	else
-# 		git clone "$REPOPATH" "$REPODIR"
-# 	fi
-# }
+git_init_dir()
+{
+	REPOPATH="$1"
+	REPODIR="$2"
+	if [ -d "$REPODIR" ]; then
+		OLDDIR=`pwd`
+		cd "$REPODIR"
+		git pull
+		cd "$OLDDIR"
+	else
+		git clone "$REPOPATH" "$REPODIR"
+	fi
+}
+
+git_update_repositories()
+{
+	TMPD=../.tmp-active
+	rm -rf "$TMPD"
+	mkdir "$TMPD"
+	for d in $@; do
+		NAME=`basename "$d"`
+		mv "$NAME" "$TMPD"
+	done
+
+	OLDDIRS=`find . -type d -maxdepth 1 -mindepth 1`
+	echo "Removing (in $PWD): $OLDDIRS..."
+	rm -rf .nakal-guard $OLDDIRS
+
+	ACTDIRS=`find "$TMPD" -type d -maxdepth 1 -mindepth 1`
+	for d in $ACTDIRS; do
+		mv $d .
+	done
+	rmdir "$TMPD"
+
+	for r in $@; do
+		NAME=`basename "$r"`
+		git_init_dir "https://github.com/$r" "$NAME"
+	done
+}
 
 echo "[shell-setup] Looking for my installation directory..."
 SCRIPT_HOME=`dirname $0`
@@ -37,7 +72,9 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig \
 	.config/fish/config.fish .config/fish/custom \
-	.config/fish/functions .zshrc \
+	.config/fish/functions .zshrc .vim/autoload/pathogen.vim \
+	.vim/vimrc .vim/update-plugins.sh \
+	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
 
 for df in $REMOVE_FILES; do
@@ -50,15 +87,24 @@ done
 cd $HOME
 echo "[shell-setup] Removing old softlinks..."
 rm -f $REMOVE_FILES
-echo "Moving vim configuration out of the way..."
-mv .vim .vim-bak-`date +%s` 2> /dev/null
-mv .vimrc .vimrc-bak-`date +%s` 2> /dev/null
+
+# tidy up vim
+echo "Inspecting vim configuration..."
+if [ -f $HOME/.vim/.by-nakal ]; then
+	echo "It's my own vim configuration. Keeping..."
+else
+	echo "ERROR: directory $HOME/.vim is not familiar to me."
+	echo "Please move it away to a safe location!"
+	exit 1
+fi
+
+# tidy up zsh
 echo "Inspecting zsh configuration..."
 if [ -f $HOME/.zsh/.by-nakal ]; then
-	echo "It's my own zsh configuration. Removing..."
-	rm -rf $HOME/.zsh
+	echo "It's my own zsh configuration. Removing softlinks..."
+	rm -f `find $HOME/.zsh -type l -maxdepth 1 -mindepth 1`
 else
-	echo "ERROR: directory $HOME/.zsh are not familiar to me."
+	echo "ERROR: directory $HOME/.zsh is not familiar to me."
 	echo "Please move it away to a safe location!"
 	exit 1
 fi
@@ -86,7 +132,7 @@ ln -s $SCRIPT_HOME/shell/zsh/.zshrc .
 cd $HOME/.zsh
 ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
-git clone https://github.com/tarruda/zsh-autosuggestions.git
+git_update_repositories $ZSH_MODULES
 
 echo Preparing vim and plugins...
 cd $HOME
@@ -95,21 +141,21 @@ touch $HOME/.vim/.by-nakal
 cd .vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 ln -s $SCRIPT_HOME/vim/update-plugins.sh .
+
 cd autoload
-git clone https://github.com/tpope/vim-pathogen.git
+VIM_PLUGIN_MANAGER="tpope/vim-pathogen"
+git_update_repositories $VIM_PLUGIN_MANAGER
 ln -s vim-pathogen/autoload/pathogen.vim .
+
 cd ../bundle
-git clone https://github.com/Shougo/unite.vim
-git clone https://github.com/tsukkee/unite-tag
-git clone https://github.com/tpope/vim-fugitive
-git clone https://github.com/tpope/vim-unimpaired
-git clone https://github.com/altercation/vim-colors-solarized
-git clone https://github.com/bling/vim-airline
+git_update_repositories $VIM_BUNDLES
+
 cd ../colors
-git clone https://github.com/gosukiwi/vim-atom-dark.git
+VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
+git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
-cd ../..
+cd $HOME
 
 echo "[shell-setup] Finished successfully."
 
