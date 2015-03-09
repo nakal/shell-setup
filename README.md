@@ -7,6 +7,8 @@ What is being configured here?
 		* managed by [oh-my-fish](https://github.com/bpinto/oh-my-fish)
 		* custom theme with Git integration
 	* tcsh
+	* zsh
+		* custom theme with Git integration
 * editors:
 	* vim
 * version control system:

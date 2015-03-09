@@ -26,7 +26,7 @@ else
 fi
 
 echo "[shell-setup] Checking packages..."
-pkg info vim git tmux fish \
+pkg info vim git tmux fish zsh \
 	> /dev/null
 if [ $? -ne 0 ]; then
 	echo "ERROR: Missing packages for bootstrap (shell only)."
@@ -37,7 +37,7 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig \
 	.config/fish/config.fish .config/fish/custom \
-	.config/fish/functions \
+	.config/fish/functions .zshrc .zsh \
 	"
 
 for df in $REMOVE_FILES; do
@@ -78,6 +78,10 @@ ln -s $SCRIPT_HOME/shell/fish/custom .
 ln -s $SCRIPT_HOME/shell/fish/functions .
 cd $HOME
 git_init_dir https://github.com/bpinto/oh-my-fish.git .oh-my-fish
+
+echo Preparing zsh...
+ln -s $SCRIPT_HOME/shell/zsh/.zshrc .
+ln -s $SCRIPT_HOME/shell/zsh/.zsh .
 
 echo Preparing vim and plugins...
 mkdir -p .vim/bundle .vim/autoload .vim/colors
