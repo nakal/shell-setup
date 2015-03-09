@@ -1,19 +1,19 @@
 #!/bin/sh
 
 # Git repo helper
-git_init_dir()
-{
-	REPOPATH="$1"
-	REPODIR="$2"
-	if [ -d "$REPODIR" ]; then
-		OLDDIR=`pwd`
-		cd "$REPODIR"
-		git pull
-		cd "$OLDDIR"
-	else
-		git clone "$REPOPATH" "$REPODIR"
-	fi
-}
+# git_init_dir()
+# {
+# 	REPOPATH="$1"
+# 	REPODIR="$2"
+# 	if [ -d "$REPODIR" ]; then
+# 		OLDDIR=`pwd`
+# 		cd "$REPODIR"
+# 		git pull
+# 		cd "$OLDDIR"
+# 	else
+# 		git clone "$REPOPATH" "$REPODIR"
+# 	fi
+# }
 
 echo "[shell-setup] Looking for my installation directory..."
 SCRIPT_HOME=`dirname $0`
@@ -26,7 +26,7 @@ else
 fi
 
 echo "[shell-setup] Checking packages..."
-pkg info vim git tmux fish zsh \
+pkg info vim git tmux zsh \
 	> /dev/null
 if [ $? -ne 0 ]; then
 	echo "ERROR: Missing packages for bootstrap (shell only)."
@@ -69,15 +69,6 @@ else
 	grep "set -g status-style " "$HOME/.tmux.conf" | sed 's/^/#/' > "$HOME/.tmux.local"
 	echo "-> Installed. You can change tmux status bar color in $HOME/.tmux.local."
 fi
-
-echo Preparing fish shell...
-mkdir -p $HOME/.config/fish
-cd $HOME/.config/fish
-ln -s $SCRIPT_HOME/shell/fish/config.fish .
-ln -s $SCRIPT_HOME/shell/fish/custom .
-ln -s $SCRIPT_HOME/shell/fish/functions .
-cd $HOME
-git_init_dir https://github.com/bpinto/oh-my-fish.git .oh-my-fish
 
 echo Preparing zsh...
 ln -s $SCRIPT_HOME/shell/zsh/.zshrc .
