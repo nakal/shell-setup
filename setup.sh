@@ -71,8 +71,7 @@ fi
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig \
-	.config/fish/config.fish .config/fish/custom \
-	.config/fish/functions .zshrc .vim/autoload/pathogen.vim \
+	.zshrc .vim/autoload/pathogen.vim \
 	.vim/vimrc .vim/update-plugins.sh \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
