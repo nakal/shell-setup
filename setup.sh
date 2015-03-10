@@ -90,23 +90,37 @@ rm -f $REMOVE_FILES
 
 # tidy up vim
 echo "Inspecting vim configuration..."
-if [ -f $HOME/.vim/.by-nakal ]; then
-	echo "It's my own vim configuration. Keeping..."
+if [ -d $HOME/.vim ]; then
+	if [ -f $HOME/.vim/.by-nakal ]; then
+		echo "It's my own vim configuration. Keeping..."
+	else
+		echo "ERROR: directory $HOME/.vim is not familiar to me."
+		echo "Please move it away to a safe location!"
+		exit 1
+	fi
 else
-	echo "ERROR: directory $HOME/.vim is not familiar to me."
-	echo "Please move it away to a safe location!"
-	exit 1
+	if [ -e $HOME/.vim ]; then
+		echo "Cannot install in $HOME/.vim!"
+		exit 1
+	fi
 fi
 
 # tidy up zsh
 echo "Inspecting zsh configuration..."
-if [ -f $HOME/.zsh/.by-nakal ]; then
-	echo "It's my own zsh configuration. Removing softlinks..."
-	rm -f `find $HOME/.zsh -type l -maxdepth 1 -mindepth 1`
+if [ -d $HOME/.zsh ]; then
+	if [ -f $HOME/.zsh/.by-nakal ]; then
+		echo "It's my own zsh configuration. Removing softlinks..."
+		rm -f `find $HOME/.zsh -type l -maxdepth 1 -mindepth 1`
+	else
+		echo "ERROR: directory $HOME/.zsh is not familiar to me."
+		echo "Please move it away to a safe location!"
+		exit 1
+	fi
 else
-	echo "ERROR: directory $HOME/.zsh is not familiar to me."
-	echo "Please move it away to a safe location!"
-	exit 1
+	if [ -e $HOME/.zsh ]; then
+		echo "Cannot install in $HOME/.zsh!"
+		exit 1
+	fi
 fi
 
 # prepare conf in user's home
