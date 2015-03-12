@@ -1,7 +1,6 @@
 # Prompt settings
 
 setopt promptsubst
-setopt nobeep
 
 if [ "$USER" = "root" ]; then
 	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %# '

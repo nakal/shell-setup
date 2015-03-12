@@ -7,3 +7,7 @@ source ~/.zsh/sys.zsh
 source ~/.zsh/kbd.zsh
 source ~/.zsh/completion.zsh
 source ~/.zsh/history.zsh
+
+if [ -f ~/.zsh_local ]; then
+source ~/.zsh_local
+fi

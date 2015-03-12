@@ -4,10 +4,11 @@
 
 ZSH_MODULES="tarruda/zsh-autosuggestions"
 VIM_BUNDLES="\
-	Shougo/unite.vim tsukkee/unite-tag tpope/vim-fugitive \
-	tpope/vim-unimpaired altercation/vim-colors-solarized \
-	bling/vim-airline"
-
+	tpope/vim-fugitive \
+	tpope/vim-unimpaired \
+	bling/vim-airline \
+	kien/ctrlp.vim \
+	"
 
 # Git repo helper
 git_init_dir()
@@ -61,7 +62,7 @@ else
 fi
 
 echo "[shell-setup] Checking packages..."
-pkg info vim git tmux zsh \
+pkg info vim git tmux zsh ctags \
 	> /dev/null
 if [ $? -ne 0 ]; then
 	echo "ERROR: Missing packages for bootstrap (shell only)."
@@ -70,7 +71,7 @@ fi
 
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
-	.gitignore_global .gitconfig \
+	.gitignore_global .gitconfig .ctags \
 	.zshrc .vim/autoload/pathogen.vim \
 	.vim/vimrc .vim/update-plugins.sh \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
@@ -127,6 +128,7 @@ echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
 ln -s $SCRIPT_HOME/misc/.indent.pro .
+ln -s $SCRIPT_HOME/misc/.ctags .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 
