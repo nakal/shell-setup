@@ -78,9 +78,11 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
 
 " CtrlP
+let g:ctrlp_regexp = 1
+let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
-  \ 'file': '\v\.(exe|so|dll|zip|o|swp)$',
+  \ 'file': '\v\.(exe|so|dll|zip|o|swp|hi)$',
   \ }
 " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 "       \ --ignore .git
