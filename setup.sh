@@ -7,7 +7,7 @@ VIM_BUNDLES="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
-	kien/ctrlp.vim \
+	ctrlpvim/ctrlp.vim \
 	"
 
 # Git repo helper
