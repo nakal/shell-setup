@@ -1,16 +1,13 @@
-" set all&
 set shell=sh
 set shortmess+=I
 set nocompatible
 set runtimepath+=$GOROOT/misc/vim
 set nobackup
 set noundofile
-"set t_Co=256 " (breaks CtrlP, Home/End keys)
+set t_Co=256 " (breaks CtrlP, Home/End keys without tmux)
 colorscheme atom-dark-256
-set background=dark
 set ai smartindent
 set hlsearch
-set incsearch
 set ignorecase
 set smartcase
 set showmatch
@@ -41,7 +38,7 @@ function! FreeBSD_Style()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
 	setlocal textwidth=80
 	highlight SpecialKey ctermbg=yellow guibg=yellow
-	au BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
+	autocmd BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
 endfun
 
 let mapleader = '\'
@@ -51,7 +48,7 @@ syntax on
 filetype plugin indent on
 
 highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+autocmd BufWinEnter * let w:matchextrawhitespace=matchadd('ExtraWhitespace', '/\s\+$\| \+\ze\t/')
 highlight ColorColumn ctermbg=darkred
 call matchadd('ColorColumn', '\%81v', 100)
 
