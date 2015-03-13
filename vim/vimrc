@@ -5,7 +5,7 @@ set nocompatible
 set runtimepath+=$GOROOT/misc/vim
 set nobackup
 set noundofile
-set t_Co=256
+"set t_Co=256 " (breaks CtrlP, Home/End keys)
 colorscheme atom-dark-256
 set background=dark
 set ai smartindent
