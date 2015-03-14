@@ -1,5 +1,6 @@
 # Aliases
 
+alias h='history -fdDE -25'
 alias ls='ls -G'
 alias l='ls -l'
 alias ..='cd ..'
