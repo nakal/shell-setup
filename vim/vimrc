@@ -1,6 +1,10 @@
+scriptencoding utf-8
+if &compatible
+	set nocompatible
+endif
+
 set shell=sh
 set shortmess+=I
-set nocompatible
 set runtimepath+=$GOROOT/misc/vim
 set nobackup
 set noundofile
@@ -28,29 +32,11 @@ set printdevice=192.168.0.50
 set printoptions=paper:a4
 set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '\ -P'\ .\ &printdevice)\ .\ '\ '\ .\ v:fname_in)\ .\ delete(v:fname_in)\ +\ v:shell_error
 
-autocmd BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
-
-" Follow the FreeBSD style(9).
-function! FreeBSD_Style()
-	setlocal cindent
-	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
-	setlocal indentexpr=IgnoreParenIndent()
-	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
-	setlocal textwidth=80
-	highlight SpecialKey ctermbg=yellow guibg=yellow
-	autocmd BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
-endfun
-
 let mapleader = '\'
 execute pathogen#infect()
 Helptags
 syntax on
 filetype plugin indent on
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * let w:matchextrawhitespace=matchadd('ExtraWhitespace', '/\s\+$\| \+\ze\t/')
-highlight ColorColumn ctermbg=darkred
-call matchadd('ColorColumn', '\%81v', 100)
 
 " ******** PLUGINS ********
 
@@ -63,8 +49,11 @@ nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>gr :Gremove<CR>
-autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
-autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup fugitive_tweaks
+	autocmd!
+	autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
+	autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup end
 
 " Airline
 let g:airline_left_sep='>'
@@ -100,14 +89,24 @@ let g:ctrlp_custom_ignore = {
 "       \ --ignore "html"
 "       \ -g ""'
 
+" ***** Programming stuff *****
 
-" ******** CUSTOM FUNCTIONS ********
+" ** C/C++ **
+augroup c_source_style
+	autocmd!
+	autocmd BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
+augroup end
 
-function! Browser ()
-    let line = getline (".")
-    let line = matchstr (line, "http[^ ]*")
-    exec ":silent !firefox ".line
-endfunction
+" Follow the FreeBSD style(9).
+function! FreeBSD_Style()
+	setlocal cindent
+	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
+	setlocal indentexpr=IgnoreParenIndent()
+	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
+	setlocal textwidth=80
+	highlight SpecialKey ctermbg=yellow guibg=yellow
+	autocmd BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
+endfun
 
 " Ignore indents caused by parentheses in FreeBSD style.
 function! IgnoreParenIndent()
@@ -124,9 +123,12 @@ function! IgnoreParenIndent()
     endif
 endfun
 
-nnoremap <Leader>w :call Browser ()<CR>
+" ** Haskell **:w
 
-autocmd FileType haskell	:call Haskell_Setup()
+augroup haskell_source_style
+	autocmd!
+	autocmd FileType haskell	:call Haskell_Setup()
+augroup end
 
 function! Haskell_Setup()
 	setlocal tabstop=8
@@ -135,3 +137,23 @@ function! Haskell_Setup()
 	setlocal shiftwidth=8
 	setlocal shiftround
 endfunction
+
+" ** Treat whitespace **
+highlight ExtraWhitespace ctermbg=red guibg=red
+augroup whitespace_errors
+	autocmd!
+	autocmd BufWinEnter * let w:matchextrawhitespace=matchadd('ExtraWhitespace', '/\s\+$\| \+\ze\t/')
+augroup end
+highlight ColorColumn ctermbg=darkred
+call matchadd('ColorColumn', '\%81v', 100)
+
+
+" ***** Treat URLs *****
+
+function! Browser ()
+    let line = getline (".")
+    let line = matchstr (line, "http[^ ]*")
+    exec ":silent !firefox ".line
+endfunction
+
+nnoremap <Leader>w :call Browser ()<CR>
