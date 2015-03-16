@@ -61,12 +61,17 @@ else
 	exit 1
 fi
 
-echo "[shell-setup] Checking packages..."
-pkg info vim git tmux zsh ctags \
-	> /dev/null
-if [ $? -ne 0 ]; then
-	echo "ERROR: Missing packages for bootstrap (shell only)."
-	exit 1
+OS=`uname -s`
+if [ "$OS" = "FreeBSD" ]; then
+	echo "[shell-setup] Checking packages..."
+	pkg info vim git tmux zsh ctags \
+		> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "ERROR: Missing packages for bootstrap (shell only)."
+		exit 1
+	fi
+else
+	echo "[shell-setup] WARNING: Skipped checking packages..."
 fi
 
 cd $HOME
