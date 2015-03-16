@@ -13,7 +13,7 @@ function git_status() {
 	__git_status_slow_repo_size="2500"
 	is_git_workdir=$(git rev-parse --is-inside-work-tree 2> /dev/null)
 	if [ "$is_git_workdir" = "true" ]; then
-		curgitpath=$(realpath $(git rev-parse --git-dir))
+		curgitpath=$(readlink -f $(git rev-parse --git-dir))
 		ref=$(git symbolic-ref -q HEAD | sed  "s-refs/heads/--" | sed -e 's/^ *//' -e 's/ *$//')
 		test -d "$curgitpath/rebase-apply" && rebasing="1"
 
