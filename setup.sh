@@ -74,6 +74,24 @@ else
 	echo "[shell-setup] WARNING: Skipped checking packages..."
 fi
 
+echo "[shell-setup] Checking software capabilities..."
+echo "Checking git..."
+git version | grep -q "git version 2"
+if [ $? -ne 0 ]; then
+	echo "*** git version 2.x.y is needed."
+	exit 1
+else
+	echo "-> git is ok, good."
+fi
+echo "Checking tmux..."
+tmux -V | grep -q "tmux 1.9a"
+if [ $? -ne 0 ]; then
+	echo "*** tmux version 1.9a is needed."
+	exit 1
+else
+	echo "-> tmux is ok, good."
+fi
+
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
