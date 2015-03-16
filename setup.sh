@@ -53,7 +53,7 @@ git_update_repositories()
 
 echo "[shell-setup] Looking for my installation directory..."
 SCRIPT_HOME=`dirname $0`
-SCRIPT_HOME=`realpath "$SCRIPT_HOME"`
+SCRIPT_HOME=`readlink -f "$SCRIPT_HOME"`
 if [ -x "$SCRIPT_HOME/setup.sh" ]; then
 	echo "Found myself in $SCRIPT_HOME, good."
 else
