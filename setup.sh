@@ -7,7 +7,7 @@ VIM_BUNDLES="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
-	ctrlpvim/ctrlp.vim \
+	Shougo/unite.vim tsukkee/unite-tag \
 	"
 
 # Git repo helper

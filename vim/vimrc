@@ -46,6 +46,31 @@ filetype plugin indent on
 
 " ******** PLUGINS ********
 
+" Unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#profile('default', 'context', {
+\	'smartcase': 1,
+\	})
+
+call unite#custom#source('line,outline','matchers','matcher_fuzzy')
+let g:unite_source_history_yank_enable = 1
+" let g:unite_source_grep_command = 'ag'
+nnoremap <leader>ub :Unite -toggle -start-insert buffer<cr>
+nnoremap <leader>uf :Unite -toggle -start-insert file_rec<cr>
+nnoremap <C-P> :Unite -toggle -start-insert file_rec<cr>
+nnoremap <leader>ut :Unite -toggle -start-insert tag<cr>
+nnoremap <leader>uq :Unite -toggle quickfix<cr>
+
+augroup unite_tweaks
+	autocmd!
+	autocmd BufEnter *
+	\ if empty(&buftype)
+	\| nnoremap <buffer> g] m':<C-u>UniteWithCursorWord -immediately tag<CR>
+	\| nnoremap <buffer> <C-]> m':<C-u>UniteWithCursorWord -immediately tag<CR>
+	\| endif
+augroup end
+
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
@@ -68,32 +93,6 @@ let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
-
-" CtrlP
-let g:ctrlp_regexp = 1
-let g:ctrlp_by_filename = 1
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
-  \ 'file': '\v\.(exe|so|dll|zip|o|swp|hi)$',
-  \ }
-" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"       \ --ignore .git
-"       \ --ignore .svn
-"       \ --ignore ".*"
-"       \ --ignore tmp
-"       \ --ignore bak
-"       \ --ignore old
-"       \ --ignore "*.exe"
-"       \ --ignore "*.dll"
-"       \ --ignore "*.so"
-"       \ --ignore "*.o"
-"       \ --ignore "*.zip"
-"       \ --ignore "*.swp"
-"       \ --ignore "*.swo"
-"       \ --ignore "lib*"
-"       \ --ignore "build*"
-"       \ --ignore "html"
-"       \ -g ""'
 
 " ***** Programming stuff *****
 
