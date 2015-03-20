@@ -20,14 +20,14 @@ bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
-# Load autosuggestions module
-source ~/.zsh/modules/zsh-autosuggestions/autosuggestions.zsh
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=240'
-
-zle-line-init() {
-	zle autosuggest-start
-}
-
-zle -N zle-line-init
-bindkey '^T' autosuggest-toggle
-bindkey '^f' vi-forward-blank-word
+# # Load autosuggestions module
+# source ~/.zsh/modules/zsh-autosuggestions/autosuggestions.zsh
+# AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=240'
+#
+# zle-line-init() {
+# 	zle autosuggest-start
+# }
+#
+# zle -N zle-line-init
+# bindkey '^T' autosuggest-toggle
+# bindkey '^f' vi-forward-blank-word
