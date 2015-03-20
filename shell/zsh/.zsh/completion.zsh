@@ -16,9 +16,9 @@ zmodload -i zsh/complist
 # directories cyan, executables red, links purple
 zstyle ':completion:*:default' list-colors 'di=36' 'ex=31' 'ln=35'
 zstyle ':completion:*:(aliases|builtins|commands)' list-colors '=*=0;31'
-zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( \(*[a-z]\))*=0=31=33' '=(#b) #([0-9]#)*=0=31'
-zstyle ':completion:*:(options|values)' list-colors '=(#b)(-*) -- *=1;0=31;1'
+zstyle ':completion:*:*:kill:*' list-colors '=(#b)(#s) #([0-9]##)* \(([^ ]##)\)*=0=31=33' '=(#b)(#s) #([0-9]##) ([^ ]##)*=0=31=33'
+zstyle ':completion:*:(options|values)' list-colors '=(#b)(#s)(-*) -- *=1;0=31;1'
 
 # Completion commands
 zstyle ':completion:*:*:kill:*:processes' command 'ps -x -o pid= -o command='
-zstyle ':completion:*:*:kill:*' ignored-patterns '0'
+zstyle ':completion:*:*:kill:*' ignored-patterns '(#s)0(#e)'
