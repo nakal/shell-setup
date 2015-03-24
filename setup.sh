@@ -7,8 +7,7 @@ VIM_BUNDLES="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
-	Shougo/unite.vim tsukkee/unite-tag osyo-manga/unite-quickfix \
-	Shougo/vimproc.vim \
+	ctrlpvim/ctrlp.vim \
 	"
 
 # Git repo helper
@@ -199,9 +198,6 @@ VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
 git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
-
-echo "-> Compiling vimproc..."
-cd $HOME/.vim/bundle/vimproc.vim && $MAKE_CMD
 
 cd $HOME
 
