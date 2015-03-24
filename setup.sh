@@ -7,7 +7,8 @@ VIM_BUNDLES="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
-	Shougo/unite.vim tsukkee/unite-tag \
+	Shougo/unite.vim tsukkee/unite-tag osyo-manga/unite-quickfix \
+	Shougo/vimproc.vim \
 	"
 
 # Git repo helper
@@ -62,6 +63,12 @@ else
 fi
 
 OS=`uname -s`
+if [ "$OS" != "Linux" ]; then
+	MAKE_CMD=gmake
+else
+	MAKE_CMD=make
+fi
+
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
 	pkg info vim git tmux zsh ctags \
@@ -96,7 +103,7 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.zshrc .vim/autoload/pathogen.vim \
-	.vim/vimrc .vim/update-plugins.sh \
+	.vim/vimrc \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
 
@@ -172,15 +179,14 @@ ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
 git_update_repositories $ZSH_MODULES
 
-echo Preparing vim and plugins...
+echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
 mkdir -p .vim/bundle .vim/autoload .vim/colors
 touch $HOME/.vim/.by-nakal
 cd .vim
 ln -s $SCRIPT_HOME/vim/vimrc .
-ln -s $SCRIPT_HOME/vim/update-plugins.sh .
 
-cd autoload
+cd $HOME/.vim/autoload
 VIM_PLUGIN_MANAGER="tpope/vim-pathogen"
 git_update_repositories $VIM_PLUGIN_MANAGER
 ln -s vim-pathogen/autoload/pathogen.vim .
@@ -193,6 +199,10 @@ VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
 git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
+
+echo "-> Compiling vimproc..."
+cd $HOME/.vim/bundle/vimproc.vim && $MAKE_CMD
+
 cd $HOME
 
 echo "[shell-setup] Finished successfully."
