@@ -16,24 +16,19 @@ What is being configured here?
 
 ## Small warning
 
-**Please be careful using this project. I cannot be hold responsible for any
-damages that might occur. If you are not sure, STOP and DON'T USE anything
-here.**
+The setup script used here will modify configurations and startup files
+in your home directory. Please be aware of this fact!
 
 I tried my best to avoid dangerous operations during the setup and operation
 phases (see below), but I cannot tell for sure if there are systems or hosts
 that can be damaged by the actions executed there.
 
-**TAKE A GOOD LOOK WHAT IS BEING DONE AND MAKE SURE THAT EVERYTHING IS
-REASONABLE IN YOUR CASE! AND I MEAN E-V-E-R-Y-T-H-I-N-G!!**
+When you start `setup.sh`, it will perform many safety checks not to destroy
+important data.
 
 ## Installation instructions
 
-If, at this point, you already don't understand something, give up please
-before doing any damage.
-
-For those who read the warnings above and have confidence that I am not
-doing any harm, proceed with these steps:
+For those who read the warnings above proceed with these steps:
 
 0. **Make a backup of your $HOME**
 1. Clone the project.
