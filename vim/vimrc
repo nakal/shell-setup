@@ -47,13 +47,17 @@ filetype plugin indent on
 " ******* BINDINGS ********
 " Ctrl Left/Right -> previous/next buffer
 nnoremap <silent> <Esc>[D :<C-u>bp<cr>
+nnoremap <silent> <Esc>[1;5D :<C-u>bp<cr>
 nnoremap <silent> <Esc>[C :<C-u>bn<cr>
+nnoremap <silent> <Esc>[1;5C :<C-u>bn<cr>
 
 " ******** PLUGINS ********
 
 " CtrlP
 nnoremap <silent> <Esc>[A :<C-u>CtrlPBuffer<cr>
+nnoremap <silent> <Esc>[1;5A :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
+nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
