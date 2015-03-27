@@ -26,7 +26,7 @@ endif
 
 set exrc
 set secure
-set tags=./tags;
+set tags=./tags
 
 set vb
 set nomodeline
@@ -112,7 +112,7 @@ set laststatus=2
 " ** C/C++ **
 augroup c_source_style
 	autocmd!
-	autocmd BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
+	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
 augroup end
 
 " Follow the FreeBSD style(9).
@@ -175,3 +175,9 @@ function! Browser ()
 endfunction
 
 nnoremap <Leader>w :call Browser ()<CR>
+
+" Start a local ~/.vimrc_local, if it exists
+let s:vimrc_local_name='~/.vimrc_local'
+if !empty(glob(s:vimrc_local_name))
+	execute 'source' s:vimrc_local_name
+endif
