@@ -16,10 +16,10 @@ set message_cachedir="~/.cache/mutt"
 set header_cache="~/.cache/mutt"
 
 # sidebar
-set sidebar_width=15
+set sidebar_width=25
 set sidebar_visible=yes
 set sidebar_delim='|'
-set sidebar_sort=yes
+#set sidebar_sort=yes
 #set sidebar_format='%B%N%S'
 #set sidebar_folderindent=yes
 #color sidebar_new yellow default
