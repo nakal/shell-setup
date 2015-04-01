@@ -51,6 +51,27 @@ git_update_repositories()
 	done
 }
 
+tidy_up_dot_directory()
+{
+	NAME="$1"
+	echo "Inspecting $NAME configuration..."
+	if [ -d "$HOME/.$NAME" ]; then
+		if [ -f "$HOME/.$NAME/.by-nakal" ]; then
+			echo "It's my own $NAME configuration. Removing softlinks..."
+			rm -f `find "$HOME/.$NAME" -maxdepth 1 -mindepth 1 -type l`
+		else
+			echo "ERROR: directory "$HOME/.$NAME" is not familiar to me."
+			echo "Please move it away to a safe location!"
+			exit 1
+		fi
+	else
+		if [ -e "$HOME/.$NAME" ]; then
+			echo "Cannot install in $HOME/.$NAME!"
+			exit 1
+		fi
+	fi
+}
+
 echo "[shell-setup] Looking for my installation directory..."
 SCRIPT_HOME=`dirname $0`
 SCRIPT_HOME=`readlink -f "$SCRIPT_HOME"`
@@ -136,21 +157,11 @@ fi
 
 # tidy up zsh
 echo "Inspecting zsh configuration..."
-if [ -d $HOME/.zsh ]; then
-	if [ -f $HOME/.zsh/.by-nakal ]; then
-		echo "It's my own zsh configuration. Removing softlinks..."
-		rm -f `find $HOME/.zsh -type l -maxdepth 1 -mindepth 1`
-	else
-		echo "ERROR: directory $HOME/.zsh is not familiar to me."
-		echo "Please move it away to a safe location!"
-		exit 1
-	fi
-else
-	if [ -e $HOME/.zsh ]; then
-		echo "Cannot install in $HOME/.zsh!"
-		exit 1
-	fi
-fi
+tidy_up_dot_directory zsh
+
+# tidy up mutt
+echo "Inspecting mutt configuration..."
+tidy_up_dot_directory mutt
 
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
@@ -177,6 +188,13 @@ cd $HOME/.zsh
 ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
 git_update_repositories $ZSH_MODULES
+
+echo "[shell-setup] Seting up mutt..."
+mkdir -p $HOME/.mutt
+touch $HOME/.mutt/.by-nakal
+cd $HOME/.mutt
+ln -s $SCRIPT_HOME/mutt/muttrc .
+ln -s $SCRIPT_HOME/mutt/colors.muttrc .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME

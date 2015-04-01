@@ -47,3 +47,15 @@ that it might be a good idea to make yourself a fork of this project. But
 you can also merge in changes from my repository, but don't complain, if
 something breaks for you. You should consider this project my private
 playground.
+
+## Mutt
+
+To use mutt, you still need a further configuration file in
+`~/.mutt/local.muttrc` with the following entries that vary from host
+to host.
+
+```
+set folder="imaps://imap.server.org"
+set spoolfile="imaps://USERNAME:PASSWORD@imap.server.org/"
+mailboxes imaps://imap.server.org/INBOX
+```
