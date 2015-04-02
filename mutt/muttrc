@@ -14,6 +14,10 @@ set beep=no
 set beep_new=yes
 set forward_quote
 set indent_str="> "
+ignore *
+unignore From: Subject: Date: To: CC: Bcc: X-Mailer:
+unhdr_order *
+hdr_order From: Subject: Date: To: CC: Bcc: X-Mailer:
 
 # Cache
 set message_cachedir="~/.cache/mutt"
@@ -38,7 +42,7 @@ bind pager \c? sidebar-open
 unset imap_passive
 set imap_keepalive=300
 set mail_check=5
-set imap_check_subscribed
+#set imap_check_subscribed
 set record="=Sent"
 set postponed="=Drafts"
 set timeout=10
