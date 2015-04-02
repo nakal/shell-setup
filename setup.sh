@@ -92,7 +92,7 @@ fi
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
 	pkg info vim git tmux zsh ctags \
-		> /dev/null
+		mutt abook > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."
 		exit 1
@@ -102,7 +102,7 @@ else
 fi
 
 echo "[shell-setup] Checking software capabilities..."
-echo "Checking git..."
+echo "-> Checking git..."
 git version | grep -q "git version 2"
 if [ $? -ne 0 ]; then
 	echo "*** git version 2.x.y is needed."
@@ -110,13 +110,26 @@ if [ $? -ne 0 ]; then
 else
 	echo "-> git is ok, good."
 fi
-echo "Checking tmux..."
+echo "-> Checking tmux..."
 tmux -V | grep -q "tmux 1.9a"
 if [ $? -ne 0 ]; then
 	echo "*** tmux version 1.9a is needed."
 	exit 1
 else
 	echo "-> tmux is ok, good."
+fi
+echo "-> Checking mutt..."
+MUTT_IS_OK=1
+mutt -v | grep -q '+USE_FLOCK' || ( MUTT_IS_OK=0; echo "*** FLOCK missing" )
+mutt -v | grep -q '+CRYPT_BACKEND_GPGME' || ( MUTT_IS_OK=0; echo "*** GPGME missing" )
+mutt -v | egrep -q 'patch.*\.sidebar\.' || ( MUTT_IS_OK=0; echo "*** SIDEBAR patch missing" )
+mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.' || ( MUTT_IS_OK=0; echo "Trash folder patch missing" )
+mutt -v | grep -q '+HAVE_COLOR' || ( MUTT_IS_OK=0; echo "*** Colors (SLANG) missing" )
+if [ $MUTT_IS_OK -ne 1 ]; then
+	echo "*** mutt check failed."
+	exit 1
+else
+	echo "-> mutt is ok, good."
 fi
 
 cd $HOME
@@ -156,11 +169,9 @@ else
 fi
 
 # tidy up zsh
-echo "Inspecting zsh configuration..."
 tidy_up_dot_directory zsh
 
 # tidy up mutt
-echo "Inspecting mutt configuration..."
 tidy_up_dot_directory mutt
 
 # prepare conf in user's home
