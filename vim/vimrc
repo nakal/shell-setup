@@ -42,6 +42,10 @@ set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '
 let &t_SI .= "\<Esc>[5 q"
 let &t_EI .= "\<Esc>[2 q"
 
+" Spelling support
+set nospell spelllang=en_us
+set spellfile=~/.vim-spellfile.add
+
 let mapleader = '\'
 execute pathogen#infect()
 Helptags
