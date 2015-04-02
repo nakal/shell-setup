@@ -43,8 +43,8 @@ let &t_SI .= "\<Esc>[5 q"
 let &t_EI .= "\<Esc>[2 q"
 
 " Spelling support
-set nospell spelllang=en_us
-set spellfile=~/.vim-spellfile.add
+set nospell spelllang=en_us,de
+set spellfile=~/.vim/spell/spellfile.add
 
 let mapleader = '\'
 execute pathogen#infect()
