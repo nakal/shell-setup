@@ -1,5 +1,6 @@
 source ~/.mutt/local.muttrc
 source ~/.mutt/colors.muttrc
+source /usr/local/share/examples/mutt/gpg.rc
 
 # Edit
 set edit_hdrs
@@ -30,13 +31,12 @@ set sidebar_delim='|'
 #set sidebar_sort=yes
 #set sidebar_format='%B%N%S'
 #set sidebar_folderindent=yes
-#color sidebar_new yellow default
-bind index "'" sidebar-prev
-bind index "\\" sidebar-next
-bind index \c? sidebar-open
-bind pager "'" sidebar-prev
-bind pager "\\" sidebar-next
-bind pager \c? sidebar-open
+bind index \e[A sidebar-prev
+bind index \e[B sidebar-next
+bind index \e[C sidebar-open
+bind pager \e[A sidebar-prev
+bind pager \e[B sidebar-next
+bind pager \e[C sidebar-open
 
 # IMAP
 unset imap_passive
@@ -61,3 +61,7 @@ set pgp_replyencrypt
 set pgp_replysign
 set pgp_replysignencrypted
 set pgp_show_unusable=no
+set pgp_verify_sig
+set pgp_use_gpg_agent
+set pgp_timeout=3600
+#set pgp_autosign
