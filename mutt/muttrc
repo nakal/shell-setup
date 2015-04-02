@@ -4,12 +4,16 @@ source ~/.mutt/colors.muttrc
 # Edit
 set edit_hdrs
 set signature="~/.mutt/signature"
+set fast_reply
+set include
 
 # View
 set sort=threads
 set sort_aux=date-sent
 set beep=no
 set beep_new=yes
+set forward_quote
+set indent_str="> "
 
 # Cache
 set message_cachedir="~/.cache/mutt"
@@ -39,3 +43,17 @@ set record="=Sent"
 set postponed="=Drafts"
 set timeout=10
 set net_inc=5
+set copy
+unset mark_old
+
+# addressbook
+#set query_command="lbdbq %s"
+#set query_command="abook --mutt-query '%s'"
+#macro index \ca !abook\n
+#macro pager A |'abook --add-email'\n
+
+# PGP
+set pgp_replyencrypt
+set pgp_replysign
+set pgp_replysignencrypted
+set pgp_show_unusable=no
