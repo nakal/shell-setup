@@ -7,6 +7,7 @@ set edit_hdrs
 set signature="~/.mutt/signature"
 set fast_reply
 set include
+set reverse_name
 
 # View
 set sort=threads
@@ -37,6 +38,7 @@ bind index \e[C sidebar-open
 bind pager \e[A sidebar-prev
 bind pager \e[B sidebar-next
 bind pager \e[C sidebar-open
+bind index "\\" next-unread-mailbox
 
 # IMAP
 unset imap_passive
