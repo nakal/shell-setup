@@ -19,6 +19,9 @@ color sidebar_new	color156	color234
 color hdrdefault	color187	color234
 color header		color156	color234	"^(From)"
 color header		color156	color234	"^(Subject)"
+color header		color156	color234	"^X-Bogosity: Ham,"
+color header		color196	color234	"^X-Bogosity: Spam,"
+color header		brightyellow	color234	"^X-Bogosity: Unsure,"
 color body		color181	color234	"^gpg: .*"
 color body		color156	color234	"^gpg: Korrekte Signatur.*"
 color body		color196	color234	"^gpg: WARNUNG.*"

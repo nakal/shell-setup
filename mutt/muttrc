@@ -2,6 +2,9 @@ source ~/.mutt/local.muttrc
 source ~/.mutt/colors.muttrc
 source /usr/local/share/examples/mutt/gpg.rc
 
+# System
+unset suspend
+
 # Edit
 set edit_hdrs
 set signature="~/.mutt/signature"
@@ -17,10 +20,11 @@ set beep=no
 set beep_new=yes
 set forward_quote
 set indent_str="> "
+set tilde
 ignore *
-unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer:
+unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 unhdr_order *
-hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer:
+hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 
 # Cache
 set message_cachedir="~/.cache/mutt"
@@ -40,6 +44,11 @@ bind pager \e[A sidebar-prev
 bind pager \e[B sidebar-next
 bind pager \e[C sidebar-open
 bind index "\\" next-unread-mailbox
+macro index,pager \c? <change-folder>=INBOX<return>
+
+# Spam
+macro pager X <save-message>=INBOX.Spam.LearnSpam<return>
+macro pager H <save-message>=INBOX.Spam.LearnHam<return>
 
 # IMAP
 unset imap_passive
@@ -48,6 +57,7 @@ set mail_check=5
 #set imap_check_subscribed
 set record="=Sent"
 set postponed="=Drafts"
+set trash="=Trash"
 set timeout=10
 set net_inc=5
 set copy
@@ -66,5 +76,6 @@ set pgp_replysignencrypted
 set pgp_show_unusable=no
 set pgp_verify_sig
 set pgp_use_gpg_agent
+set crypt_use_gpgme
 set pgp_timeout=3600
 set pgp_autosign
