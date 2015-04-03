@@ -18,9 +18,9 @@ set beep_new=yes
 set forward_quote
 set indent_str="> "
 ignore *
-unignore From: Subject: Date: To: CC: Bcc: X-Mailer:
+unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer:
 unhdr_order *
-hdr_order From: Subject: Date: To: CC: Bcc: X-Mailer:
+hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer:
 
 # Cache
 set message_cachedir="~/.cache/mutt"
@@ -55,9 +55,9 @@ unset mark_old
 
 # addressbook
 #set query_command="lbdbq %s"
-#set query_command="abook --mutt-query '%s'"
-#macro index \ca !abook\n
-#macro pager A |'abook --add-email'\n
+set query_command="abook --mutt-query '%s'"
+macro index \ca !abook\n
+macro pager A |'abook --add-email'\n
 
 # PGP
 set pgp_replyencrypt
@@ -67,4 +67,4 @@ set pgp_show_unusable=no
 set pgp_verify_sig
 set pgp_use_gpg_agent
 set pgp_timeout=3600
-#set pgp_autosign
+set pgp_autosign
