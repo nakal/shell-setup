@@ -13,6 +13,18 @@ line to the host-specific configuration (in `autostartPrograms`):
 ("xterm", ["-title", "mutt", "-e", "sh", "-c", "'tmux has-session -t mutt && tmux -2 attach-session -d -t mutt || tmux -2 new-session -s mutt mutt'"])
 ```
 
+To have mutt working properly together with GNUpg 2.1.x it is a good idea
+to set the environment `GPG_AGENT_INFO` which has been deprecated in latest
+releases. It will avoid being asked about the mantra two times and use the
+pinentry backend, like it has been designed to work.
+
+Usually the line below should be enough. I have put it in my
+[~/.xinitrc](https://github.com/nakal/xmonad-conf/blob/master/xsettings/.xinitrc).
+
+```
+export GPG_AGENT_INFO="$HOME/.gnupg/S.gpg-agent:0:1"
+```
+
 ## Local configuration
 
 To use mutt, you still need a further configuration file in
