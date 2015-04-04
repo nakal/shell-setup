@@ -12,7 +12,7 @@ about the configuration done for the specific piece of software.
 * mail:
 	* [mutt](mutt/README.md)
 * version control system:
-	* git
+	* [git](git/README.md)
 * utils:
 	* tmux
 	* indent

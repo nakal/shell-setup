@@ -1,4 +1,4 @@
-# Mutt
+# shell-setup: Mutt
 
 This [mutt](http://www.mutt.org/) configuration is a part of the entire
 configuration suite named [shell-setup](https://github.com/nakal/shell-setup).
@@ -38,12 +38,12 @@ simulate the colors from atom-dark.
 
 ## Further features
 
-* integrate vim as editor to write emails
-* integrate GNUpg and GPG-Agent in a unannoying way
-* integrate `abook`
+* integrates vim as editor to write emails
+* integrates GNUpg and GPG-Agent in a unannoying way
+* integrates `abook`
 * Trash is a trash folder, mails won't be simply deleted
-* Caching enabled
-* Some special bindings
+* caching enabled
+* some special bindings
 	* a few hacks for the sidebar patch
 		* `Ctrl+Up` and `Ctrl+Down`  move the folder selection
 		* `Ctrl+Right` selects the folder
