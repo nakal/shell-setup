@@ -1,6 +1,7 @@
 # nakal's shell configuration
 
-What is being configured here?
+What is being configured here? Click on the links to see details
+about the configuration done for the specific piece of software.
 
 * shells:
 	* tcsh
@@ -8,6 +9,8 @@ What is being configured here?
 		* custom prompt theme with Git integration
 * editors:
 	* vim
+* mail:
+	* [mutt](mutt/README.md)
 * version control system:
 	* git
 * utils:
@@ -37,7 +40,7 @@ For those who read the warnings above proceed with these steps:
    to check the dependencies by yourself and comment out the
    `pkg info` check at the beginning of the script.
 
-## Features and gotchas
+## Managed software configurations
 
 The configuration is fully managed in [git](http://git-scm.com).
 
@@ -47,15 +50,3 @@ that it might be a good idea to make yourself a fork of this project. But
 you can also merge in changes from my repository, but don't complain, if
 something breaks for you. You should consider this project my private
 playground.
-
-## Mutt
-
-To use mutt, you still need a further configuration file in
-`~/.mutt/local.muttrc` with the following entries that vary from host
-to host.
-
-```
-set folder="imaps://imap.server.org"
-set spoolfile="imaps://USERNAME:PASSWORD@imap.server.org/"
-mailboxes imaps://imap.server.org/INBOX
-```
