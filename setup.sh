@@ -92,7 +92,7 @@ fi
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
 	pkg info vim git tmux zsh ctags \
-		mutt abook > /dev/null
+		mutt abook urlview gnupg > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."
 		exit 1

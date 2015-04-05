@@ -11,7 +11,7 @@ set signature="~/.mutt/signature"
 set fast_reply
 set include
 set reverse_name
-set editor="vim -c 'set spell' -c 'normal /^$/\n:noh\n' -c 'normal o' -c ':startinsert'"
+set editor="vim -c 'set spell' -c 'normal Go' -c ':startinsert'"
 
 # View
 set sort=threads
@@ -25,6 +25,7 @@ ignore *
 unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 unhdr_order *
 hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
+macro pager \cw |urlview<return>
 
 # Cache
 set message_cachedir="~/.cache/mutt"
@@ -51,7 +52,7 @@ macro pager X <save-message>=INBOX.Spam.LearnSpam<return>
 macro pager H <save-message>=INBOX.Spam.LearnHam<return>
 
 # IMAP
-unset imap_passive
+set imap_idle
 set imap_keepalive=300
 set mail_check=5
 #set imap_check_subscribed
