@@ -45,6 +45,7 @@ bind pager \e[A sidebar-prev
 bind pager \e[B sidebar-next
 bind pager \e[C sidebar-open
 bind index "\\" next-unread-mailbox
+bind pager "\\" next-unread-mailbox
 macro index,pager \c? <change-folder>=INBOX<return>
 
 # Spam
@@ -52,7 +53,7 @@ macro pager X <save-message>=INBOX.Spam.LearnSpam<return>
 macro pager H <save-message>=INBOX.Spam.LearnHam<return>
 
 # IMAP
-set imap_idle
+#set imap_idle
 set imap_keepalive=300
 set mail_check=5
 #set imap_check_subscribed
