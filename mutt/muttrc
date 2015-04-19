@@ -4,6 +4,10 @@ source /usr/local/share/examples/mutt/gpg.rc
 
 # System
 unset suspend
+unset wait_key
+unset ssl_use_sslv3
+unset ssl_use_tlsv1
+unset ssl_use_tlsv1_1
 
 # Edit
 set edit_hdrs
@@ -12,6 +16,7 @@ set fast_reply
 set include
 set reverse_name
 set editor="vim -c 'set spell' -c 'normal Go' -c ':startinsert'"
+set send_charset="us-ascii:utf-8"
 
 # View
 set sort=threads
@@ -21,6 +26,8 @@ set beep_new=yes
 set forward_quote
 set indent_str="> "
 set tilde
+#set charset="utf-8"
+set assumed_charset="us-ascii:utf-8:iso-8859-1"
 ignore *
 unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 unhdr_order *
@@ -53,10 +60,12 @@ macro pager X <save-message>=INBOX.Spam.LearnSpam<return>
 macro pager H <save-message>=INBOX.Spam.LearnHam<return>
 
 # IMAP
-#set imap_idle
+unset imap_idle
 set imap_keepalive=300
+unset imap_passive
 set mail_check=5
-#set imap_check_subscribed
+unset mail_check_recent
+unset imap_check_subscribed
 set record="=Sent"
 set postponed="=Drafts"
 set trash="=Trash"
