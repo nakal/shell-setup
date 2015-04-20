@@ -60,7 +60,7 @@ macro pager X <save-message>=INBOX.Spam.LearnSpam<return>
 macro pager H <save-message>=INBOX.Spam.LearnHam<return>
 
 # IMAP
-unset imap_idle
+set imap_idle
 set imap_keepalive=300
 unset imap_passive
 set mail_check=5
