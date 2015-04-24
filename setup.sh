@@ -92,7 +92,7 @@ fi
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
 	pkg info vim git tmux zsh ctags \
-		mutt abook urlview gnupg > /dev/null
+		abook urlview gnupg > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."
 		exit 1
@@ -117,19 +117,6 @@ if [ $? -ne 0 ]; then
 	exit 1
 else
 	echo "-> tmux is ok, good."
-fi
-echo "-> Checking mutt..."
-MUTT_IS_OK=1
-mutt -v | grep -q '+USE_FLOCK' || ( MUTT_IS_OK=0; echo "*** FLOCK missing" )
-mutt -v | grep -q '+CRYPT_BACKEND_GPGME' || ( MUTT_IS_OK=0; echo "*** GPGME missing" )
-mutt -v | egrep -q 'patch.*\.sidebar\.' || ( MUTT_IS_OK=0; echo "*** SIDEBAR patch missing" )
-mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.' || ( MUTT_IS_OK=0; echo "Trash folder patch missing" )
-mutt -v | grep -q '+HAVE_COLOR' || ( MUTT_IS_OK=0; echo "*** Colors (SLANG) missing" )
-if [ $MUTT_IS_OK -ne 1 ]; then
-	echo "*** mutt check failed."
-	exit 1
-else
-	echo "-> mutt is ok, good."
 fi
 
 cd $HOME
@@ -171,9 +158,6 @@ fi
 # tidy up zsh
 tidy_up_dot_directory zsh
 
-# tidy up mutt
-tidy_up_dot_directory mutt
-
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
@@ -199,13 +183,6 @@ cd $HOME/.zsh
 ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
 git_update_repositories $ZSH_MODULES
-
-echo "[shell-setup] Seting up mutt..."
-mkdir -p $HOME/.mutt
-touch $HOME/.mutt/.by-nakal
-cd $HOME/.mutt
-ln -s $SCRIPT_HOME/mutt/muttrc .
-ln -s $SCRIPT_HOME/mutt/colors.muttrc .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME

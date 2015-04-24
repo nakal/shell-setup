@@ -9,8 +9,6 @@ about the configuration done for the specific piece of software.
 		* custom prompt theme with Git integration
 * editors:
 	* vim
-* mail:
-	* [mutt](mutt/README.md)
 * version control system:
 	* [git](git/README.md)
 * utils:
