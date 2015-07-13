@@ -111,13 +111,15 @@ else
 	echo "-> git is ok, good."
 fi
 echo "-> Checking tmux..."
-tmux -V | grep -q "tmux 1.9a"
+tmux -V | grep -q "tmux 2."
 if [ $? -ne 0 ]; then
-	echo "*** tmux version 1.9a is needed."
-	exit 1
-else
-	echo "-> tmux is ok, good."
+	tmux -V | grep -q "tmux 1.9a"
+	if [ $? -ne 0 ]; then
+		echo "*** tmux version 2.x (at least 1.9a) is needed."
+		exit 1
+	fi
 fi
+echo "-> tmux is ok, good."
 
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
