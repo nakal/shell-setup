@@ -70,7 +70,7 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
  \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
- \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png)$',
+ \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux)$',
  \ }
 " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 " \ --ignore .git
@@ -149,7 +149,7 @@ function! IgnoreParenIndent()
     endif
 endfun
 
-" ** Haskell **:w
+" ** Haskell **
 
 augroup haskell_source_style
 	autocmd!
@@ -163,6 +163,12 @@ function! Haskell_Setup()
 	setlocal shiftwidth=8
 	setlocal shiftround
 endfunction
+
+" ** LaTeX **
+augroup latex_source
+	autocmd!
+	autocmd BufNewFile,BufRead *.tex :set spell
+augroup end
 
 " ** Treat whitespace **
 highlight ExtraWhitespace ctermbg=red guibg=red
