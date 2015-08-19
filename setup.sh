@@ -122,7 +122,7 @@ fi
 echo "-> tmux is ok, good."
 
 cd $HOME
-REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
+REMOVE_FILES=".cshrc .tmux.conf .indent.pro .uncrustify.cfg \
 	.gitignore_global .gitconfig .ctags \
 	.zshrc .vim/autoload/pathogen.vim \
 	.vim/vimrc \
@@ -164,7 +164,6 @@ tidy_up_dot_directory zsh
 echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
-ln -s $SCRIPT_HOME/misc/.indent.pro .
 ln -s $SCRIPT_HOME/misc/.ctags .
 ln -s $SCRIPT_HOME/misc/.uncrustify.cfg .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
