@@ -92,7 +92,7 @@ fi
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
 	pkg info vim git tmux zsh ctags \
-		abook urlview gnupg > /dev/null
+		gnupg > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."
 		exit 1
@@ -166,6 +166,7 @@ ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
 ln -s $SCRIPT_HOME/misc/.indent.pro .
 ln -s $SCRIPT_HOME/misc/.ctags .
+ln -s $SCRIPT_HOME/misc/.uncrustify.cfg .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 
