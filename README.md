@@ -13,7 +13,7 @@ about the configuration done for the specific piece of software.
 	* [git](git/README.md)
 * utils:
 	* tmux
-	* indent
+	* uncrustify
 
 ## Small warning
 
