@@ -59,6 +59,39 @@ nnoremap <silent> <Esc>[1;5D :<C-u>bp<cr>
 nnoremap <silent> <Esc>[C :<C-u>bn<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>bn<cr>
 
+" CScope
+
+if has('cscope')
+	set cscopetag
+	set cscopeverbose
+
+	if has('quickfix')
+		set cscopequickfix=s-,c-,d-,i-,t-,e-
+	endif
+
+	cnoreabbrev csa cs add
+	cnoreabbrev csf cs find
+	cnoreabbrev csk cs kill
+	cnoreabbrev csr cs reset
+	cnoreabbrev css cs show
+	cnoreabbrev csh cs help
+
+	command -nargs=0 Cscope call Cscope_load()
+endif
+
+function! Cscope_load ()
+	if filereadable("../../cscope.out")
+		cs add ../../cscope.out
+	endif
+	if filereadable("../cscope.out")
+		cs add ../cscope.out
+	endif
+	if filereadable("cscope.out")
+		cs add cscope.out
+	endif
+endfunction
+
+
 " ******** PLUGINS ********
 
 " CtrlP
