@@ -10,7 +10,7 @@ bindkey '\e[4~' end-of-line
 
 # CtrlP from zsh
 zsh_ctrlp() {
-	(unset TMUX; xterm -e tmux -2 new-session 'vim -c CtrlP' 2>/dev/null) &
+	(unset TMUX; ${DEFAULT_X_TERMINAL} -e tmux -2 new-session 'vim -c CtrlP' 2>/dev/null) &
 }
 zle -N zsh_ctrlp
 

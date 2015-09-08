@@ -7,7 +7,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 if [ -n "$DISPLAY" ]; then
-	alias vi='background xterm -e vim'
+	alias vi='background '${DEFAULT_X_TERMINAL}' -e vim'
 else
 	alias vi='vim'
 fi

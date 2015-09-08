@@ -5,6 +5,7 @@ export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 export GOROOT='/usr/local/go'
+export DEFAULT_X_TERMINAL='urxvt'
 
 # Nice features for less
 export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
