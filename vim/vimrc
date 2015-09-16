@@ -97,8 +97,10 @@ endfunction
 " CtrlP
 nnoremap <silent> <Esc>[A :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[1;5A :<C-u>CtrlPBuffer<cr>
+nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
+nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_custom_ignore = {
