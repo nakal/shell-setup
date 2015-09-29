@@ -170,7 +170,13 @@ function! FreeBSD_Style()
 	autocmd BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
 endfun
 
-nnoremap <silent> <leader>u :%!uncrustify -l c 2> /dev/null<CR>ggVG=gg
+function! ISO_Style()
+	:%!uncrustify -l c 2> /dev/null
+	normal ggVG=gg<CR>
+endfun
+
+nnoremap <silent> <leader>u :call ISO_Style()<CR>
+vnoremap <silent> <leader>u :%!uncrustify -l c 2> /dev/null<CR>gv=
 
 " Ignore indents caused by parentheses in FreeBSD style.
 function! IgnoreParenIndent()
