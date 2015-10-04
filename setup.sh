@@ -202,10 +202,13 @@ cd ../bundle
 git_update_repositories $VIM_BUNDLES
 
 cd ../colors
-VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
+VIM_COLORSCHEMES="\
+	gosukiwi/vim-atom-dark \
+	tomasr/molokai"
 git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
+ln -s molokai/colors/molokai.vim .
 
 cd $HOME
 

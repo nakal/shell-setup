@@ -9,7 +9,8 @@ set runtimepath+=$GOROOT/misc/vim
 set nobackup
 set noundofile
 set t_Co=256 " (breaks CtrlP, Home/End keys without tmux)
-colorscheme atom-dark-256
+colorscheme molokai
+let g:rehash256 = 1 " for molokai original
 set ai smartindent
 set hlsearch
 set ignorecase
