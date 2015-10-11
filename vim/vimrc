@@ -103,29 +103,45 @@ nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
-let g:ctrlp_custom_ignore = {
- \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
- \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
-		\ilg|ind|lof|lot|toc)$',
- \ }
-" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-" \ --ignore .git
-" \ --ignore .svn
-" \ --ignore ".*"
-" \ --ignore tmp
-" \ --ignore bak
-" \ --ignore old
-" \ --ignore "*.exe"
-" \ --ignore "*.dll"
-" \ --ignore "*.so"
-" \ --ignore "*.o"
-" \ --ignore "*.zip"
-" \ --ignore "*.swp"
-" \ --ignore "*.swo"
-" \ --ignore "lib*"
-" \ --ignore "build*"
-" \ --ignore "html"
-" \ -g ""'
+" let g:ctrlp_custom_ignore = {
+"  \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
+"  \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
+" 		\ilg|ind|lof|lot|toc)$',
+"  \ }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+\ --ignore .git
+\ --ignore .svn
+\ --ignore .hg
+\ --ignore ".*"
+\ --ignore tmp
+\ --ignore bak
+\ --ignore old
+\ --ignore "*.exe"
+\ --ignore "*.dll"
+\ --ignore "*.so"
+\ --ignore "*.o"
+\ --ignore "*.obj"
+\ --ignore "*.a"
+\ --ignore "*.zip"
+\ --ignore "*.swp"
+\ --ignore "*.swo"
+\ --ignore "*.hi"
+\ --ignore "*.core"
+\ --ignore "*.xls"
+\ --ignore "*.doc"
+\ --ignore "*.pdf"
+\ --ignore "*.png"
+\ --ignore "*.aux"
+\ --ignore "*.idx"
+\ --ignore "*.ilg"
+\ --ignore "*.ind"
+\ --ignore "*.lof"
+\ --ignore "*.lot"
+\ --ignore "*.toc"
+\ --ignore "lib*"
+\ --ignore "build*"
+\ --ignore "html"
+\ -g ""'
 
 
 " Fugitive
