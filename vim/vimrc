@@ -106,7 +106,7 @@ let g:ctrlp_by_filename = 1
 " let g:ctrlp_custom_ignore = {
 "  \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
 "  \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
-" 		\ilg|ind|lof|lot|toc)$',
+"		\ilg|ind|lof|lot|toc)$',
 "  \ }
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 \ --ignore .git
@@ -183,7 +183,7 @@ function! FreeBSD_Style()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
 	setlocal textwidth=80
 	highlight SpecialKey ctermbg=yellow guibg=yellow
-	autocmd BufWinEnter * let w:matchnonascii=matchadd('SpecialKey', "[\x7f-\xff]", -1)
+	call matchadd('SpecialKey', "[\x7f-\xff]", -1)
 endfun
 
 function! ISO_Style()
@@ -237,15 +237,19 @@ augroup latex_source
 	autocmd BufNewFile,BufRead *.tex :set spell
 augroup end
 
+
 " ** Treat whitespace **
-highlight ExtraWhitespace ctermbg=red guibg=red
+function! WhiteSpace_Setup()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '\t\+     \+\|\s\+$\| \+\ze\t', 100)
+	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+	call matchadd('ColorColumn', '\%81v', 100)
+endfunction
+
 augroup whitespace_errors
 	autocmd!
-	autocmd BufWinEnter * let w:matchextrawhitespace=matchadd('ExtraWhitespace', '/\s\+$\| \+\ze\t/')
+	autocmd BufNewFile,BufRead *	:call WhiteSpace_Setup()
 augroup end
-highlight ColorColumn ctermbg=darkred
-call matchadd('ColorColumn', '\%81v', 100)
-
 
 " ***** Treat URLs *****
 
