@@ -91,7 +91,7 @@ fi
 
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking packages..."
-	pkg info vim git tmux zsh ctags \
+	pkg info vim git tmux zsh ctags uncrustify \
 		gnupg the_silver_searcher > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."

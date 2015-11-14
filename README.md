@@ -9,9 +9,12 @@ about the configuration done for the specific piece of software.
 		* custom prompt theme with Git integration
 * editors:
 	* vim
+		* advanced configuration for developers
 * version control system:
 	* [git](git/README.md)
 * utils:
+	* (ex)ctags
+	* git
 	* tmux
 	* uncrustify
 
