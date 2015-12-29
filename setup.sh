@@ -209,6 +209,15 @@ ln -s vim-atom-dark/colors/atom-dark-256.vim .
 
 cd $HOME
 
+if [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
+	echo "Warning: syscons keymap with swapped ESC and CAPSLOCK"
+	echo "         has not been installed, yet."
+	echo "1) Copy the file:"
+	echo "         cp ./syscons/us.capsescswap.kbd /usr/share/syscons/keymaps/"
+	echo "2) Set in /etc/rc.conf:"
+	echo "         keymap=\"us.capsescswap.kbd\""
+fi
+
 echo "[shell-setup] Finished successfully."
 
 exit 0

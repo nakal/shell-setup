@@ -10,6 +10,8 @@ about the configuration done for the specific piece of software.
 * editors:
 	* vim
 		* advanced configuration for developers
+	* syscons (FreeBSD)
+		* keymap file with swapped ESC and CAPSLOCK
 * version control system:
 	* [git](git/README.md)
 * utils:
