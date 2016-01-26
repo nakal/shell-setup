@@ -5,7 +5,15 @@ export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 export GOROOT='/usr/local/go'
-export DEFAULT_X_TERMINAL='urxvt'
+
+if [ -n "$DISPLAY" ]; then
+	for termtype in urxvt xterm; do
+		which -s $termtype > /dev/null
+		if [ $? -eq 0 ] && [ -z "$DEFAULT_X_TERMINAL" ]; then
+			export DEFAULT_X_TERMINAL="$termtype"
+		fi
+	done
+fi
 
 # Nice features for less
 export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode

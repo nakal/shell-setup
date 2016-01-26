@@ -6,7 +6,7 @@ alias l='ls -l'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-if [ -n "$DISPLAY" ]; then
+if [ -n "$DEFAULT_X_TERMINAL" ] && [ -n "$DISPLAY" ]; then
 	alias vi='background '${DEFAULT_X_TERMINAL}' -e vim'
 else
 	alias vi='vim'
