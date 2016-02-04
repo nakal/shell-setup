@@ -13,7 +13,7 @@ zsh_ctrlp() {
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
 		(unset TMUX; ${DEFAULT_X_TERMINAL} -e tmux -2 new-session 'vim -c CtrlP' 2>/dev/null) &
 	else
-		vim -c CtrlP
+		</dev/tty vim -c CtrlP
 	fi
 }
 zle -N zsh_ctrlp
