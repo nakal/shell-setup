@@ -90,12 +90,16 @@ else
 fi
 
 if [ "$OS" = "FreeBSD" ]; then
-	echo "[shell-setup] Checking packages..."
-	pkg info vim git tmux zsh ctags uncrustify \
-		gnupg the_silver_searcher > /dev/null
+	echo "[shell-setup] Checking required packages..."
+	pkg info vim git tmux zsh the_silver_searcher > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "ERROR: Missing packages for bootstrap (shell only)."
 		exit 1
+	fi
+	echo "[shell-setup] Checking recommended packages..."
+	pkg info ctags uncrustify gnupg > /dev/null
+	if [ $? -ne 0 ]; then
+		echo "WARNING: Some recommended packages are not installed."
 	fi
 else
 	echo "[shell-setup] WARNING: Skipped checking packages..."
