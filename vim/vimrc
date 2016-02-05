@@ -167,6 +167,20 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
 
+" NERDTree
+function! NERDTree_Project_Dir()
+	if !empty(glob(getcwd() . '/.git')) && bufnr('*/COMMIT_EDITMSG$') < 0
+		silent :NERDTree
+		silent :wincmd w
+	endif
+endfun
+
+augroup nerdtree_project
+	autocmd!
+	autocmd BufNewFile,BufRead * :call NERDTree_Project_Dir()
+	autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup end
+
 " ***** Programming stuff *****
 
 " ** C/C++ **
@@ -260,6 +274,7 @@ function! Browser ()
 endfunction
 
 nnoremap <Leader>w :call Browser ()<CR>
+nnoremap <Leader>n :NERDTree<CR>
 
 " Start a local ~/.vimrc_local, if it exists
 let s:vimrc_local_name='~/.vimrc_local'
