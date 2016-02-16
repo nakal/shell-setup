@@ -8,7 +8,6 @@ VIM_BUNDLES="\
 	tpope/vim-unimpaired \
 	bling/vim-airline \
 	ctrlpvim/ctrlp.vim \
-	scrooloose/nerdtree.git \
 	"
 
 # Git repo helper
