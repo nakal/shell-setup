@@ -169,7 +169,7 @@ set laststatus=2
 
 " NERDTree
 function! NERDTree_Project_Dir()
-	if !empty(glob(getcwd() . '/.git')) && bufnr('*/COMMIT_EDITMSG$') < 0
+	if bufnr('ControlP') < 0 && !empty(glob(getcwd() . '/.git')) && bufnr('*/COMMIT_EDITMSG$') < 0
 		silent :NERDTree
 		silent :wincmd w
 	endif
@@ -177,7 +177,7 @@ endfun
 
 augroup nerdtree_project
 	autocmd!
-	autocmd BufNewFile,BufRead * :call NERDTree_Project_Dir()
+	autocmd BufNewFile,BufRead,VimEnter * :call NERDTree_Project_Dir()
 	autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup end
 
