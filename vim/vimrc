@@ -54,11 +54,9 @@ syntax on
 filetype plugin indent on
 
 " ******* BINDINGS ********
-" Ctrl Left/Right -> previous/next buffer
-nnoremap <silent> <Esc>[D :<C-u>bp<cr>
-nnoremap <silent> <Esc>[1;5D :<C-u>bp<cr>
-nnoremap <silent> <Esc>[C :<C-u>bn<cr>
-nnoremap <silent> <Esc>[1;5C :<C-u>bn<cr>
+" previous/next buffer
+nnoremap <silent> <leader>p :<C-u>bp<cr>
+nnoremap <silent> <leader>n :<C-u>bn<cr>
 
 " CScope
 
@@ -102,6 +100,10 @@ nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
+nnoremap <silent> <Esc>[C :<C-u>CtrlP .<cr>
+nnoremap <silent> <Esc>[1;5C :<C-u>CtrlP .<cr>
+nnoremap <silent> <Esc>[D :<C-u>CtrlP<cr>
+nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 " let g:ctrlp_custom_ignore = {
@@ -261,7 +263,7 @@ function! Browser ()
     exec ":silent !firefox ".line
 endfunction
 
-nnoremap <Leader>w :call Browser ()<CR>
+nnoremap <leader>w :call Browser ()<CR>
 
 " Start a local ~/.vimrc_local, if it exists
 let s:vimrc_local_name='~/.vimrc_local'

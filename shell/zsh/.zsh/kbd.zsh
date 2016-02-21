@@ -26,4 +26,7 @@ zle -N zsh_ctrlp
 zle -N zsh_ctrlp_curdir
 
 bindkey "^p" zsh_ctrlp
-bindkey "^o" zsh_ctrlp_curdir
+bindkey "[D" zsh_ctrlp
+bindkey "OD" zsh_ctrlp
+bindkey "OC" zsh_ctrlp_curdir
+bindkey "[C" zsh_ctrlp_curdir
