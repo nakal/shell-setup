@@ -10,12 +10,20 @@ bindkey '\e[4~' end-of-line
 
 # CtrlP from zsh
 zsh_ctrlp() {
+	ctrlp_cmd="CtrlP $1"
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
-		(unset TMUX; ${DEFAULT_X_TERMINAL} -e tmux -2 new-session 'vim -c CtrlP' 2>/dev/null) &
+		(unset TMUX; ${DEFAULT_X_TERMINAL} -e tmux -2 new-session "vim -c \"$ctrlp_cmd\"" 2>/dev/null) &
 	else
-		</dev/tty vim -c CtrlP
+		</dev/tty vim -c "$ctrlp_cmd"
 	fi
 }
+
+zsh_ctrlp_curdir() {
+	zsh_ctrlp .
+}
+
 zle -N zsh_ctrlp
+zle -N zsh_ctrlp_curdir
 
 bindkey "^p" zsh_ctrlp
+bindkey "^o" zsh_ctrlp_curdir
