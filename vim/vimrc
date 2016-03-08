@@ -235,6 +235,21 @@ function! Haskell_Setup()
 	setlocal shiftround
 endfunction
 
+" ** PHP **
+
+augroup php_source_style
+	autocmd!
+	autocmd FileType php	:call PHP_Setup()
+augroup end
+
+function! PHP_Setup()
+	setlocal tabstop=2
+	setlocal expandtab
+	setlocal softtabstop=0
+	setlocal shiftwidth=2
+	setlocal shiftround
+endfunction
+
 " ** LaTeX **
 augroup latex_source
 	autocmd!
