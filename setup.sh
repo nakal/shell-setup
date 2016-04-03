@@ -116,7 +116,7 @@ else
 fi
 echo "-> Checking tmux..."
 tmux -V | grep -q "tmux 2."
-if [ $? -ne 0 ]; then
+if [ "$OS" = "FreeBSD" ] && [ $? -ne 0 ]; then
 	tmux -V | grep -q "tmux 1.9a"
 	if [ $? -ne 0 ]; then
 		echo "*** tmux version 2.x (at least 1.9a) is needed."
@@ -213,7 +213,7 @@ ln -s vim-atom-dark/colors/atom-dark-256.vim .
 
 cd $HOME
 
-if [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
+if [ "$OS" = "FreeBSD" ] && [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
 	echo "Warning: syscons keymap with swapped ESC and CAPSLOCK"
 	echo "         has not been installed, yet."
 	echo "1) Copy the file:"
