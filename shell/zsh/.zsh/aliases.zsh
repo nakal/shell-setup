@@ -1,7 +1,12 @@
 # Aliases
 
 alias h='history -fdDE -25'
-alias ls='ls -G'
+
+if [ "$OS" = "FreeBSD" ]; then
+	alias ls='ls -G'
+else
+	alias ls='colorls -G'
+fi
 alias l='ls -l'
 alias ..='cd ..'
 alias ...='cd ../..'

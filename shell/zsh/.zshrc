@@ -1,5 +1,7 @@
 # zsh configuration
 
+OS=`uname -s`
+
 source ~/.zsh/env.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/prompt.zsh
