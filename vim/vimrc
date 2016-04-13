@@ -93,17 +93,27 @@ endfunction
 
 " ******** PLUGINS ********
 
-" CtrlP
+" CtrlP (X terminal bindings)
+"
+" Ctrl+up	: buffer list
+" Ctrl+down	: ctags list
+" Ctrl+left	: file list from current dir
+" Ctrl+right	: file list (project dir)
+nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
+nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
+nnoremap <silent> <Esc>Oc :<C-u>CtrlP .<cr>
+nnoremap <silent> <Esc>Od :<C-u>CtrlP<cr>
+
+" Other console bindings (compatibility)
 nnoremap <silent> <Esc>[A :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[1;5A :<C-u>CtrlPBuffer<cr>
-nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
-nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>[C :<C-u>CtrlP .<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>CtrlP .<cr>
 nnoremap <silent> <Esc>[D :<C-u>CtrlP<cr>
 nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
+
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
 " let g:ctrlp_custom_ignore = {
