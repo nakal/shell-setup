@@ -122,22 +122,17 @@ let g:ctrlp_by_filename = 1
 "		\ilg|ind|lof|lot|toc)$',
 "  \ }
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-\ --ignore .git
-\ --ignore .svn
-\ --ignore .hg
+\ --ignore ".git"
+\ --ignore ".svn"
+\ --ignore ".hg"
 \ --ignore ".*"
-\ --ignore tmp
-\ --ignore bak
-\ --ignore old
 \ --ignore "*.exe"
 \ --ignore "*.dll"
 \ --ignore "*.so"
-\ --ignore "*.o"
+\ --ignore "*.[ao]"
 \ --ignore "*.obj"
-\ --ignore "*.a"
 \ --ignore "*.zip"
-\ --ignore "*.swp"
-\ --ignore "*.swo"
+\ --ignore "*.sw[p-z]"
 \ --ignore "*.hi"
 \ --ignore "*.core"
 \ --ignore "*.xls"
@@ -148,13 +143,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 \ --ignore "*.idx"
 \ --ignore "*.ilg"
 \ --ignore "*.ind"
-\ --ignore "*.lof"
-\ --ignore "*.lot"
-\ --ignore "*.toc"
-\ --ignore "lib*"
-\ --ignore "project"
-\ --ignore "build-*"
-\ --ignore "html"
+\ --ignore "*.lo[cft]"
 \ -g ""'
 
 
@@ -288,7 +277,8 @@ function! Browser ()
     exec ":silent !firefox ".line
 endfunction
 
-nnoremap <leader>w :call Browser ()<CR>
+nnoremap <silent> <leader>w :call Browser ()<CR>
+nnoremap <silent> <leader>e :Lexplore<CR>
 
 " Start a local ~/.vimrc_local, if it exists
 let s:vimrc_local_name='~/.vimrc_local'
