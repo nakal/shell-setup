@@ -7,7 +7,7 @@ export LSCOLORS='gxfxcxdxbxegedabagacad'
 export GOROOT='/usr/local/go'
 
 if [ -n "$DISPLAY" ]; then
-	for termtype in urxvt xterm; do
+	for termtype in xterm urxvt; do
 		which -s $termtype > /dev/null
 		if [ $? -eq 0 ] && [ -z "$DEFAULT_X_TERMINAL" ]; then
 			export DEFAULT_X_TERMINAL="$termtype"
