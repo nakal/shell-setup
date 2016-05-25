@@ -15,6 +15,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set showmatch
+set foldmethod=syntax
 let c_space_errors=1
 
 if v:version >= 704
@@ -259,7 +260,7 @@ augroup end
 " ** Treat whitespace **
 function! WhiteSpace_Setup()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
-	call matchadd('ExtraWhitespace', '\t\+     \+\|\s\+$\| \+\ze\t', 100)
+	call matchadd('ExtraWhitespace', '\t\+         \+\|\s\+$\| \+\ze\t', 100)
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
 endfunction
