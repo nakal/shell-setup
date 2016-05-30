@@ -190,20 +190,14 @@ function! FreeBSD_Style()
 	call matchadd('SpecialKey', "[\x7f-\xff]", -1)
 endfun
 
-function! ISO_Style()
-	silent :%!uncrustify -l c 2> /dev/null
-	silent normal ggVG=gg
-endfun
+nnoremap <silent> <leader>i :call Indent()<CR>
 
-function! ISO_Style_Function()
-	normal [[-mV][mW
-	exec ":'V,'W!uncrustify -l c 2> /dev/null"
-	normal 'V='W
+" indent buffer
+function! Indent()
+	silent set fileformat=unix
+	silent exec ":%!indent"
+	silent exec ":%s/\\s*$//"
 endfun
-
-nnoremap <silent> <leader>u :call ISO_Style()<CR>
-vnoremap <silent> <leader>u :%!uncrustify -l c 2> /dev/null<CR>gv=
-nnoremap <silent> <leader>fu :call ISO_Style_Function()<CR>
 
 " Ignore indents caused by parentheses in FreeBSD style.
 function! IgnoreParenIndent()
