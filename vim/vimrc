@@ -197,6 +197,7 @@ function! Indent()
 	silent set fileformat=unix
 	silent exec ":%!indent"
 	silent exec ":%s/\\s*$//"
+	silent normal ggVG=gg
 endfun
 
 " Ignore indents caused by parentheses in FreeBSD style.
