@@ -9,7 +9,6 @@ set runtimepath+=$GOROOT/misc/vim
 set nobackup
 set noundofile
 set t_Co=256 " (breaks CtrlP, Home/End keys without tmux)
-colorscheme atom-dark-256
 set ai smartindent
 set hlsearch
 set ignorecase
@@ -265,6 +264,16 @@ augroup whitespace_errors
 	autocmd BufNewFile,BufRead *	:call WhiteSpace_Setup()
 augroup end
 
+" Fixups for colorscheme
+function! FixColorscheme()
+	highlight! IncSearch ctermfg=172 ctermbg=16
+endfun
+
+augroup fix_color_scheme
+	autocmd!
+	autocmd ColorScheme * call FixColorscheme()
+augroup end
+
 " ***** Treat URLs *****
 
 function! Browser ()
@@ -282,5 +291,6 @@ if !empty(glob(s:vimrc_local_name))
 	execute 'source' s:vimrc_local_name
 endif
 
+colorscheme atom-dark-256
 set printoptions=paper:a4
 set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '\ -P'\ .\ &printdevice)\ .\ '\ '\ .\ v:fname_in)\ .\ delete(v:fname_in)\ +\ v:shell_error
