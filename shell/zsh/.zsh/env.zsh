@@ -31,3 +31,11 @@ if [ -z "$TMUX" ]; then
 else
 	export TERM='screen-256color'
 fi
+
+# GPG agent
+GPG_TTY=$(tty)
+export GPG_TTY
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+	export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+fi
