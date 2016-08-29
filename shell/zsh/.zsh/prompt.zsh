@@ -10,6 +10,7 @@ else
 fi
 
 function git_status() {
+	LANG=C
 	__git_status_slow_repo_size="2500"
 	is_git_workdir=$(git rev-parse --is-inside-work-tree 2> /dev/null)
 	if [ "$is_git_workdir" = "true" ]; then
@@ -63,4 +64,3 @@ function git_status() {
 		echo -n "$ref%f%k"
 	fi
 }
-
