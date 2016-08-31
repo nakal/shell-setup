@@ -33,6 +33,8 @@ set nomodeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
+set list
+set listchars=tab:▸·
 
 set history=1000
 set autoread
@@ -185,8 +187,8 @@ function! FreeBSD_Style()
 	setlocal indentexpr=IgnoreParenIndent()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
 	setlocal textwidth=80
-	highlight SpecialKey ctermbg=yellow guibg=yellow
-	call matchadd('SpecialKey', "[\x7f-\xff]", -1)
+	highlight NonASCII ctermbg=yellow guibg=yellow
+	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfun
 
 nnoremap <silent> <leader>i :call Indent()<CR>
