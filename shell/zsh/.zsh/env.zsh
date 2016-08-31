@@ -15,6 +15,13 @@ if [ -n "$DISPLAY" ]; then
 			export DEFAULT_X_TERMINAL="$termtype"
 		fi
 	done
+	if [ "$DEFAULT_X_TERMINAL" = "urxvt" ]; then
+		TERM="rxvt-unicode-256color"
+	fi
+	if [ "$DEFAULT_X_TERMINAL" = "xterm" ]; then
+		TERM="xterm-256color"
+	fi
+	export TERM
 fi
 
 # Nice features for less
