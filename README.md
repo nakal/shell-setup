@@ -14,6 +14,8 @@ about the configuration done for the specific piece of software.
 		* keymap file with swapped ESC and CAPSLOCK
 * version control system:
 	* [git](git/README.md)
+* mail:
+	* [mutt](mutt/README.md)
 * utils:
 	* (ex)ctags
 	* git

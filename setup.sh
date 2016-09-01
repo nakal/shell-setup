@@ -83,11 +83,6 @@ else
 fi
 
 OS=`uname -s`
-if [ "$OS" != "Linux" ]; then
-	MAKE_CMD=gmake
-else
-	MAKE_CMD=make
-fi
 
 if [ "$OS" = "FreeBSD" ]; then
 	echo "[shell-setup] Checking required packages..."
@@ -97,7 +92,7 @@ if [ "$OS" = "FreeBSD" ]; then
 		exit 1
 	fi
 	echo "[shell-setup] Checking recommended packages..."
-	pkg info ctags gnupg > /dev/null
+	pkg info ctags gnupg mutt offlineimap abook > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "WARNING: Some recommended packages are not installed."
 	fi
@@ -124,6 +119,40 @@ if [ "$OS" = "FreeBSD" ] && [ $? -ne 0 ]; then
 	fi
 fi
 echo "-> tmux is ok, good."
+
+echo "-> Checking mutt..."
+MUTT_IS_OK=1
+mutt -v | grep -q '+USE_FLOCK'
+if [ $? -ne 0 ]; then
+	MUTT_IS_OK=0
+	echo "*** FLOCK missing"
+fi
+mutt -v | grep -q '+CRYPT_BACKEND_GPGME'
+if [ $? -ne 0 ]; then
+	MUTT_IS_OK=0
+	echo "*** GPGME missing"
+fi
+mutt -v | egrep -q 'patch.*\.sidebar\.'
+if [ $? -ne 0 ]; then
+	MUTT_IS_OK=0
+	echo "*** SIDEBAR patch missing"
+fi
+mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.'
+if [ $? -ne 0 ]; then
+	MUTT_IS_OK=0
+	echo "Trash folder patch missing"
+fi
+mutt -v | grep -q '+HAVE_COLOR'
+if [ $? -ne 0 ]; then
+	MUTT_IS_OK=0
+	echo "*** Colors (NCURSES) missing"
+fi
+if [ $MUTT_IS_OK -ne 1 ]; then
+	echo "*** mutt check failed."
+	exit 1
+else
+	echo "-> mutt is ok, good."
+fi
 
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
@@ -164,6 +193,9 @@ fi
 # tidy up zsh
 tidy_up_dot_directory zsh
 
+# tidy up mutt
+tidy_up_dot_directory mutt
+
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
@@ -172,7 +204,7 @@ ln -s $SCRIPT_HOME/misc/.ctags .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 if [ "$OS" = "FreeBSD" ]; then
-	ln -s /usr/share/examples/indent/indent.pro .
+	ln -s /usr/share/examples/indent/indent.pro .indent.pro
 else
 	echo "*** Skipping indent configuration..."
 fi
@@ -193,6 +225,13 @@ cd $HOME/.zsh
 ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
 git_update_repositories $ZSH_MODULES
+
+echo "[shell-setup] Setting up mutt..."
+mkdir -p $HOME/.mutt
+touch $HOME/.mutt/.by-nakal
+cd $HOME/.mutt
+ln -s $SCRIPT_HOME/mutt/muttrc .
+ln -s $SCRIPT_HOME/mutt/colors.muttrc .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
