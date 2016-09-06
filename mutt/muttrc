@@ -46,11 +46,17 @@ set sidebar_delim='|'
 #set sidebar_format='%B%>  %N'
 set sidebar_folderindent=yes
 bind index \e[A sidebar-prev
+bind index \eOa sidebar-prev
 bind index \e[B sidebar-next
+bind index \eOb sidebar-next
 bind index \e[C sidebar-open
+bind index \eOc sidebar-open
 bind pager \e[A sidebar-prev
+bind pager \eOa sidebar-prev
 bind pager \e[B sidebar-next
+bind pager \eOb sidebar-next
 bind pager \e[C sidebar-open
+bind pager \eOc sidebar-open
 bind index "\\" next-unread-mailbox
 bind pager "\\" next-unread-mailbox
 macro index,pager \c? <change-folder>=INBOX<return>
@@ -59,8 +65,8 @@ macro index,pager \c? <change-folder>=INBOX<return>
 macro pager X <save-message>=Spam.LearnSpam<return>
 macro pager H <save-message>=Spam.LearnHam<return>
 
-set mail_check=1
-set timeout=2
+set mail_check=15
+set timeout=60
 unset mail_check_recent
 set folder=~/.mail
 set spoolfile="=INBOX"
