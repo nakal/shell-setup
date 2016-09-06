@@ -2,6 +2,7 @@
 color normal		color250	color234
 color indicator		color234	color151
 color message		color196	color234
+color error		color196	color234
 color search		color234	color187
 color tilde		color117	color234
 color status		color253	color238
