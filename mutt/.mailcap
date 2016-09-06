@@ -1,0 +1,1 @@
+*/*; firefox -remote 'openURL(%s)'

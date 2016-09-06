@@ -158,7 +158,7 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.zshrc .vim/autoload/pathogen.vim \
-	.vim/vimrc \
+	.vim/vimrc .mailcap \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
 
@@ -203,6 +203,7 @@ ln -s $SCRIPT_HOME/tmux/.tmux.conf .
 ln -s $SCRIPT_HOME/misc/.ctags .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
+ln -s $SCRIPT_HOME/mutt/.mailcap .
 if [ "$OS" = "FreeBSD" ]; then
 	ln -s /usr/share/examples/indent/indent.pro .indent.pro
 else
