@@ -17,13 +17,18 @@ function git_status() {
 		curgitpath=$(readlink -f $(git rev-parse --git-dir))
 		ref=$(git symbolic-ref -q HEAD | sed  "s-refs/heads/--" | sed -e 's/^ *//' -e 's/ *$//')
 		test -d "$curgitpath/rebase-apply" && rebasing="1"
+		svnrepo=$(git config --local svn-remote.svn.url)
 
 		if [ "$__git_status_last_git_path" != "$curgitpath" ]; then
 			reposize=$(du -sk "$curgitpath/index" 2> /dev/null | sed 's/[^0-9].*//')
 			if [ "$reposize" -lt "$__git_status_slow_repo_size" ]; then
 				dirty=$(git status -s -uno --ignore-submodules=dirty 2> /dev/null | wc -l | sed -e 's/^ *//' -e 's/ *$//')
 				uncommitted=$(git status -s --ignore-submodules=dirty 2> /dev/null | egrep "^\?\? " | wc -l | sed -e 's/^ *//' -e 's/ *$//')
-				unpushed=$(git status -sb --ignore-submodules=dirty 2> /dev/null | head -1 | grep '\[ahead ' | sed 's/.*\[ahead \([0-9][0-9]*\).*/\1/')
+				if [ -n "$svnrepo" ]; then
+					unpushed=$(git status -sb --ignore-submodules=dirty 2> /dev/null | head -1 | grep '\[ahead ' | sed 's/.*\[ahead \([0-9][0-9]*\).*/\1/')
+				else
+					unpushed=""
+				fi
 				if [ "$dirty$uncommitted" != "00" ]; then
 					if [ "$dirty" != "0" ]; then
 						echo -n "%F{88}$dirty ($uncommitted)%f "
@@ -59,6 +64,10 @@ function git_status() {
 		if [ -z "$ref" ]; then
 			echo -n "%F{184}"
 			ref="(???)"
+		fi
+
+		if [ -n "$svnrepo" ]; then
+			ref="[svn] $ref"
 		fi
 
 		echo -n "$ref%f%k"
