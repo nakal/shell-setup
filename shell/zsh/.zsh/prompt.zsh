@@ -3,9 +3,9 @@
 setopt promptsubst
 
 if [ "$USER" = "root" ]; then
-	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %# '
+	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}(%?)%f )%# '
 else
-	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %# '
+	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}(%?%)%f )%# '
 	export RPS1='$(git_status)'
 fi
 
