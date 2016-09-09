@@ -122,30 +122,36 @@ echo "-> tmux is ok, good."
 
 echo "-> Checking mutt..."
 MUTT_IS_OK=1
-mutt -v | grep -q '+USE_FLOCK'
-if [ $? -ne 0 ]; then
+mutt -v
+if [ $? -eq 0 ]; then
+	mutt -v | grep -q '+USE_FLOCK'
+	if [ $? -ne 0 ]; then
+		MUTT_IS_OK=0
+		echo "*** FLOCK missing"
+	fi
+	mutt -v | grep -q '+CRYPT_BACKEND_GPGME'
+	if [ $? -ne 0 ]; then
+		MUTT_IS_OK=0
+		echo "*** GPGME missing"
+	fi
+	mutt -v | egrep -q 'patch.*\.sidebar\.'
+	if [ $? -ne 0 ]; then
+		MUTT_IS_OK=0
+		echo "*** SIDEBAR patch missing"
+	fi
+	mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.'
+	if [ $? -ne 0 ]; then
+		MUTT_IS_OK=0
+		echo "Trash folder patch missing"
+	fi
+	mutt -v | grep -q '+HAVE_COLOR'
+	if [ $? -ne 0 ]; then
+		MUTT_IS_OK=0
+		echo "*** Colors (NCURSES) missing"
+	fi
+else
+	echo "*** mutt not found, skipping checks."
 	MUTT_IS_OK=0
-	echo "*** FLOCK missing"
-fi
-mutt -v | grep -q '+CRYPT_BACKEND_GPGME'
-if [ $? -ne 0 ]; then
-	MUTT_IS_OK=0
-	echo "*** GPGME missing"
-fi
-mutt -v | egrep -q 'patch.*\.sidebar\.'
-if [ $? -ne 0 ]; then
-	MUTT_IS_OK=0
-	echo "*** SIDEBAR patch missing"
-fi
-mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.'
-if [ $? -ne 0 ]; then
-	MUTT_IS_OK=0
-	echo "Trash folder patch missing"
-fi
-mutt -v | grep -q '+HAVE_COLOR'
-if [ $? -ne 0 ]; then
-	MUTT_IS_OK=0
-	echo "*** Colors (NCURSES) missing"
 fi
 if [ $MUTT_IS_OK -ne 1 ]; then
 	echo "*** mutt check failed."
