@@ -25,6 +25,8 @@ set beep=no
 set beep_new=yes
 set forward_quote
 set indent_str="> "
+set mime_forward=yes
+set mime_forward_rest=yes
 set tilde
 #set charset="utf-8"
 set assumed_charset="us-ascii:utf-8:iso-8859-1"
