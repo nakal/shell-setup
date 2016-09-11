@@ -60,6 +60,7 @@ bind pager \eOc sidebar-open
 bind index "\\" next-unread-mailbox
 bind pager "\\" next-unread-mailbox
 macro index,pager \c? <change-folder>=INBOX<return>
+macro index,pager \cH <change-folder>=INBOX<return>
 
 # Spam
 macro pager X <save-message>=Spam.LearnSpam<return>
