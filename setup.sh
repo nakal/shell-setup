@@ -154,8 +154,7 @@ else
 	MUTT_IS_OK=0
 fi
 if [ $MUTT_IS_OK -ne 1 ]; then
-	echo "*** mutt check failed."
-	exit 1
+	echo "*** WARNING: mutt check failed."
 else
 	echo "-> mutt is ok, good."
 fi
