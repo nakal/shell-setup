@@ -3,11 +3,51 @@
 setopt promptsubst
 
 if [ "$USER" = "root" ]; then
-	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}(%?)%f )%# '
+	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}$(exit_code %?)%)%f )%# '
 else
-	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}(%?%)%f )%# '
+	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}($(exit_code %?)%)%f )%# '
 	export RPS1='$(git_status)'
 fi
+
+function exit_code() {
+	CODE=$?
+	case "$CODE" in
+		129) echo "SIGHUP" ;;
+		130) echo "SIGINT" ;;
+		131) echo "SIGQUIT" ;;
+		132) echo "SIGILL" ;;
+		133) echo "SIGTRAP" ;;
+		134) echo "SIGABRT" ;;
+		135) echo "SIGEMT" ;;
+		136) echo "SIGFPE" ;;
+		137) echo "SIGKILL" ;;
+		138) echo "SIGBUS" ;;
+		139) echo "SIGSEGV" ;;
+		140) echo "SIGSYS" ;;
+		141) echo "SIGPIPE" ;;
+		142) echo "SIGALRM" ;;
+		143) echo "SIGTERM" ;;
+		144) echo "SIGURG" ;;
+		145) echo "SIGSTOP" ;;
+		146) echo "SIGTSTP" ;;
+		147) echo "SIGCONT" ;;
+		148) echo "SIGCHLD" ;;
+		149) echo "SIGTTIN" ;;
+		150) echo "SIGTTOU" ;;
+		151) echo "SIGIO" ;;
+		152) echo "SIGXCPU" ;;
+		153) echo "SIGXFSZ" ;;
+		154) echo "SIGVTALRM" ;;
+		155) echo "SIGPROF" ;;
+		156) echo "SIGWINCH" ;;
+		157) echo "SIGINFO" ;;
+		158) echo "SIGUSR1" ;;
+		159) echo "SIGUSR2" ;;
+		160) echo "SIGTHR" ;;
+		161) echo "SIGLIBRT" ;;
+		*) echo "$CODE" ;;
+	esac
+}
 
 function git_status() {
 	LANG=C
