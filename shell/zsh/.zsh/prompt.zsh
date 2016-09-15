@@ -3,9 +3,9 @@
 setopt promptsubst
 
 if [ "$USER" = "root" ]; then
-	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}$(exit_code %?)%)%f )%# '
+	export PS1='%F{red}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}$(exit_code)%)%f )%# '
 else
-	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}($(exit_code %?)%)%f )%# '
+	export PS1='%F{yellow}%B%n@%m%b%f %F{34}%~%f %(?||%F{red}($(exit_code)%)%f )%# '
 	export RPS1='$(git_status)'
 fi
 
@@ -64,7 +64,7 @@ function git_status() {
 			if [ "$reposize" -lt "$__git_status_slow_repo_size" ]; then
 				dirty=$(git status -s -uno --ignore-submodules=dirty 2> /dev/null | wc -l | sed -e 's/^ *//' -e 's/ *$//')
 				uncommitted=$(git status -s --ignore-submodules=dirty 2> /dev/null | egrep "^\?\? " | wc -l | sed -e 's/^ *//' -e 's/ *$//')
-				if [ -n "$svnrepo" ]; then
+				if [ -z "$svnrepo" ]; then
 					unpushed=$(git status -sb --ignore-submodules=dirty 2> /dev/null | head -1 | grep '\[ahead ' | sed 's/.*\[ahead \([0-9][0-9]*\).*/\1/')
 				else
 					unpushed=""
