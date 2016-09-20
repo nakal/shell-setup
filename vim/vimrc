@@ -207,9 +207,9 @@ function! IgnoreParenIndent()
 
     if indent > 4000
         if cindent(v:lnum - 1) > 4000
-            return indent(v:lnum - 1)
+		return indent(v:lnum - 1)
         else
-            return indent(v:lnum - 1) + 4
+		return indent(v:lnum - 1) + 4
         endif
     else
         return (indent)
@@ -256,7 +256,7 @@ augroup end
 " ** Treat whitespace **
 function! WhiteSpace_Setup()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
-	call matchadd('ExtraWhitespace', '\t\+         \+\|\s\+$\| \+\ze\t', 100)
+	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
 endfunction
