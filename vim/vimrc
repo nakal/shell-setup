@@ -263,7 +263,7 @@ endfunction
 
 augroup whitespace_errors
 	autocmd!
-	autocmd BufNewFile,BufRead *	:call WhiteSpace_Setup()
+	autocmd BufNewFile,BufRead *.c	:call WhiteSpace_Setup()
 augroup end
 
 " Fixups for colorscheme
