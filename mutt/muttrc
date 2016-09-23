@@ -27,6 +27,7 @@ set forward_quote
 set indent_str="> "
 set mime_forward=yes
 set mime_forward_rest=yes
+alternative_order text/plain text/html
 set tilde
 #set charset="utf-8"
 set assumed_charset="us-ascii:utf-8:iso-8859-1"
@@ -96,4 +97,3 @@ set pgp_timeout=3600
 set pgp_autosign
 
 source ~/.mutt/add.mailboxes
-

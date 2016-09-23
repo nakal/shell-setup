@@ -1,1 +1,2 @@
-*/*; firefox -remote 'openURL(%s)'
+application/pdf; xpdf %s; test=test $DISPLAY
+*/*; firefox %s; test=test $DISPLAY
