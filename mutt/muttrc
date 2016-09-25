@@ -29,6 +29,8 @@ set mime_forward=yes
 set mime_forward_rest=yes
 alternative_order text/plain text/html
 set tilde
+auto_view text/html
+alternative_order text/plain text/enriched text/html
 #set charset="utf-8"
 set assumed_charset="us-ascii:utf-8:iso-8859-1"
 ignore *

@@ -1,2 +1,3 @@
 application/pdf; xpdf %s; test=test $DISPLAY
+text/html; lynx -stdin -dump -display_charset=UTF-8 -image_links; copiousoutput
 */*; firefox %s; test=test $DISPLAY
