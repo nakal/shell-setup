@@ -92,7 +92,7 @@ if [ "$OS" = "FreeBSD" ]; then
 		exit 1
 	fi
 	echo "[shell-setup] Checking recommended packages..."
-	pkg info ctags gnupg mutt offlineimap abook > /dev/null
+	pkg info ctags gnupg mutt offlineimap abook lynx > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "WARNING: Some recommended packages are not installed."
 	fi
