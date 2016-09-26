@@ -122,7 +122,7 @@ echo "-> tmux is ok, good."
 
 echo "-> Checking mutt..."
 MUTT_IS_OK=1
-mutt -v
+mutt -v > /dev/null 2>&1
 if [ $? -eq 0 ]; then
 	mutt -v | grep -q '+USE_FLOCK'
 	if [ $? -ne 0 ]; then
