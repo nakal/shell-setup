@@ -178,6 +178,7 @@ set laststatus=2
 augroup c_source_style
 	autocmd!
 	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
+	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call WhiteSpace_Setup()
 augroup end
 
 " Follow the FreeBSD style(9).
@@ -260,11 +261,6 @@ function! WhiteSpace_Setup()
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
 endfunction
-
-augroup whitespace_errors
-	autocmd!
-	autocmd BufNewFile,BufRead *.c	:call WhiteSpace_Setup()
-augroup end
 
 " Fixups for colorscheme
 function! FixColorscheme()
