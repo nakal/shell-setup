@@ -16,6 +16,11 @@ color index		color196	color234 ~F	# flagged
 
 # Sidebar
 color sidebar_new	color156	color234
+color sidebar_divider	color250	color234
+color sidebar_flagged	color192	color234
+color sidebar_indicator brightyellow	color234
+color sidebar_highlight color234	color151
+color sidebar_spoolfile white		color234
 
 # Mail view
 color hdrdefault	color187	color234
