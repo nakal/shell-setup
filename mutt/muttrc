@@ -46,10 +46,10 @@ set header_cache="~/.cache/mutt"
 # sidebar
 set sidebar_width=25
 set sidebar_visible=yes
-set sidebar_delim='|'
+set sidebar_divider_char='|'
 #set sidebar_sort=yes
 #set sidebar_format='%B%>  %N'
-set sidebar_folderindent=yes
+set sidebar_folder_indent=yes
 bind index \e[A sidebar-prev
 bind index \eOa sidebar-prev
 bind index \e[B sidebar-next
