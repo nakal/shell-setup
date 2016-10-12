@@ -48,7 +48,8 @@ set sidebar_width=25
 set sidebar_visible=yes
 set sidebar_divider_char='|'
 #set sidebar_sort=yes
-#set sidebar_format='%B%>  %N'
+#set sidebar_format='%B%*  %N'
+set sidebar_format='%B%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_folder_indent=yes
 bind index \e[A sidebar-prev
 bind index \eOa sidebar-prev
@@ -72,6 +73,7 @@ macro pager X <save-message>=Spam.LearnSpam<return>
 macro pager H <save-message>=Spam.LearnHam<return>
 
 set mail_check=15
+set mail_check_stats
 set timeout=60
 unset mail_check_recent
 set folder=~/.mail
