@@ -40,8 +40,10 @@ hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 macro pager \cw |urlview<return>
 
 # Cache
-set message_cachedir="~/.cache/mutt"
 set header_cache="~/.cache/mutt"
+# body caching is disabled, because I use maildir
+#set message_cachedir="~/.cache/mutt"
+unset maildir_header_cache_verify
 
 # sidebar
 set sidebar_width=25
