@@ -15,11 +15,11 @@ color index		color106	color234 ~O	# old
 color index		color196	color234 ~F	# flagged
 
 # Sidebar
-color sidebar_new	color156	color234
+color sidebar_new	color208	color234
 color sidebar_divider	color250	color234
+color sidebar_indicator	brightcolor156	color234
 color sidebar_flagged	color192	color234
-color sidebar_indicator brightyellow	color234
-color sidebar_highlight color234	color151
+color sidebar_highlight brightblack	color156
 color sidebar_spoolfile white		color234
 
 # Mail view
