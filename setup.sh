@@ -243,6 +243,7 @@ echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
 mkdir -p .vim/bundle .vim/autoload .vim/colors
 touch $HOME/.vim/.by-nakal
+test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 cd .vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 

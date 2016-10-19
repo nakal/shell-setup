@@ -6,8 +6,10 @@ endif
 set shell=sh
 set shortmess+=I
 set runtimepath+=$GOROOT/misc/vim
-set nobackup
-set noundofile
+set backup
+set backupdir=~/.cache/vim
+set undofile
+set undodir=~/.cache/vim
 set t_Co=256 " (breaks CtrlP, Home/End keys without tmux)
 set ai smartindent
 set hlsearch
@@ -15,6 +17,7 @@ set ignorecase
 set smartcase
 set showmatch
 set foldmethod=syntax
+set foldnestmax=1
 let c_space_errors=1
 
 if v:version >= 704
