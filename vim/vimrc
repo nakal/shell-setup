@@ -36,8 +36,8 @@ set nomodeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
-set list
-set listchars=tab:▸·
+" set list
+" set listchars=tab:▸·
 
 set history=1000
 set autoread
