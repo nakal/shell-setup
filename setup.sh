@@ -10,7 +10,7 @@ VIM_BUNDLES="\
 	ctrlpvim/ctrlp.vim \
 	"
 
-# Git repo helper
+# Git repo helper (clone or update a repository)
 git_init_dir()
 {
 	REPOPATH="$1"
@@ -27,6 +27,7 @@ git_init_dir()
 
 git_update_repositories()
 {
+	# Save repositories that we still need
 	TMPD=../.tmp-active
 	rm -rf "$TMPD"
 	mkdir "$TMPD"
@@ -35,10 +36,12 @@ git_update_repositories()
 		mv "$NAME" "$TMPD"
 	done
 
+	# Remove repositories that we don't need anymore
 	OLDDIRS=`find . -type d -maxdepth 1 -mindepth 1`
 	echo "Removing (in $PWD): $OLDDIRS..."
 	rm -rf .nakal-guard $OLDDIRS
 
+	# Move back repositories to update them in place
 	ACTDIRS=`find "$TMPD" -type d -maxdepth 1 -mindepth 1`
 	for d in $ACTDIRS; do
 		mv $d .
@@ -134,7 +137,7 @@ if [ $? -eq 0 ]; then
 		MUTT_IS_OK=0
 		echo "*** GPGME missing"
 	fi
-	mutt -v | egrep -q 'patch.*\.sidebar\.'
+	mutt -v | egrep -q '(patch.*\.sidebar\.|USE_SIDEBAR)'
 	if [ $? -ne 0 ]; then
 		MUTT_IS_OK=0
 		echo "*** SIDEBAR patch missing"
