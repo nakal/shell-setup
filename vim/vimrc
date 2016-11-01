@@ -180,9 +180,14 @@ set laststatus=2
 " ** C/C++ **
 augroup c_source_style
 	autocmd!
-	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call FreeBSD_Style()
-	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call WhiteSpace_Setup()
+	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call C_Setup()
 augroup end
+
+function! C_Setup()
+	call FreeBSD_Style()
+	call WhiteSpace_Setup_C()
+	call TermWidthWarning()
+endfunction
 
 " Follow the FreeBSD style(9).
 function! FreeBSD_Style()
@@ -233,6 +238,9 @@ function! Haskell_Setup()
 	setlocal softtabstop=8
 	setlocal shiftwidth=8
 	setlocal shiftround
+	call TermWidthWarning()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 endfunction
 
 " ** PHP **
@@ -253,14 +261,17 @@ endfunction
 " ** LaTeX **
 augroup latex_source
 	autocmd!
-	autocmd BufNewFile,BufRead *.tex :set spell
+	autocmd BufNewFile,BufRead *.tex :setlocal spell
 augroup end
 
 
 " ** Treat whitespace **
-function! WhiteSpace_Setup()
+function! WhiteSpace_Setup_C()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+function! TermWidthWarning()
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
 endfunction
