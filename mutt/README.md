@@ -10,7 +10,7 @@ configuration. You can easily get it integrated to start within the
 line to the host-specific configuration (in `autostartPrograms`):
 
 ```
-("xterm", ["-title", "mutt", "-e", "sh", "-c", "'tmux has-session -t mutt && tmux -2 attach-session -d -t mutt || tmux -2 new-session -s mutt mutt'"])
+("sh", ["-c", "'pgrep mutt || urxvt -title mutt -e mutt'"])
 ```
 
 To have mutt working properly together with GNUpg 2.1.x it is a good idea
@@ -108,12 +108,14 @@ idlefolders = ['INBOX', 'FreeBSD', 'Logs', 'Notifications']
 * integrates `abook`
 * Trash is a trash folder, mails won't be simply deleted
 * caching enabled
+* safe HTML view of emails without losing all links
+* some `mailcap` settings
 * some special bindings
 	* a few hacks for the sidebar patch
 		* `Ctrl+Up` and `Ctrl+Down`  move the folder selection
 		* `Ctrl+Right` selects the folder
-	* `Backspace` goes back to INBOX
+	* `Ctrl+Backspace` goes back to INBOX
 	* `Backslash` goes to a mailbox with unread mail
 	* learning of spams and hams (the backend is not open source, sorry)
-		* `X` moves the current mail to the folder `INBOX.Spam.LearnSpam`
-		* `H` moves the current mail to the folder `INBOX.Spam.LearnHam`
+		* `X` moves the current mail to the folder `=LearnSpam`
+		* `H` moves the current mail to the folder `=LearnHam`

@@ -29,18 +29,31 @@ endif
 
 set exrc
 set secure
-set tags=./tags;
 
 set vb
 set nomodeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
-" set list
-" set listchars=tab:▸·
 
 set history=1000
 set autoread
+
+" Figure out project directory (we need only git ;) )
+let g:project_dir=getcwd()
+while g:project_dir != '/' && empty(glob(g:project_dir . '/.git'))
+	let g:project_dir=fnamemodify(g:project_dir, ':h')
+endwhile
+if g:project_dir == '/'
+	" fall back to cwd
+	let g:project_dir=getcwd()
+endif
+
+" Read project-local .vimrc, if any
+let s:vimrc_path = g:project_dir . '/.vimrc'
+if filereadable(s:vimrc_path)
+	execute 'source' s:vimrc_path
+endif
 
 " Change cursor in insert mode
 if $TERM =~ "rxvt" || $TERM =~ "xterm" || $TERM =~ "^screen"
@@ -66,6 +79,13 @@ nnoremap <silent> <leader>n :<C-u>bn<cr>
 " CScope
 
 if has('cscope')
+	function! Cscope_load ()
+		let l:cscope_path = g:project_dir . '/.git/cscope.db'
+		if filereadable(l:cscope_path)
+			execute 'cs add' l:cscope_path
+		endif
+	endfunction
+
 	set cscopetag
 	set cscopeverbose
 
@@ -80,20 +100,9 @@ if has('cscope')
 	cnoreabbrev css cs show
 	cnoreabbrev csh cs help
 
-	command -nargs=0 Cscope call Cscope_load()
+	silent call Cscope_load()
 endif
 
-function! Cscope_load ()
-	if filereadable("../../cscope.out")
-		cs add ../../cscope.out
-	endif
-	if filereadable("../cscope.out")
-		cs add ../cscope.out
-	endif
-	if filereadable("cscope.out")
-		cs add cscope.out
-	endif
-endfunction
 
 
 " ******** PLUGINS ********

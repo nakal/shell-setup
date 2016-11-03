@@ -1,11 +1,11 @@
 # shell-setup: Git
 
-This [Git](https://git-scm.herokuapp.com/) configuration is a part of the
+This [Git](https://git-scm.com/) configuration is a part of the
 entire configuration suite named
 [shell-setup](https://github.com/nakal/shell-setup).
 It is not meant to be run standalone.
 
-[Git](https://git-scm.herokuapp.com/) is a core application within the
+[Git](https://git-scm.com/) is a core application within the
 configuration itself and it is critical to keep the entire configuration
 system working.
 
@@ -30,3 +30,4 @@ in every project and avoid repetitions. The format is same like in
 
 * integrates vim
 * uses colors
+* refreshes ctags and cscope with hooks

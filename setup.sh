@@ -165,6 +165,7 @@ fi
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
+	.git_template \
 	.zshrc .vim/autoload/pathogen.vim \
 	.vim/vimrc .mailcap \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
@@ -208,9 +209,9 @@ tidy_up_dot_directory mutt
 echo "[shell-setup] Reinstalling softlinks..."
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
-ln -s $SCRIPT_HOME/misc/.ctags .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
+ln -s $SCRIPT_HOME/git/template .git_template
 ln -s $SCRIPT_HOME/mutt/.mailcap .
 if [ "$OS" = "FreeBSD" ]; then
 	ln -s /usr/share/examples/indent/indent.pro .indent.pro

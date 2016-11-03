@@ -25,3 +25,5 @@
 	log = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [interactive]
 	diffFilter = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
+[init]
+	templatedir = ~/.git_template

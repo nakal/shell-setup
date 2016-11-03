@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+dir="`git rev-parse --git-dir`"
+trap 'rm -f "$dir/$$.cscope"' EXIT
+cd "$dir/.."
+cscope -Rb -f "$dir/$$.cscope"
+mv "$dir/$$.cscope" "$dir/cscope.db"
