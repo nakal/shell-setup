@@ -12,7 +12,7 @@ bindkey '\e[4~' end-of-line
 zsh_ctrlp() {
 	ctrlp_cmd="CtrlP $1"
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
-		(unset TMUX; ${DEFAULT_X_TERMINAL} -e tmux -2 new-session "vim -c \"$ctrlp_cmd\"" 2>/dev/null) &
+		(${DEFAULT_X_TERMINAL} -e vim -c "$ctrlp_cmd" 2>/dev/null) &
 	else
 		</dev/tty vim -c "$ctrlp_cmd"
 	fi
