@@ -41,17 +41,17 @@ set history=1000
 set autoread
 
 " Figure out project directory (we need only git ;) )
-let g:project_dir=getcwd()
-while g:project_dir != '/' && empty(glob(g:project_dir . '/.git'))
-	let g:project_dir=fnamemodify(g:project_dir, ':h')
+let g:shs_project_dir=getcwd()
+while g:shs_project_dir != '/' && empty(glob(g:shs_project_dir . '/.git'))
+	let g:shs_project_dir=fnamemodify(g:shs_project_dir, ':h')
 endwhile
-if g:project_dir == '/'
+if g:shs_project_dir == '/'
 	" fall back to cwd
-	let g:project_dir=getcwd()
+	let g:shs_project_dir=getcwd()
 endif
 
 " Read project-local .vimrc, if any
-let s:vimrc_path = g:project_dir . '/.vimrc'
+let s:vimrc_path = g:shs_project_dir . '/.vimrc'
 if filereadable(s:vimrc_path)
 	execute 'source' s:vimrc_path
 endif
@@ -81,7 +81,7 @@ nnoremap <silent> <leader>n :<C-u>bn<cr>
 
 if has('cscope')
 	function! Cscope_load ()
-		let l:cscope_path = g:project_dir . '/.git/cscope.db'
+		let l:cscope_path = g:shs_project_dir . '/.git/cscope.db'
 		if filereadable(l:cscope_path)
 			execute 'cs add' l:cscope_path
 		endif
@@ -131,11 +131,11 @@ nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
-" let g:ctrlp_custom_ignore = {
-"  \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
-"  \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
-"		\ilg|ind|lof|lot|toc)$',
-"  \ }
+"let g:ctrlp_custom_ignore = {
+" \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
+" \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
+"      	\ilg|ind|lof|lot|toc)$',
+" \ }
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 \ --ignore ".git"
 \ --ignore ".svn"
