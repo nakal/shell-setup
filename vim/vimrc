@@ -266,6 +266,7 @@ function! PHP_Setup()
 	setlocal softtabstop=0
 	setlocal shiftwidth=2
 	setlocal shiftround
+	call TermWidthWarning()
 endfunction
 
 " ** LaTeX **
