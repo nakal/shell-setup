@@ -8,6 +8,9 @@ bindkey '\e[3~' delete-char
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
 
+bindkey '^f' vi-forward-blank-word
+bindkey '^b' vi-backwards-blank-word
+
 # CtrlP from zsh
 zsh_ctrlp() {
 	ctrlp_cmd="CtrlP $1"
