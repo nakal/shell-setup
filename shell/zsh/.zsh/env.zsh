@@ -8,21 +8,7 @@ export GOROOT='/usr/local/go'
 
 source ~/.zsh/path.zsh
 
-if [ -n "$DISPLAY" ]; then
-	for termtype in urxvt xterm; do
-		which -s $termtype > /dev/null
-		if [ $? -eq 0 ] && [ -z "$DEFAULT_X_TERMINAL" ]; then
-			export DEFAULT_X_TERMINAL="$termtype"
-		fi
-	done
-	if [ "$DEFAULT_X_TERMINAL" = "urxvt" ]; then
-		TERM="rxvt-unicode-256color"
-	fi
-	if [ "$DEFAULT_X_TERMINAL" = "xterm" ]; then
-		TERM="xterm-256color"
-	fi
-	export TERM
-fi
+export TERM="screen-256color"
 
 # Nice features for less
 export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
