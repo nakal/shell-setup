@@ -167,7 +167,7 @@ REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.git_template \
 	.zshrc .vim/autoload/pathogen.vim \
-	.vim/vimrc .mailcap \
+	.vim/vimrc .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
 
@@ -213,6 +213,7 @@ ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 ln -s $SCRIPT_HOME/git/template .git_template
 ln -s $SCRIPT_HOME/mutt/.mailcap .
+ln -s $SCRIPT_HOME/mutt/.urlview .
 if [ "$OS" = "FreeBSD" ]; then
 	ln -s /usr/share/examples/indent/indent.pro .indent.pro
 else
@@ -242,6 +243,7 @@ touch $HOME/.mutt/.by-nakal
 cd $HOME/.mutt
 ln -s $SCRIPT_HOME/mutt/muttrc .
 ln -s $SCRIPT_HOME/mutt/colors.muttrc .
+ln -s $SCRIPT_HOME/mutt/urls.sh .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
