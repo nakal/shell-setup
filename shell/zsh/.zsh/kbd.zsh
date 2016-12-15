@@ -7,6 +7,15 @@ bindkey '\e\e[C' forward-word
 bindkey '\e[3~' delete-char
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
+bindkey '\e[7~' beginning-of-line
+bindkey '\e[8~' end-of-line
+bindkey -M vicmd '\e[3~' delete-char
+bindkey -M vicmd '\e[1~' beginning-of-line
+bindkey -M vicmd '\e[4~' end-of-line
+bindkey -M vicmd '\e[7~' beginning-of-line
+bindkey -M vicmd '\e[8~' end-of-line
+bindkey -M vicmd '\e[2~' vi-insert
+bindkey '\e[2~' vi-cmd-mode
 
 bindkey '^f' vi-forward-blank-word
 bindkey '^b' vi-backwards-blank-word

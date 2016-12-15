@@ -130,6 +130,8 @@ nnoremap <silent> <Esc>[D :<C-u>CtrlP<cr>
 nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
 nnoremap <silent> <Esc>[7~ ^
 nnoremap <silent> <Esc>[8~ $
+inoremap <silent> <Esc>[7~ <Esc>^i
+inoremap <silent> <Esc>[8~ <Esc>$i
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
