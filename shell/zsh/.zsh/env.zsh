@@ -8,6 +8,22 @@ export GOROOT='/usr/local/go'
 
 source ~/.zsh/path.zsh
 
+if [ -n "$DISPLAY" ]; then
+
+	# detect terminals from runtime environment
+	for termtype in urxvt rxvt-unicode xterm; do
+		which -s $termtype > /dev/null
+		if [ $? -eq 0 ] && [ -z "$DEFAULT_X_TERMINAL" ]; then
+			export DEFAULT_X_TERMINAL="$termtype"
+		fi
+	done
+
+	# fallback to xterm
+	if [ -z "$DEFAULT_X_TERMINAL" ]; then
+		export DEFAULT_X_TERMINAL="xterm"
+	fi
+fi
+
 export TERM="screen-256color"
 
 # Nice features for less
