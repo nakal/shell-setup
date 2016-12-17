@@ -37,7 +37,7 @@ ignore *
 unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 unhdr_order *
 hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
-macro pager \cw "|~/.mutt/urls.sh"<return>
+macro index,pager \cw "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "view URLs"
 
 # Cache
 set header_cache="~/.cache/mutt"
