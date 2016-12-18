@@ -17,13 +17,13 @@
 	default = simple
 [difftool]
 	prompt = false
-[include]
-	path = ~/.gitconfig_local
 [pager]
 	diff = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 	show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 	log = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [interactive]
 	diffFilter = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
+[include]
+	path = ~/.gitconfig_local
 [init]
 	templatedir = ~/.git_template
