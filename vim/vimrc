@@ -191,6 +191,21 @@ set laststatus=2
 
 " ***** Programming stuff *****
 
+" ** General **
+augroup general
+	autocmd!
+	autocmd BufNewFile,BufRead * :call General_Setup()
+augroup end
+
+function! General_Setup()
+	setlocal textwidth=80
+	highlight NonASCII ctermbg=yellow guibg=yellow
+	call matchadd('NonASCII', "[\x7f-\xff]", -1)
+	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+	call matchadd('ColorColumn', '\%81v', 100)
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+endfunction
+
 " ** C/C++ **
 augroup c_source_style
 	autocmd!
@@ -200,7 +215,6 @@ augroup end
 function! C_Setup()
 	call FreeBSD_Style()
 	call WhiteSpace_Setup_C()
-	call TermWidthWarning()
 endfunction
 
 " Follow the FreeBSD style(9).
@@ -209,9 +223,6 @@ function! FreeBSD_Style()
 	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
 	setlocal indentexpr=IgnoreParenIndent()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
-	setlocal textwidth=80
-	highlight NonASCII ctermbg=yellow guibg=yellow
-	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfun
 
 nnoremap <silent> <leader>i :call Indent()<CR>
@@ -252,8 +263,6 @@ function! Haskell_Setup()
 	setlocal softtabstop=8
 	setlocal shiftwidth=8
 	setlocal shiftround
-	call TermWidthWarning()
-	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 endfunction
 
@@ -270,7 +279,7 @@ function! PHP_Setup()
 	setlocal softtabstop=0
 	setlocal shiftwidth=2
 	setlocal shiftround
-	call TermWidthWarning()
+	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 endfunction
 
 " ** LaTeX **
@@ -282,13 +291,7 @@ augroup end
 
 " ** Treat whitespace **
 function! WhiteSpace_Setup_C()
-	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
-endfunction
-
-function! TermWidthWarning()
-	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-	call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 
 " Fixups for colorscheme
