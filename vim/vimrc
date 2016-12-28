@@ -195,6 +195,7 @@ set laststatus=2
 augroup general
 	autocmd!
 	autocmd BufNewFile,BufRead * :call General_Setup()
+	autocmd Filetype * :call General_Setup()
 augroup end
 
 function! General_Setup()
