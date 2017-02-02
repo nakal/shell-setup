@@ -56,6 +56,13 @@ if filereadable(s:vimrc_path)
 	execute 'source' s:vimrc_path
 endif
 
+" Add project-local ctags database, if any
+" This is needed when CWD != project dir
+let s:ctags_path = g:shs_project_dir . '/.git/ctags'
+if filereadable(s:ctags_path)
+	set tags+=s:vimrc_path
+endif
+
 " Change cursor in insert mode
 if $TERM =~ "rxvt" || $TERM =~ "xterm" || $TERM =~ "^screen"
 	let &t_SI .= "\<Esc>[5 q"
@@ -200,11 +207,14 @@ augroup end
 
 function! General_Setup()
 	setlocal textwidth=80
-	highlight NonASCII ctermbg=yellow guibg=yellow
-	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+endfunction
+
+function! ASCII_Only_File()
+	highlight NonASCII ctermbg=yellow guibg=yellow
+	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfunction
 
 " ** C/C++ **
@@ -216,6 +226,7 @@ augroup end
 function! C_Setup()
 	call FreeBSD_Style()
 	call WhiteSpace_Setup_C()
+	call ASCII_Only_File()
 endfunction
 
 " Follow the FreeBSD style(9).
@@ -265,6 +276,7 @@ function! Haskell_Setup()
 	setlocal shiftwidth=8
 	setlocal shiftround
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
+	call ASCII_Only_File()
 endfunction
 
 " ** PHP **
@@ -281,14 +293,30 @@ function! PHP_Setup()
 	setlocal shiftwidth=2
 	setlocal shiftround
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
+	call ASCII_Only_File()
 endfunction
 
 " ** LaTeX **
 augroup latex_source
 	autocmd!
-	autocmd BufNewFile,BufRead *.tex :setlocal spell
+	autocmd FileType tex	:call LaTeX_Setup()
 augroup end
 
+function! LaTeX_Setup()
+	setlocal spell
+	call ASCII_Only_File()
+endfunction
+
+" ** Emails **
+augroup email_edit
+	autocmd!
+	autocmd FileType mail	:call Mail_Setup()
+augroup end
+
+function! Mail_Setup()
+	setlocal spell
+	setlocal nofoldenable
+endfunction
 
 " ** Treat whitespace **
 function! WhiteSpace_Setup_C()

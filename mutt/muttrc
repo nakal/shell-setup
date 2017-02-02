@@ -15,7 +15,7 @@ set signature="~/.mutt/signature"
 set fast_reply
 set include
 set reverse_name
-set editor="vim -c 'set spell nofoldenable' -c 'normal Go' -c ':startinsert'"
+set editor="vim -c 'normal Go' -c ':startinsert'"
 set send_charset="us-ascii:utf-8"
 
 # View
