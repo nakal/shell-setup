@@ -135,10 +135,12 @@ nnoremap <silent> <Esc>[C :<C-u>CtrlP .<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>CtrlP .<cr>
 nnoremap <silent> <Esc>[D :<C-u>CtrlP<cr>
 nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
-nnoremap <silent> <Esc>[7~ ^
-nnoremap <silent> <Esc>[8~ $
-inoremap <silent> <Esc>[7~ <Esc>^i
-inoremap <silent> <Esc>[8~ <Esc>$i
+
+" Fix home/end key bindings
+" nnoremap <silent> <Esc>[7~ ^
+" nnoremap <silent> <Esc>[8~ $
+" inoremap <silent> <Esc>[7~ <Esc>^i
+" inoremap <silent> <Esc>[8~ <Esc>$a
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 1
