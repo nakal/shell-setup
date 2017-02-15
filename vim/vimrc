@@ -304,7 +304,6 @@ augroup end
 
 function! LaTeX_Setup()
 	setlocal spell
-	call ASCII_Only_File()
 endfunction
 
 " ** Emails **
