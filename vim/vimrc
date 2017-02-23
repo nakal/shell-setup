@@ -319,6 +319,18 @@ function! Mail_Setup()
 	setlocal nofoldenable
 endfunction
 
+" ** Makefiles **
+
+augroup makefile_edit
+	autocmd!
+	autocmd FileType make	:call Makefile_Setup()
+augroup end
+
+function! Makefile_Setup()
+	call WhiteSpace_Setup_C()
+	call ASCII_Only_File()
+endfunction
+
 " ** Treat whitespace **
 function! WhiteSpace_Setup_C()
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
