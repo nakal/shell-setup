@@ -64,6 +64,7 @@ function git_status() {
 			if [ "$reposize" -lt "$__git_status_slow_repo_size" ]; then
 				dirty=$(git status -s -uno --ignore-submodules=dirty 2> /dev/null | wc -l | sed -e 's/^ *//' -e 's/ *$//')
 				uncommitted=$(git status -s --ignore-submodules=dirty 2> /dev/null | egrep "^\?\? " | wc -l | sed -e 's/^ *//' -e 's/ *$//')
+				conflicted=$(git status -s --ignore-submodules=dirty 2> /dev/null | egrep "^[ADU][ADU] " | wc -l | sed -e 's/^ *//' -e 's/ *$//')
 				if [ -z "$svnrepo" ]; then
 					unpushed=$(git status -sb --ignore-submodules=dirty 2> /dev/null | head -1 | grep '\[ahead ' | sed 's/.*\[ahead \([0-9][0-9]*\).*/\1/')
 				else
@@ -91,6 +92,10 @@ function git_status() {
 				if [ "$rebasing" = "1" ]; then
 					echo -n "%K{170}%F{white}"
 					ref=$(basename $(cat "$curgitpath/rebase-apply/head-name"))
+				fi
+
+				if [ "$conflicted" != "0" ]; then
+					echo -n "%K{170}%F{white}($conflicted)"
 				fi
 			else
 				export __git_status_last_git_path="$curgitpath"
