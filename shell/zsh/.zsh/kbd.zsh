@@ -18,7 +18,7 @@ bindkey -M vicmd '\e[2~' vi-insert
 bindkey '\e[2~' vi-cmd-mode
 
 bindkey '^f' vi-forward-blank-word
-bindkey '^b' vi-backwards-blank-word
+bindkey '^b' vi-backward-blank-word
 
 # CtrlP from zsh
 zsh_ctrlp() {
