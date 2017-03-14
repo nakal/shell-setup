@@ -3,7 +3,7 @@
 # Repositories from github
 
 ZSH_MODULES="tarruda/zsh-autosuggestions"
-VIM_BUNDLES="\
+VIM_PLUGINS="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
@@ -247,21 +247,17 @@ ln -s $SCRIPT_HOME/mutt/urls.sh .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
-mkdir -p .vim/bundle .vim/autoload .vim/colors
+mkdir -p .vim/pack/vim/start .vim/pack/vim/opt .vim/colors
 touch $HOME/.vim/.by-nakal
 test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
-cd .vim
+cd $HOME/.vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 
-cd $HOME/.vim/autoload
-VIM_PLUGIN_MANAGER="tpope/vim-pathogen"
-git_update_repositories $VIM_PLUGIN_MANAGER
-ln -s vim-pathogen/autoload/pathogen.vim .
+rm -rf autoload plugins
+cd pack/vim/start
+git_update_repositories $VIM_PLUGINS
 
-cd ../bundle
-git_update_repositories $VIM_BUNDLES
-
-cd ../colors
+cd $HOME/.vim/colors
 VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
 git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
