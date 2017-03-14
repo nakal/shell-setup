@@ -15,7 +15,8 @@ set signature="~/.mutt/signature"
 set fast_reply
 set include
 set reverse_name
-set editor="vim -c 'normal Go' -c ':startinsert'"
+set my_editor="vim -c 'normal Go' -c ':startinsert'"
+set editor=$my_editor
 set send_charset="us-ascii:utf-8"
 
 # View
@@ -75,6 +76,10 @@ macro index,pager \cH <change-folder>=INBOX<return>
 # Spam
 macro pager X <save-message>=Spam.LearnSpam<return>
 macro pager H <save-message>=Spam.LearnHam<return>
+
+# Expire
+macro index E ':set editor=~/.mutt/edit_expires<Return><edit>:set editor=$my_editor<Return>' "set Expires: header"
+macro pager E ':set editor=~/.mutt/edit_expires<Return><edit>:set editor=$my_editor<Return><next-entry><clear-flag>N' "set Expires: header"
 
 set mail_check=15
 set mail_check_stats

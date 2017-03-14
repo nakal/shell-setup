@@ -1,0 +1,33 @@
+#!/bin/sh
+
+FORMAIL="/usr/local/bin/formail"
+
+if [ ! -x "$FORMAIL" ]; then
+	exit 2
+fi
+
+default_date="+30d"
+file=$1
+tmp_file=$file.$$
+
+echo -n "Expiry date [$default_date, \"never\" to remove]: "
+read date
+
+if [ $? -ne 0 ]; then
+	exit 2
+fi
+
+if [ -z "$date" ]; then
+	date="$default_date"
+fi
+
+if [ "$date" = "never" ]; then
+	"$FORMAIL" -i "Expires:" < $file > $tmp_file
+	mv $tmp_file $file
+else
+	rfc822_date=$(date -R -v"$date")
+	if [ -n "$rfc822_date" ]; then
+		"$FORMAIL" -i "Expires: $rfc822_date" < $file > $tmp_file
+		mv $tmp_file $file
+	fi
+fi

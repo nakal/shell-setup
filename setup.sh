@@ -95,7 +95,7 @@ if [ "$OS" = "FreeBSD" ]; then
 		exit 1
 	fi
 	echo "[shell-setup] Checking recommended packages..."
-	pkg info ctags gnupg mutt offlineimap abook lynx > /dev/null
+	pkg info ctags gnupg mutt offlineimap procmail abook lynx > /dev/null
 	if [ $? -ne 0 ]; then
 		echo "WARNING: Some recommended packages are not installed."
 	fi
@@ -244,6 +244,7 @@ cd $HOME/.mutt
 ln -s $SCRIPT_HOME/mutt/muttrc .
 ln -s $SCRIPT_HOME/mutt/colors.muttrc .
 ln -s $SCRIPT_HOME/mutt/urls.sh .
+ln -s $SCRIPT_HOME/mutt/edit_expires .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME
