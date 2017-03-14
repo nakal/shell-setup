@@ -38,6 +38,8 @@ unignore From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 unhdr_order *
 hdr_order From: Subject: Date: To: CC: Bcc: User-Agent: X-Mailer: X-Bogosity:
 macro index,pager \cw "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>" "view URLs"
+set date_format="%a %d. %b %Y %I:%M"
+set index_format="%4C %Z %D %-20.20L (%?l?%4l&%4c?) %s"
 
 # Cache
 set header_cache="~/.cache/mutt"
