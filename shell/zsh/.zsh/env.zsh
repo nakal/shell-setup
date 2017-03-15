@@ -36,7 +36,3 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # GPG agent
 GPG_TTY=$(tty)
 export GPG_TTY
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-	export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
-fi
