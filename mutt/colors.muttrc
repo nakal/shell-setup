@@ -13,9 +13,9 @@ color tree		color196	color234
 color index		color156	color234 ~N	# new
 color index		color29		color234 ~Q	# answered
 color index		color250	color234 ~O	# old
-color index		color250	color234 ~R	# read
+color index		color250	color234 '~R !~Q' # read
 color index		color250	color234 ~S	# superseded
-color index		color253	color234 ~U	# unread
+color index		color253	color234 '~U !~N' # unread
 color index		color237	color234 ~D	# deleted
 color index		color25		color234 ~P	# from me
 color index		color198	color234 ~T	# tagged
