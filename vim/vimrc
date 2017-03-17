@@ -210,7 +210,6 @@ function! General_Setup()
 	setlocal textwidth=80
 	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 	call matchadd('ColorColumn', '\%81v', 100)
-	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 endfunction
 
 function! ASCII_Only_File()
@@ -275,6 +274,7 @@ endfun
 
 " ** Treat whitespace **
 function! WhiteSpace_Setup_C()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
 endfunction
 
@@ -317,6 +317,7 @@ function! Haskell_Setup()
 	setlocal softtabstop=8
 	setlocal shiftwidth=8
 	setlocal shiftround
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 	call ASCII_Only_File()
 endfunction
@@ -334,6 +335,7 @@ function! PHP_Setup()
 	setlocal softtabstop=0
 	setlocal shiftwidth=2
 	setlocal shiftround
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 	call ASCII_Only_File()
 endfunction
