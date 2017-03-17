@@ -218,34 +218,44 @@ function! ASCII_Only_File()
 	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfunction
 
-" ** C/C++ **
+function! TermWidthWarning()
+	highlight ColorColumn ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+	call matchadd('ColorColumn', '\%81v', 100)
+endfunction
+
+" ** C **
 augroup c_source_style
 	autocmd!
-	autocmd BufNewFile,BufRead *.[cChH],*.cpp,*.cxx,*.c++,*.cc :call C_Setup()
+	autocmd FileType c :call C_Setup()
 augroup end
 
 function! C_Setup()
 	call FreeBSD_Style()
 	call WhiteSpace_Setup_C()
-	call ASCII_Only_File()
+	call TermWidthWarning()
+	nnoremap <silent> <leader>i :call Indent_C()<CR>
 endfunction
 
 " Follow the FreeBSD style(9).
 function! FreeBSD_Style()
+	setlocal fileformat=dos
 	setlocal cindent
 	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
 	setlocal indentexpr=IgnoreParenIndent()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
+	setlocal textwidth=80
+	highlight NonASCII ctermbg=yellow guibg=yellow
+	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfun
 
-nnoremap <silent> <leader>i :call Indent()<CR>
-
 " indent buffer
-function! Indent()
-	silent set fileformat=unix
+function! Indent_C()
+	let oldformat = &fileformat
+	set fileformat=unix
 	silent exec ":%!indent"
 	silent exec ":%s/\\s*$//"
 	silent normal ggVG=gg
+	let &fileformat=oldformat
 endfun
 
 " Ignore indents caused by parentheses in FreeBSD style.
@@ -262,6 +272,37 @@ function! IgnoreParenIndent()
         return (indent)
     endif
 endfun
+
+" ** Treat whitespace **
+function! WhiteSpace_Setup_C()
+	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+" ** C++ **
+augroup cpp_source_style
+	autocmd!
+	autocmd FileType cpp :call Cpp_Setup()
+augroup end
+
+function! Cpp_Setup()
+	call FreeBSD_Style()
+	call WhiteSpace_Setup_Cpp()
+	call TermWidthWarning()
+	nnoremap <silent> <leader>i :call Indent_Cpp()<CR>
+endfunction
+
+" indent buffer
+function! Indent_Cpp()
+	let oldformat = &fileformat
+	set fileformat=unix
+	silent exec ":%!clang-format39 -style=file"
+	let &fileformat=oldformat
+endfun
+
+function! WhiteSpace_Setup_Cpp()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
 
 " ** Haskell **
 
@@ -328,11 +369,6 @@ augroup end
 function! Makefile_Setup()
 	call WhiteSpace_Setup_C()
 	call ASCII_Only_File()
-endfunction
-
-" ** Treat whitespace **
-function! WhiteSpace_Setup_C()
-	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
 endfunction
 
 " Fixups for colorscheme

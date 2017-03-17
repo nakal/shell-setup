@@ -165,7 +165,7 @@ fi
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
-	.git_template \
+	.git_template .clang-format \
 	.zshrc .vim/autoload/pathogen.vim \
 	.vim/vimrc .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
@@ -214,6 +214,7 @@ ln -s $SCRIPT_HOME/git/.gitconfig .
 ln -s $SCRIPT_HOME/git/template .git_template
 ln -s $SCRIPT_HOME/mutt/.mailcap .
 ln -s $SCRIPT_HOME/mutt/.urlview .
+ln -s $SCRIPT_HOME/misc/.clang-format .
 if [ "$OS" = "FreeBSD" ]; then
 	ln -s /usr/share/examples/indent/indent.pro .indent.pro
 else
