@@ -166,8 +166,7 @@ cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.git_template .clang-format \
-	.zshrc .vim/autoload/pathogen.vim \
-	.vim/vimrc .mailcap .urlview \
+	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
 
@@ -254,6 +253,7 @@ touch $HOME/.vim/.by-nakal
 test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 cd $HOME/.vim
 ln -s $SCRIPT_HOME/vim/vimrc .
+ln -s $SCRIPT_HOME/vim/mod .
 
 rm -rf autoload plugins
 cd pack/vim/start
