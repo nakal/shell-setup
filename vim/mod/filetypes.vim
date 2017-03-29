@@ -130,7 +130,6 @@ endfunction
 
 function! Mail_Setup()
 	setlocal spell
-	call EnableFolding()
 endfunction
 
 " ** Makefiles **

@@ -74,8 +74,8 @@ macro index,pager \c? <change-folder>=INBOX<return>
 macro index,pager \cH <change-folder>=INBOX<return>
 
 # Spam
-macro pager X <save-message>=Spam.LearnSpam<return>
-macro pager H <save-message>=Spam.LearnHam<return>
+macro index,pager X <save-message>=Spam.LearnSpam<return> "Learn the message as spam"
+macro index,pager H <save-message>=Spam.LearnHam<return> "Learn the message as ham"
 
 # Expire
 macro index E ':set editor=~/.mutt/edit_expires<Return><edit>:set editor=$my_editor<Return>' "set Expires: header"
@@ -100,13 +100,12 @@ macro index \ca !abook\n
 macro pager A |'abook --add-email'\n
 
 # PGP
-set pgp_replyencrypt
-set pgp_replysign
-set pgp_replysignencrypted
+set crypt_replyencrypt
+set crypt_replysign
+set crypt_replysignencrypted
+set crypt_verify_sig
 set pgp_show_unusable=no
-set pgp_verify_sig
 set pgp_use_gpg_agent
 set pgp_timeout=3600
-set pgp_autosign
 
 source ~/.mutt/add.mailboxes
