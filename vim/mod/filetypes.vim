@@ -124,6 +124,8 @@ endfunction
 function! LaTeX_Setup()
 	setlocal spell
 	call EnableFolding()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '\s\+$', 100)
 endfunction
 
 " ** Emails **
