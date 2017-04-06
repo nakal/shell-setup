@@ -39,9 +39,9 @@ endfunction
 
 " Follow the FreeBSD style(9).
 function! FreeBSD_Style()
-	setlocal fileformat=dos
+	setlocal fileformat=unix
 	setlocal cindent
-	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200
+	setlocal cinoptions=(4200,u4200,+0.5s,*500,:0,t0,U4200,g0,N-s,E-s,i4
 	setlocal indentexpr=IgnoreParenIndent()
 	setlocal indentkeys=0{,0},0),:,0#,!^F,o,O,e
 	setlocal textwidth=80
