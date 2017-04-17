@@ -1,0 +1,5 @@
+#!/usr/bin/env perl
+
+print $_ while (<STDIN>);
+
+exit(0);

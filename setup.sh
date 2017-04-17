@@ -165,7 +165,7 @@ fi
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
 	.gitignore_global .gitconfig .ctags \
-	.git_template .clang-format \
+	.git_template .clang-format .diff-highlight \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	"
@@ -214,11 +214,6 @@ ln -s $SCRIPT_HOME/git/template .git_template
 ln -s $SCRIPT_HOME/mutt/.mailcap .
 ln -s $SCRIPT_HOME/mutt/.urlview .
 ln -s $SCRIPT_HOME/misc/.clang-format .
-if [ "$OS" = "FreeBSD" ]; then
-	ln -s /usr/share/examples/indent/indent.pro .indent.pro
-else
-	echo "*** Skipping indent configuration..."
-fi
 
 echo Checking local tmux configuration...
 if [ -r "$HOME/.tmux.local" ]; then
@@ -266,6 +261,21 @@ ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
 
 cd $HOME
+
+# OS specific setup
+case "$OS" in
+	FreeBSD)
+		ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight .diff-highlight;
+		ln -s /usr/share/examples/indent/indent.pro .indent.pro;
+		;;
+	Linux)
+		ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight .diff-highlight;
+		;;
+	*)
+		ln -s $SCRIPT_HOME/git/.diff-highlight.fallback .diff-highlight;
+		;;
+esac
+
 
 if [ "$OS" = "FreeBSD" ] && [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
 	echo "Warning: syscons keymap with swapped ESC and CAPSLOCK"

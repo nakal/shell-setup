@@ -18,11 +18,11 @@
 [difftool]
 	prompt = false
 [pager]
-	diff = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
-	show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
-	log = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+	diff = perl ~/.diff-highlight | less -c
+	show = perl ~/.diff-highlight | less -c
+	log =  perl ~/.diff-highlight | less -c
 [interactive]
-	diffFilter = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight
+	diffFilter = perl ~/.diff-highlight
 [include]
 	path = ~/.gitconfig_local
 [init]
