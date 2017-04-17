@@ -2,7 +2,7 @@
 
 # Repositories from github
 
-ZSH_MODULES="tarruda/zsh-autosuggestions"
+ZSH_MODULES=""
 VIM_PLUGINS="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
@@ -163,7 +163,7 @@ else
 fi
 
 cd $HOME
-REMOVE_FILES=".cshrc .tmux.conf .tmux.sys .indent.pro \
+REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.git_template .clang-format .diff-highlight \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \

@@ -19,7 +19,3 @@ bindkey '\eOA' up-line-or-beginning-search
 bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
-
-# Load autosuggestions module
-source ~/.zsh/modules/zsh-autosuggestions/zsh-autosuggestions.zsh
-AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
