@@ -33,7 +33,7 @@ export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
 export LESS_TERMCAP_so=$'\E[38;5;016m\E[48;5;220m'    # begin standout-mode - info box
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 if [ "$OS" = "OpenBSD" ];then
-	export LESS="-c"
+	export LESS="-cR"
 fi
 
 # GPG agent
