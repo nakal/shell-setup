@@ -18,9 +18,9 @@
 [difftool]
 	prompt = false
 [pager]
-	diff = perl ~/.diff-highlight | less -c
-	show = perl ~/.diff-highlight | less -c
-	log =  perl ~/.diff-highlight | less -c
+	diff = perl ~/.diff-highlight | less
+	show = perl ~/.diff-highlight | less
+	log =  perl ~/.diff-highlight | less
 [interactive]
 	diffFilter = perl ~/.diff-highlight
 [include]

@@ -163,7 +163,7 @@ else
 fi
 
 cd $HOME
-REMOVE_FILES=".cshrc .tmux.conf .indent.pro \
+REMOVE_FILES=".cshrc .tmux.conf .tmux.sys .indent.pro \
 	.gitignore_global .gitconfig .ctags \
 	.git_template .clang-format .diff-highlight \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
@@ -206,8 +206,14 @@ tidy_up_dot_directory mutt
 
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
+if [ "$OS" = "OpenBSD" ]; then
+	TMUX_FLAVOR=openbsd
+else
+	TMUX_FLAVOR=sys
+fi
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
+ln -s $SCRIPT_HOME/tmux/.tmux.conf.${TMUX_FLAVOR} .tmux.conf.sys
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 ln -s $SCRIPT_HOME/git/template .git_template
