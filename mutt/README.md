@@ -10,7 +10,7 @@ configuration. You can easily get it integrated to start within the
 line to the host-specific configuration (in `autostartPrograms`):
 
 ```
-("sh", ["-c", "'pgrep mutt || urxvt -title mutt -e mutt'"])
+("sh", ["-c", "'pgrep mutt || xterm -title mutt -e mutt'"])
 ```
 
 To have mutt working properly together with GNUpg 2.1.x it is a good idea
