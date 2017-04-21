@@ -27,6 +27,7 @@ set nomodeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
+set t_Co=256
 
 set wildmenu
 set lazyredraw
