@@ -115,12 +115,9 @@ else
 fi
 echo "-> Checking tmux..."
 tmux -V | grep -q "tmux 2."
-if [ "$OS" = "FreeBSD" ] && [ $? -ne 0 ]; then
-	tmux -V | grep -q "tmux 1.9a"
-	if [ $? -ne 0 ]; then
-		echo "*** tmux version 2.x (at least 1.9a) is needed."
-		exit 1
-	fi
+if [ $? -ne 0 ]; then
+	echo "*** tmux version 2.x is needed."
+	exit 1
 fi
 echo "-> tmux is ok, good."
 
@@ -207,14 +204,8 @@ tidy_up_dot_directory mutt
 
 # prepare conf in user's home
 echo "[shell-setup] Reinstalling softlinks..."
-if [ "$OS" = "OpenBSD" ]; then
-	TMUX_FLAVOR=openbsd
-else
-	TMUX_FLAVOR=sys
-fi
 ln -s $SCRIPT_HOME/shell/tcsh/.cshrc .
 ln -s $SCRIPT_HOME/tmux/.tmux.conf .
-ln -s $SCRIPT_HOME/tmux/.tmux.conf.${TMUX_FLAVOR} .tmux.conf.sys
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 ln -s $SCRIPT_HOME/git/template .git_template
