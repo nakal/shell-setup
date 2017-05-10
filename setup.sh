@@ -114,7 +114,7 @@ else
 	echo "-> git is ok, good."
 fi
 echo "-> Checking tmux..."
-tmux -V | grep -q "tmux 2."
+which tmux
 if [ $? -ne 0 ]; then
 	echo "*** tmux version 2.x is needed."
 	exit 1
