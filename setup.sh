@@ -8,7 +8,8 @@ VIM_PLUGINS="\
 	tpope/vim-unimpaired \
 	bling/vim-airline \
 	ctrlpvim/ctrlp.vim \
-	rust-lang/rust.vim
+	rust-lang/rust.vim \
+	vim-syntastic/syntastic
 	"
 
 # Git repo helper (clone or update a repository)
