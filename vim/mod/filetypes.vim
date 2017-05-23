@@ -8,6 +8,8 @@ augroup setup_filetypes
 	autocmd FileType tex		:call LaTeX_Setup()
 	autocmd FileType mail		:call Mail_Setup()
 	autocmd FileType make		:call Makefile_Setup()
+	autocmd FileType sh		:call Script_Setup()
+	autocmd FileType gitcommit	:call GitCommit_Setup()
 augroup end
 
 " ** GENERAL functions **
@@ -114,6 +116,7 @@ function! PHP_Setup()
 	setlocal shiftwidth=2
 	setlocal shiftround
 	call EnableFolding()
+	call TermWidthWarning()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 	call ASCII_Only_File()
@@ -132,11 +135,32 @@ endfunction
 
 function! Mail_Setup()
 	setlocal spell
+	call TermWidthWarning()
 endfunction
 
 " ** Makefiles **
 
 function! Makefile_Setup()
+	call ASCII_Only_File()
+	call TermWidthWarning()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+" ** Script files **
+
+function! Script_Setup()
+	call ASCII_Only_File()
+	call TermWidthWarning()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+" ** Git commits **
+
+function! GitCommit_Setup()
+	setlocal spell
+	call TermWidthWarning()
 	call ASCII_Only_File()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
