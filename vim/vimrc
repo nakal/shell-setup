@@ -18,7 +18,6 @@ augroup end
 
 source ~/.vim/mod/set.vim
 source ~/.vim/mod/bindings.vim
-source ~/.vim/mod/plugins.vim
 source ~/.vim/mod/filetypes.vim
 
 " Start a local ~/.vimrc_local, if it exists
@@ -31,3 +30,4 @@ set printoptions=paper:a4
 set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '\ -P'\ .\ &printdevice)\ .\ '\ '\ .\ v:fname_in)\ .\ delete(v:fname_in)\ +\ v:shell_error
 
 source ~/.vim/mod/project.vim
+source ~/.vim/mod/plugins.vim

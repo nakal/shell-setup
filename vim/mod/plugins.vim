@@ -82,9 +82,19 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
 
 " Syntastic
-let g:syntastic_always_populate_loc_list = 1
+nnoremap <silent> <leader>ss :SyntasticCheck<CR>
+nnoremap <silent> <leader>si :SyntasticInfo<CR>
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": [],
+        \ "passive_filetypes": [] }
 let g:syntastic_clang_check_exec = "clang-check40"
 let g:syntastic_clang_tidy_exec = "clang-tidy40"
+let g:syntastic_c_clang_check_post_args = ""
+let g:syntastic_c_clang_tidy_post_args = ""
+let g:syntastic_cpp_clang_check_post_args = ""
+let g:syntastic_cpp_clang_tidy_post_args = ""
