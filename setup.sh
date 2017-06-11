@@ -88,22 +88,20 @@ else
 fi
 
 OS=`uname -s`
-
-if [ "$OS" = "FreeBSD" ]; then
-	echo "[shell-setup] Checking required packages..."
-	pkg info vim git tmux zsh the_silver_searcher > /dev/null
-	if [ $? -ne 0 ]; then
-		echo "ERROR: Missing packages for bootstrap (shell only)."
-		exit 1
-	fi
-	echo "[shell-setup] Checking recommended packages..."
-	pkg info ctags gnupg mutt offlineimap procmail abook lynx > /dev/null
-	if [ $? -ne 0 ]; then
-		echo "WARNING: Some recommended packages are not installed."
-	fi
-else
-	echo "[shell-setup] WARNING: Skipped checking packages..."
-fi
+REQUIRED_PACKAGES_OpenBSD="\
+	git vim zsh the_silver_searcher \
+	"
+RECOMMENDED_PACKAGES_OpenBSD="\
+	ectags gnupg-2 gpgme mutt isync procmail abook lynx \
+"
+REQUIRED_PACKAGES_FreeBSD="\
+	git vim tmux zsh the_silver_searcher \
+	"
+RECOMMENDED_PACKAGES_FreeBSD="\
+	ctags gnupg mutt isync procmail abook lynx \
+	"
+. include/packages.sh
+check_packages
 
 echo "[shell-setup] Checking software capabilities..."
 echo "-> Checking git..."
