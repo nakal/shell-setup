@@ -89,16 +89,16 @@ fi
 
 OS=`uname -s`
 REQUIRED_PACKAGES_OpenBSD="\
-	git vim zsh the_silver_searcher \
+	git vim zsh the_silver_searcher colorls \
 	"
 RECOMMENDED_PACKAGES_OpenBSD="\
-	ectags gnupg-2 gpgme mutt isync procmail abook lynx \
+	ectags gnupg-2 gpgme mutt isync procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
 	git vim tmux zsh the_silver_searcher \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
-	ctags gnupg mutt isync procmail abook lynx \
+	ctags gnupg mutt isync procmail abook urlview lynx \
 	"
 . include/packages.sh
 check_packages
