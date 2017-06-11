@@ -100,7 +100,7 @@ REQUIRED_PACKAGES_FreeBSD="\
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg mutt isync procmail abook urlview lynx \
 	"
-. include/packages.sh
+. "$SCRIPT_HOME/include/packages.sh"
 check_packages
 
 echo "[shell-setup] Checking software capabilities..."
