@@ -9,6 +9,7 @@ colorscheme atom-dark-256
 " Fixups for colorscheme
 function! FixColorscheme()
        highlight! IncSearch ctermfg=172 ctermbg=16
+       highlight! Error term=reverse ctermfg=white ctermbg=red guifg=white guibg=red
 endfun
 
 augroup fix_color_scheme
