@@ -89,7 +89,7 @@ endfunction
 function! Indent_Cpp()
 	let oldformat = &fileformat
 	set fileformat=unix
-	silent exec ":%!clang-format39 -style=file"
+	silent exec ":%!clang-format40 -style=file"
 	let &fileformat=oldformat
 endfun
 
