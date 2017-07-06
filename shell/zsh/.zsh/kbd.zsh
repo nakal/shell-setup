@@ -38,5 +38,11 @@ zle -N zsh_ctrlp
 zle -N zsh_ctrlp_curdir
 
 bindkey "^p" zsh_ctrlp
-bindkey "OD" zsh_ctrlp
-bindkey "OC" zsh_ctrlp_curdir
+
+if [ -n "$TMUX" ]; then
+	bindkey "OD" zsh_ctrlp
+	bindkey "OC" zsh_ctrlp_curdir
+else
+	bindkey "Od" zsh_ctrlp
+	bindkey "Oc" zsh_ctrlp_curdir
+fi
