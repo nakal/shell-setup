@@ -4,12 +4,14 @@ augroup setup_filetypes
 	autocmd FileType c		:call C_Setup()
 	autocmd FileType cpp		:call Cpp_Setup()
 	autocmd FileType haskell	:call Haskell_Setup()
+	autocmd FileType cabal		:call Haskell_Setup()
 	autocmd FileType php		:call PHP_Setup()
 	autocmd FileType tex		:call LaTeX_Setup()
 	autocmd FileType mail		:call Mail_Setup()
 	autocmd FileType make		:call Makefile_Setup()
 	autocmd FileType sh		:call Script_Setup()
 	autocmd FileType gitcommit	:call GitCommit_Setup()
+	autocmd FileType cmake		:call CMake_Setup()
 augroup end
 
 " ** GENERAL functions **
@@ -143,6 +145,14 @@ endfunction
 function! Makefile_Setup()
 	call ASCII_Only_File()
 	call TermWidthWarning()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+" ** CMake **
+
+function! CMake_Setup()
+	call ASCII_Only_File()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
 endfunction
