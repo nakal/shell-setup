@@ -139,11 +139,6 @@ if [ $? -eq 0 ]; then
 		MUTT_IS_OK=0
 		echo "*** SIDEBAR patch missing"
 	fi
-	mutt -v | egrep -q 'patch.*\.trash_folder-purge_message\.'
-	if [ $? -ne 0 ]; then
-		MUTT_IS_OK=0
-		echo "Trash folder patch missing"
-	fi
 	mutt -v | grep -q '+HAVE_COLOR'
 	if [ $? -ne 0 ]; then
 		MUTT_IS_OK=0
