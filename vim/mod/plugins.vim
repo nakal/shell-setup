@@ -6,18 +6,21 @@
 " Ctrl+right	: file list (project dir)
 nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
-nnoremap <silent> <Esc>Oc :<C-u>CtrlP .<cr>
-nnoremap <silent> <Esc>Od :<C-u>CtrlP<cr>
+nnoremap <silent> <Esc>Oc :<C-u>CtrlPCurFile<cr>
+nnoremap <silent> <Esc>Od :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
 
 " Other console bindings (compatibility)
 nnoremap <silent> <Esc>[A :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[1;5A :<C-u>CtrlPBuffer<cr>
 nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
-nnoremap <silent> <Esc>[C :<C-u>CtrlP .<cr>
-nnoremap <silent> <Esc>[1;5C :<C-u>CtrlP .<cr>
-nnoremap <silent> <Esc>[D :<C-u>CtrlP<cr>
-nnoremap <silent> <Esc>[1;5D :<C-u>CtrlP<cr>
+nnoremap <silent> <Esc>[C :<C-u>CtrlPCurFile<cr>
+nnoremap <silent> <Esc>[1;5C :<C-u>CtrlPCurFile<cr>
+nnoremap <silent> <Esc>[D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
+nnoremap <silent> <Esc>[1;5D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
+
+" CtrlP gf alternative
+nmap <leader>gf :<C-u>execute ':CtrlP '.g:shs_project_dir<cr><C-d><C-\>f
 
 " Fix home/end key bindings
 " nnoremap <silent> <Esc>[7~ ^
