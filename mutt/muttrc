@@ -1,6 +1,6 @@
 source ~/.mutt/local.muttrc
 source ~/.mutt/colors.muttrc
-source /usr/local/share/examples/mutt/gpg.rc
+source ~/.mutt/gpg.rc
 
 # System
 unset suspend
@@ -72,6 +72,8 @@ bind index "\\" next-unread-mailbox
 bind pager "\\" next-unread-mailbox
 macro index,pager \c? <change-folder>=INBOX<return>
 macro index,pager \cH <change-folder>=INBOX<return>
+bind index \e[7~ first-entry
+bind index \e[8~ last-entry
 
 # Spam
 macro index,pager X <save-message>=Spam.LearnSpam<return> "Learn the message as spam"
