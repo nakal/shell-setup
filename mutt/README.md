@@ -1,10 +1,10 @@
 # shell-setup: Mutt
 
-This [mutt](http://www.mutt.org/) configuration is a part of the entire
+This [neomutt](https://www.neomutt.org/) configuration is a part of the entire
 configuration suite named [shell-setup](https://github.com/nakal/shell-setup).
 It is not meant to be run standalone.
 
-[mutt](http://www.mutt.org/) is the default email client (MUA) for this
+[neomutt](https://www.neomutt.org/) is the default email client (MUA) for this
 configuration. You can easily get it integrated to start within the
 [xmonad configuration](https://github.com/nakal/xmonad-conf) by adding this
 line to the host-specific configuration (in `autostartPrograms`):
@@ -56,7 +56,42 @@ want exclude some of them from `mutt`.
 The colorscheme for mutt is in `~/.mutt/colors.muttrc`. It mostly tries to
 simulate the colors from atom-dark.
 
-## OfflineIMAP
+## Syncing emails
+
+There are two possibilities to synchronize emails.
+
+### mbsync
+
+Here is a configuration for [mbsync](http://isync.sourceforge.net/).
+Use the script [sync-maildir](sync-maildir) for syncing. There
+is a comment how to use add it to cron.
+
+```
+MaildirStore maildir
+Path ~/.mail/
+Inbox ~/.mail/INBOX
+Flatten .
+
+IMAPAccount imapaccount
+Host imap.mycompany.org
+User myname
+Pass mypassword
+SSLVersions TLSv1.2
+SystemCertificates yes
+
+IMAPStore imap
+Account imapaccount
+
+Channel sync
+Master :imap:
+Slave :maildir:
+Pattern *
+Create both
+Expunge both
+SyncState *
+```
+
+### OfflineIMAP
 
 Here is a sample configuration for `offlineimap`. It generates the
 list of mailboxes that can be consumed as shown above. It syncs
@@ -106,6 +141,7 @@ idlefolders = ['INBOX', 'FreeBSD', 'Logs', 'Notifications']
 * integrates vim as editor to write emails
 * integrates GNUpg and GPG-Agent in a unannoying way
 * integrates `abook`
+* integrates `notmuch`
 * Trash is a trash folder, mails won't be simply deleted
 * caching enabled
 * safe HTML view of emails without losing all links

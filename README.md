@@ -15,7 +15,7 @@ about the configuration done for the specific piece of software.
 * version control system:
 	* [git](git/README.md)
 * mail:
-	* [mutt](mutt/README.md)
+	* [neomutt](mutt/README.md)
 * utils:
 	* (ex)ctags
 	* git
