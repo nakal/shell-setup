@@ -83,6 +83,11 @@ macro index,pager H <save-message>=Spam.LearnHam<return> "Learn the message as h
 macro index E ':set editor=~/.mutt/edit_expires<Return><edit>:set editor=$my_editor<Return>' "set Expires: header"
 macro pager E ':set editor=~/.mutt/edit_expires<Return><edit>:set editor=$my_editor<Return><next-entry><clear-flag>N' "set Expires: header"
 
+# NotMuch
+macro index \cl \
+     "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
+     "notmuch: search mail"
+
 set mail_check=15
 set mail_check_stats
 set timeout=60
