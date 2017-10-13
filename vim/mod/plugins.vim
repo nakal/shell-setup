@@ -95,8 +95,18 @@ let g:syntastic_mode_map = {
         \ "mode": "passive",
         \ "active_filetypes": [],
         \ "passive_filetypes": [] }
-let g:syntastic_clang_check_exec = "clang-check40"
-let g:syntastic_clang_tidy_exec = "clang-tidy40"
+
+let s:clang_checker = GetFirstExecutable("clang-check", "clang-check50", "clang-check40")
+let s:clang_tidy = GetFirstExecutable("clang-tidy", "clang-tidy50", "clang-tidy40")
+let s:clang_c_compiler = GetFirstExecutable("clang", "clang50", "clang40")
+let s:clang_cpp_compiler = GetFirstExecutable("clang++", "clang++50", "clang++40")
+
+let g:syntastic_c_checkers = ["clang"]
+let g:syntastic_cpp_checkers = ["clang"]
+let g:syntastic_c_compiler = s:clang_c_compiler
+let g:syntastic_cpp_compiler = s:clang_cpp_compiler
+let g:syntastic_clang_check_exec = s:clang_checker
+let g:syntastic_clang_tidy_exec = s:clang_tidy
 let g:syntastic_c_clang_check_post_args = ""
 let g:syntastic_c_clang_tidy_post_args = ""
 let g:syntastic_cpp_clang_check_post_args = ""

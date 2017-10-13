@@ -6,17 +6,12 @@ endif
 
 colorscheme atom-dark-256
 
-" Fixups for colorscheme
-function! FixColorscheme()
-       highlight! IncSearch ctermfg=172 ctermbg=16
-       highlight! Error term=reverse ctermfg=white ctermbg=red guifg=white guibg=red
-endfun
-
 augroup fix_color_scheme
        autocmd!
        autocmd ColorScheme * call FixColorscheme()
 augroup end
 
+source ~/.vim/mod/utils.vim
 source ~/.vim/mod/set.vim
 source ~/.vim/mod/bindings.vim
 source ~/.vim/mod/filetypes.vim

@@ -25,7 +25,8 @@ function! ASCII_Only_File()
 	call matchadd('NonASCII', "[\x7f-\xff]", -1)
 endfunction
 
-function! EnableFolding()
+function! SetupFolds()
+	setlocal nofoldenable
 	setlocal foldmethod=syntax
 	setlocal foldnestmax=1
 endfunction
@@ -35,7 +36,7 @@ function! C_Setup()
 	call FreeBSD_Style()
 	call TermWidthWarning()
 	call ASCII_Only_File()
-	call EnableFolding()
+	call SetupFolds()
 	nnoremap <silent> <leader>i :call Indent_C()<CR>
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
@@ -81,7 +82,7 @@ function! Cpp_Setup()
 	call FreeBSD_Style()
 	call TermWidthWarning()
 	call ASCII_Only_File()
-	call EnableFolding()
+	call SetupFolds()
 	nnoremap <silent> <leader>i :call Indent_Cpp()<CR>
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^\t\+         \+\|\s\+$\| \+\ze\t', 100)
@@ -90,8 +91,8 @@ endfunction
 " indent buffer
 function! Indent_Cpp()
 	let oldformat = &fileformat
-	set fileformat=unix
-	silent exec ":%!clang-format40 -style=file"
+	setlocal fileformat=unix
+	silent exec ":%!" . GetFirstExecutable("clang-format", "clang-format50", "clanf-format40") . " -style=file"
 	let &fileformat=oldformat
 endfun
 
@@ -103,7 +104,7 @@ function! Haskell_Setup()
 	setlocal softtabstop=8
 	setlocal shiftwidth=8
 	setlocal shiftround
-	call EnableFolding()
+	call SetupFolds()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
 	call ASCII_Only_File()
@@ -117,7 +118,7 @@ function! PHP_Setup()
 	setlocal softtabstop=0
 	setlocal shiftwidth=2
 	setlocal shiftround
-	call EnableFolding()
+	call SetupFolds()
 	call TermWidthWarning()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^ *\t\+ *\|\s\+$\| \+\ze\t', 100)
@@ -128,7 +129,7 @@ endfunction
 
 function! LaTeX_Setup()
 	setlocal spell
-	call EnableFolding()
+	call SetupFolds()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '\s\+$', 100)
 endfunction
