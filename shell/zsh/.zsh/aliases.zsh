@@ -2,11 +2,15 @@
 
 alias h='history -fdDE -25'
 
-case "$OS" in
-	FreeBSD) alias ls='ls -G';;
-	Linux)	alias ls='ls --color';;
-	*)	alias ls='colorls -G';;
-esac
+if which exa > /dev/null 2>&1; then
+	alias ls='exa --git -Fag'
+else
+	case "$OS" in
+		FreeBSD) alias ls='ls -G';;
+		Linux)	alias ls='ls --color';;
+		*)	alias ls='colorls -G';;
+	esac
+fi
 
 alias l='ls -l'
 alias ..='cd ..'

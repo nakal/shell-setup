@@ -4,6 +4,7 @@ export EDITOR='vim'
 export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
+export EXA_COLORS='di=36:da=0:uu=1:gu=1'
 export GOROOT='/usr/local/go'
 
 source ~/.zsh/path.zsh
