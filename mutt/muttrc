@@ -74,6 +74,8 @@ macro index,pager \c? <change-folder>=INBOX<return>
 macro index,pager \cH <change-folder>=INBOX<return>
 bind index \e[7~ first-entry
 bind index \e[8~ last-entry
+bind pager \e[7~ top
+bind pager \e[8~ bottom
 
 # Spam
 macro index,pager X <save-message>=Spam.LearnSpam<return> "Learn the message as spam"

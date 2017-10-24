@@ -3,7 +3,7 @@
 alias h='history -fdDE -25'
 
 if which exa > /dev/null 2>&1; then
-	alias ls='exa --git -Fag'
+	alias ls='exa --git -Fg'
 else
 	case "$OS" in
 		FreeBSD) alias ls='ls -G';;
