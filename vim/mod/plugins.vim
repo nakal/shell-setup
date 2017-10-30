@@ -35,31 +35,40 @@ let g:ctrlp_by_filename = 1
 " \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
 "      	\ilg|ind|lof|lot|toc)$',
 " \ }
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-\ --ignore ".git"
-\ --ignore ".svn"
-\ --ignore ".hg"
-\ --ignore ".*"
-\ --ignore "*.exe"
-\ --ignore "*.dll"
-\ --ignore "*.so"
-\ --ignore "*.[ao]"
-\ --ignore "*.obj"
-\ --ignore "*.zip"
-\ --ignore "*.sw[p-z]"
-\ --ignore "*.hi"
-\ --ignore "*.core"
-\ --ignore "*.xls"
-\ --ignore "*.doc"
-\ --ignore "*.pdf"
-\ --ignore "*.png"
-\ --ignore "*.aux"
-\ --ignore "*.idx"
-\ --ignore "*.ilg"
-\ --ignore "*.ind"
-\ --ignore "*.lo[cft]"
-\ -g ""'
-
+if executable('rg')
+	" ripgrep
+	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+	let g:ctrlp_use_caching = 0
+elseif executable('ag')
+	" the silver searcher
+	let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+	\ --ignore ".git"
+	\ --ignore ".svn"
+	\ --ignore ".hg"
+	\ --ignore ".*"
+	\ --ignore "*.exe"
+	\ --ignore "*.dll"
+	\ --ignore "*.so"
+	\ --ignore "*.[ao]"
+	\ --ignore "*.obj"
+	\ --ignore "*.zip"
+	\ --ignore "*.sw[p-z]"
+	\ --ignore "*.hi"
+	\ --ignore "*.core"
+	\ --ignore "*.xls"
+	\ --ignore "*.doc"
+	\ --ignore "*.pdf"
+	\ --ignore "*.png"
+	\ --ignore "*.aux"
+	\ --ignore "*.idx"
+	\ --ignore "*.ilg"
+	\ --ignore "*.ind"
+	\ --ignore "*.lo[cft]"
+	\ -g ""'
+else
+	" fallback
+	let g:ctrlp_user_command = 'find %s -not -path "*/\.*" -type f -exec grep -Iq . {} \; -and -print'
+endif
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>

@@ -10,17 +10,18 @@ about the configuration done for the specific piece of software.
 * editors:
 	* vim
 		* advanced configuration for developers
-	* syscons (FreeBSD)
-		* keymap file with swapped ESC and CAPSLOCK
 * version control system:
 	* [git](git/README.md)
 * mail:
 	* [neomutt](mutt/README.md)
+		* lynx and urlview integration
 * utils:
 	* (ex)ctags
 	* git
 	* tmux
 	* uncrustify
+* syscons (FreeBSD)
+	* keymap file with swapped ESC and CAPSLOCK
 
 ## Small warning
 
