@@ -22,7 +22,17 @@ bindkey '^b' vi-backward-blank-word
 
 # CtrlP from zsh
 zsh_ctrlp() {
-	ctrlp_cmd="CtrlP $1"
+	if which fzy; then
+		fzy_dir="$1"
+		if test -z "$fzy_dir"; then
+			fzy_dir="g:shs_project_dir"
+		else
+			fzy_dir="\"$fzy_dir\""
+		fi
+		ctrlp_cmd="call FzyCommand(printf(g:ctrlp_user_command, $fzy_dir), \":e\")"
+	else
+		ctrlp_cmd="CtrlP $1"
+	fi
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
 		(${DEFAULT_X_TERMINAL} -e vim -c "$ctrlp_cmd" 2>/dev/null) &
 	else

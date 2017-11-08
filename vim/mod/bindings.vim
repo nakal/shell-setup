@@ -13,4 +13,3 @@ function! Browser ()
 endfunction
 
 nnoremap <silent> <leader>w :call Browser ()<CR>
-nnoremap <silent> <leader>e :Lexplore<CR>
