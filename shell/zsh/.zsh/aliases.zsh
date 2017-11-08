@@ -3,7 +3,8 @@
 alias h='history -fdDE -25'
 
 if which exa > /dev/null 2>&1; then
-	alias ls='exa --git --time-style=long-iso --color-scale -FBg'
+	alias ls='exa --time-style=long-iso --color-scale -FBg'
+	alias lg='exa --git --time-style=long-iso --color-scale -FBg'
 else
 	case "$OS" in
 		FreeBSD) alias ls='ls -G';;

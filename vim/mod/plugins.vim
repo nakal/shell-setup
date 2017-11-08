@@ -20,7 +20,7 @@ nnoremap <silent> <Esc>[D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
 nnoremap <silent> <Esc>[1;5D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
 
 " CtrlP gf alternative
-nmap <leader>gf :<C-u>execute ':CtrlP '.g:shs_project_dir<cr><C-d><C-\>f
+nmap <leader>gf :<C-u>execute ':CtrlP '.g:shs_project_dir<cr><C-\>f
 
 " Fix home/end key bindings
 " nnoremap <silent> <Esc>[7~ ^
@@ -29,7 +29,6 @@ nmap <leader>gf :<C-u>execute ':CtrlP '.g:shs_project_dir<cr><C-d><C-\>f
 " inoremap <silent> <Esc>[8~ <Esc>$a
 
 let g:ctrlp_regexp = 1
-let g:ctrlp_by_filename = 1
 "let g:ctrlp_custom_ignore = {
 " \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
 " \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
@@ -101,9 +100,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
-        \ "mode": "passive",
-        \ "active_filetypes": [],
-        \ "passive_filetypes": [] }
+	\ "mode": "passive",
+	\ "active_filetypes": [],
+	\ "passive_filetypes": [] }
 
 let s:clang_checker = GetFirstExecutable("clang-check", "clang-check50", "clang-check40")
 let s:clang_tidy = GetFirstExecutable("clang-tidy", "clang-tidy50", "clang-tidy40")
