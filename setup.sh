@@ -9,7 +9,9 @@ VIM_PLUGINS="\
 	bling/vim-airline \
 	ctrlpvim/ctrlp.vim \
 	rust-lang/rust.vim \
-	vim-syntastic/syntastic
+	vim-syntastic/syntastic \
+	Rip-Rip/clang_complete \
+	airblade/vim-gitgutter \
 	"
 
 # Git repo helper (clone or update a repository)

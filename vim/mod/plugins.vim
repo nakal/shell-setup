@@ -119,3 +119,11 @@ let g:syntastic_c_clang_check_post_args = ""
 let g:syntastic_c_clang_tidy_post_args = ""
 let g:syntastic_cpp_clang_check_post_args = ""
 let g:syntastic_cpp_clang_tidy_post_args = ""
+
+" clang complete
+let g:clang_library_path = GetFirstDirectory(
+	\ "/usr/lib/llvm-5.0/lib",
+	\ "/usr/local/llvm60/lib",
+	\ "/usr/local/llvm50/lib",
+	\ "/usr/local/llvm40/lib",
+	\ "/usr/lib/clang/4.0.0/lib")
