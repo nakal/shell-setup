@@ -16,6 +16,8 @@ fi
 alias l='ls -l'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias mutt='~/.mutt/mutt'
+alias neomutt='~/.mutt/mutt'
 
 if [ -n "$DEFAULT_X_TERMINAL" ] && [ -n "$DISPLAY" ]; then
 	alias vi='background '${DEFAULT_X_TERMINAL}' -e vim'

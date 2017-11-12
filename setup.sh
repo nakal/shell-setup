@@ -236,6 +236,7 @@ ln -s $SCRIPT_HOME/mutt/urls.sh .
 ln -s $SCRIPT_HOME/mutt/edit_expires .
 ln -s $SCRIPT_HOME/mutt/sync-maildir .
 ln -s $SCRIPT_HOME/mutt/gpg.rc .
+ln -s $SCRIPT_HOME/mutt/mutt .
 
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME

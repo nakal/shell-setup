@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if test -e /usr/local/lib/neomutt/pgpewrap; then
+	PATH=$PATH:/usr/local/lib/neomutt
+	export PATH
+fi
+
+if which neomutt; then
+	CMD=neomutt
+else
+	CMD=mutt
+fi
+
+exec $CMD $@
