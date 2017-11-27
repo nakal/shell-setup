@@ -10,7 +10,6 @@ VIM_PLUGINS="\
 	ctrlpvim/ctrlp.vim \
 	rust-lang/rust.vim \
 	vim-syntastic/syntastic \
-	Rip-Rip/clang_complete \
 	airblade/vim-gitgutter \
 	"
 
