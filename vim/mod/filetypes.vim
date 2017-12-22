@@ -12,6 +12,7 @@ augroup setup_filetypes
 	autocmd FileType sh		:call Script_Setup()
 	autocmd FileType gitcommit	:call GitCommit_Setup()
 	autocmd FileType cmake		:call CMake_Setup()
+	autocmd FileType yaml		:call Yaml_Setup()
 augroup end
 
 " ** GENERAL functions **
@@ -175,4 +176,14 @@ function! GitCommit_Setup()
 	call ASCII_Only_File()
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
 	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+endfunction
+
+" ** Yaml **
+
+function! Yaml_Setup()
+	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
+	call matchadd('ExtraWhitespace', '^\s*\t\+\s*\|\s\+\ze$', 100)
+	setlocal shiftwidth=2
+	setlocal tabstop=2
+	setlocal expandtab
 endfunction

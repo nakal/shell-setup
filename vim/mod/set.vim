@@ -23,7 +23,7 @@ set exrc
 set secure
 
 set vb
-set nomodeline
+set modeline
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
