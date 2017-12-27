@@ -10,7 +10,7 @@ configuration. You can easily get it integrated to start within the
 line to the host-specific configuration (in `autostartPrograms`):
 
 ```
-("sh", ["-c", "'pgrep mutt || xterm -title mutt -e mutt'"])
+("sh", ["-c", "'pgrep mutt || xterm -title mutt -e ~/.mutt/mutt'"])
 ```
 
 To have mutt working properly together with GNUpg 2.1.x it is a good idea
@@ -60,6 +60,53 @@ simulate the colors from atom-dark.
 
 There are two possibilities to synchronize emails.
 
+### OfflineIMAP
+
+Here is a sample configuration for `offlineimap`. It generates the
+list of mailboxes that can be consumed as shown above. It syncs
+an IMAP account that you need to set up with a local maildir
+in `~/.mail` (hidden directory).
+
+```
+[general]
+
+accounts = MyCompany
+
+[mbnames]
+
+enabled = yes
+filename = ~/.mutt/muttrc.mailboxes
+header = ''
+peritem = "+%(foldername)s"
+sep = "\n"
+footer = "\n"
+incremental = no
+
+[Account MyCompany]
+
+localrepository = Local
+remoterepository = Remote
+autorefresh = 2
+postsynchook = ~/.mutt/sync-notmuch
+
+[Repository Local]
+
+type = Maildir
+localfolders = ~/.mail
+
+[Repository Remote]
+
+type = IMAP
+remotehost = imap.mycompany.org
+ssl = no
+starttls = yes
+#sslcacertfile = ~/.certs/myca.pem
+remoteuser = myname
+remotepass = mypassword
+
+idlefolders = ['INBOX', 'FreeBSD', 'Logs', 'Notifications']
+```
+
 ### mbsync
 
 Here is a configuration for [mbsync](http://isync.sourceforge.net/).
@@ -89,51 +136,6 @@ Pattern *
 Create both
 Expunge both
 SyncState *
-```
-
-### OfflineIMAP
-
-Here is a sample configuration for `offlineimap`. It generates the
-list of mailboxes that can be consumed as shown above. It syncs
-an IMAP account that you need to set up with a local maildir
-in `~/.mail` (hidden directory).
-
-```
-[general]
-
-accounts = MyCompany
-
-[mbnames]
-
-enabled = yes
-filename = ~/.mutt/muttrc.mailboxes
-header = ''
-peritem = "+%(foldername)s"
-sep = "\n"
-footer = "\n"
-incremental = no
-
-[Account MyCompany]
-
-localrepository = Local
-remoterepository = Remote
-autorefresh = 2
-
-[Repository Local]
-
-type = Maildir
-localfolders = ~/.mail
-
-[Repository Remote]
-
-type = IMAP
-remotehost = imap.mycompany.org
-ssl = yes
-#sslcacertfile = ~/.certs/myca.pem
-remoteuser = myname
-remotepass = mypassword
-
-idlefolders = ['INBOX', 'FreeBSD', 'Logs', 'Notifications']
 ```
 
 ## Further features

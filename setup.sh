@@ -93,13 +93,13 @@ REQUIRED_PACKAGES_OpenBSD="\
 	git vim zsh ripgrep colorls \
 	"
 RECOMMENDED_PACKAGES_OpenBSD="\
-	ectags gnupg-2 gpgme mutt isync procmail abook urlview lynx \
+	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
 	git vim tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
-	ctags gnupg neomutt isync procmail abook urlview lynx ripgrep \
+	ctags gnupg neomutt offlineimap procmail abook urlview lynx ripgrep \
 	"
 . "$SCRIPT_HOME/include/packages.sh"
 check_packages
@@ -233,7 +233,7 @@ ln -s $SCRIPT_HOME/mutt/muttrc .
 ln -s $SCRIPT_HOME/mutt/colors.muttrc .
 ln -s $SCRIPT_HOME/mutt/urls.sh .
 ln -s $SCRIPT_HOME/mutt/edit_expires .
-ln -s $SCRIPT_HOME/mutt/sync-maildir .
+ln -s $SCRIPT_HOME/mutt/sync-notmuch .
 ln -s $SCRIPT_HOME/mutt/gpg.rc .
 ln -s $SCRIPT_HOME/mutt/mutt .
 
