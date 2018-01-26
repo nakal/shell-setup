@@ -27,3 +27,8 @@
 	path = ~/.gitconfig_local
 [init]
 	templatedir = ~/.git_template
+[log]
+	decorate = true
+[alias]
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold 156)%h%C(reset) - %C(dim white)(%ar)%C(reset) %C(normal)%s%C(reset) %C(bold white)<%an>%C(reset)%C(156)%d%C(reset)' --all
+	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold 156)%h%C(reset) - %C(dim 208)%aD%C(reset) %C(dim white)(%ar)%C(reset)%C(156)%d%C(reset)%n''          %C(normal)%s%C(reset) %C(bold white)<%an>%C(reset)' --all
