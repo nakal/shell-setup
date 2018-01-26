@@ -4,11 +4,11 @@ What is being configured here? Click on the links to see details
 about the configuration done for the specific piece of software.
 
 * shells:
-	* tcsh
-	* zsh
+	* [tcsh](shell/tcsh/.cshrc)
+	* [zsh](shell/zsh)
 		* custom prompt theme with Git integration
 * editors:
-	* vim
+	* [vim](vim)
 		* advanced configuration for developers
 * version control system:
 	* [git](git/README.md)
