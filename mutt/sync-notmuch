@@ -1,6 +1,8 @@
 #!/bin/sh
 
-/usr/local/bin/notmuch new --quiet 2> /dev/null
+which notmuch || exit 0
+
+notmuch new --quiet 2> /dev/null
 if [ $? -ne 0 ]; then
 	echo "notmuch update failed.\n"
 	exit 1

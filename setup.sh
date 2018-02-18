@@ -40,12 +40,12 @@ git_update_repositories()
 	done
 
 	# Remove repositories that we don't need anymore
-	OLDDIRS=`find . -type d -maxdepth 1 -mindepth 1`
+	OLDDIRS=`find . -maxdepth 1 -mindepth 1 -type d`
 	echo "Removing (in $PWD): $OLDDIRS..."
 	rm -rf .nakal-guard $OLDDIRS
 
 	# Move back repositories to update them in place
-	ACTDIRS=`find "$TMPD" -type d -maxdepth 1 -mindepth 1`
+	ACTDIRS=`find "$TMPD" -maxdepth 1 -mindepth 1 -type d`
 	for d in $ACTDIRS; do
 		mv $d .
 	done
@@ -258,20 +258,24 @@ ln -s vim-atom-dark/colors/atom-dark-256.vim .
 
 cd $HOME
 
-# OS specific setup
-case "$OS" in
-	FreeBSD)
-		ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight .diff-highlight;
-		ln -s /usr/share/examples/indent/indent.pro .indent.pro;
-		;;
-	Linux)
-		ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight .diff-highlight;
-		;;
-	*)
-		ln -s $SCRIPT_HOME/git/.diff-highlight.fallback .diff-highlight;
-		;;
-esac
-
+DIFFH=`which diff-highlight`;
+if [ -n "$DIFFH" ]; then
+	ln -s "$DIFFH" .diff-highlight
+else
+	# OS specific setup
+	case "$OS" in
+		FreeBSD)
+			ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight .diff-highlight;
+			ln -s /usr/share/examples/indent/indent.pro .indent.pro;
+			;;
+		Linux)
+			ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight .diff-highlight;
+			;;
+		*)
+			ln -s $SCRIPT_HOME/git/.diff-highlight.fallback .diff-highlight;
+			;;
+	esac
+fi
 
 if [ "$OS" = "FreeBSD" ] && [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
 	echo "Warning: syscons keymap with swapped ESC and CAPSLOCK"
