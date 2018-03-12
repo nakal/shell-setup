@@ -1,9 +1,12 @@
 #!/bin/sh
 
-if test -e /usr/local/lib/neomutt/pgpewrap; then
-	PATH=$PATH:/usr/local/lib/neomutt
-	export PATH
-fi
+for wrapper in /usr/local/lib*/neomutt/pgpewrap; do
+	if test -e "$wrapper"; then
+		echo $wrapper
+		PATH=$PATH:$(dirname $wrapper)
+		export PATH
+	fi
+done
 
 if which neomutt; then
 	CMD=neomutt
