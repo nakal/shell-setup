@@ -20,39 +20,35 @@ bindkey '\e[2~' vi-cmd-mode
 bindkey '^f' vi-forward-blank-word
 bindkey '^b' vi-backward-blank-word
 
-# CtrlP from zsh
-zsh_ctrlp() {
-	if which fzy; then
-		fzy_dir="$1"
-		if test -z "$fzy_dir"; then
-			fzy_dir="g:shs_project_dir"
-		else
-			fzy_dir="\"$fzy_dir\""
-		fi
-		ctrlp_cmd="call FzyCommand(printf(g:ctrlp_user_command, $fzy_dir), \":e\")"
+# FZF from zsh
+zsh_fzf() {
+	fzf_dir="$1"
+	if test -z "$fzf_dir"; then
+		fzf_dir="g:shs_project_dir"
 	else
-		ctrlp_cmd="CtrlP $1"
+		fzf_dir="\"$fzf_dir\""
 	fi
+	fzf_cmd="call FZFTryGFiles($fzf_dir)"
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
-		(${DEFAULT_X_TERMINAL} -e vim -c "$ctrlp_cmd" 2>/dev/null) &
+		(${DEFAULT_X_TERMINAL} -e vim -c "$fzf_cmd" 2>/dev/null) &
 	else
-		</dev/tty vim -c "$ctrlp_cmd"
+		</dev/tty vim -c "$fzf_cmd"
 	fi
 }
 
-zsh_ctrlp_curdir() {
-	zsh_ctrlp .
+zsh_fzf_curdir() {
+	zsh_fzf .
 }
 
-zle -N zsh_ctrlp
-zle -N zsh_ctrlp_curdir
+zle -N zsh_fzf
+zle -N zsh_fzf_curdir
 
-bindkey "^p" zsh_ctrlp
+bindkey "^p" zsh_fzf
 
 if [ -n "$TMUX" ]; then
-	bindkey "OD" zsh_ctrlp
-	bindkey "OC" zsh_ctrlp_curdir
+	bindkey "OD" zsh_fzf
+	bindkey "OC" zsh_fzf_curdir
 else
-	bindkey "Od" zsh_ctrlp
-	bindkey "Oc" zsh_ctrlp_curdir
+	bindkey "Od" zsh_fzf
+	bindkey "Oc" zsh_fzf_curdir
 fi

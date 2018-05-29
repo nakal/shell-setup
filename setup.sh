@@ -7,10 +7,11 @@ VIM_PLUGINS="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
 	bling/vim-airline \
-	ctrlpvim/ctrlp.vim \
 	rust-lang/rust.vim \
 	vim-syntastic/syntastic \
 	airblade/vim-gitgutter \
+	junegunn/fzf \
+	junegunn/fzf.vim \
 	"
 
 # Git repo helper (clone or update a repository)
@@ -96,7 +97,7 @@ RECOMMENDED_PACKAGES_OpenBSD="\
 	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
-	git vim tmux zsh \
+	git vim tmux zsh fzf \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg neomutt offlineimap procmail abook urlview lynx ripgrep \

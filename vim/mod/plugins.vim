@@ -4,97 +4,42 @@
 " inoremap <silent> <Esc>[7~ <Esc>^i
 " inoremap <silent> <Esc>[8~ <Esc>$a
 
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_regexp = 1
-"let g:ctrlp_custom_ignore = {
-" \ 'dir': '\v[\/]\.(git|hg|svn)$|\v[\/](tmp|bak|old|build.*|html)$',
-" \ 'file': '\v\.(exe|so|dll|zip|o|a|obj|swp|hi|core|xls|doc|pdf|png|aux|idx|
-"      	\ilg|ind|lof|lot|toc)$',
-" \ }
-if executable('rg')
-	" ripgrep
-	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-	let g:ctrlp_use_caching = 0
-elseif executable('ag')
-	" the silver searcher
-	let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-	\ --ignore ".git"
-	\ --ignore ".svn"
-	\ --ignore ".hg"
-	\ --ignore ".*"
-	\ --ignore "*.exe"
-	\ --ignore "*.dll"
-	\ --ignore "*.so"
-	\ --ignore "*.[ao]"
-	\ --ignore "*.obj"
-	\ --ignore "*.zip"
-	\ --ignore "*.sw[p-z]"
-	\ --ignore "*.hi"
-	\ --ignore "*.core"
-	\ --ignore "*.xls"
-	\ --ignore "*.doc"
-	\ --ignore "*.pdf"
-	\ --ignore "*.png"
-	\ --ignore "*.aux"
-	\ --ignore "*.idx"
-	\ --ignore "*.ilg"
-	\ --ignore "*.ind"
-	\ --ignore "*.lo[cft]"
-	\ -g ""'
-else
-	" fallback
-	let g:ctrlp_user_command = 'find %s -not -path "*/\.*" -type f -exec grep -Iq . {} \; -and -print'
-endif
+" FZF bindings
+nnoremap <silent> <Esc>Oa :<C-u>Buffers<cr>
+nnoremap <silent> <Esc>Ob :<C-u>Tags<cr>
+nnoremap <silent> <Esc>[A :<C-u>Buffers<cr>
+nnoremap <silent> <Esc>[1;5A :<C-u>Buffers<cr>
+nnoremap <silent> <Esc>[B :<C-u>Tags<cr>
+nnoremap <silent> <Esc>[1;5B :<C-u>Tags<cr>
 
-" CtrlP bindings
-nnoremap <silent> <Esc>Oa :<C-u>CtrlPBuffer<cr>
-nnoremap <silent> <Esc>Ob :<C-u>CtrlPTag<cr>
-nnoremap <silent> <Esc>[A :<C-u>CtrlPBuffer<cr>
-nnoremap <silent> <Esc>[1;5A :<C-u>CtrlPBuffer<cr>
-nnoremap <silent> <Esc>[B :<C-u>CtrlPTag<cr>
-nnoremap <silent> <Esc>[1;5B :<C-u>CtrlPTag<cr>
+" FZF gf alternative
+"nmap <leader>gf :<C-u>execute ':GFiles '.g:shs_project_dir.' h'<cr>
+let g:fzf_tags_command = GetFirstExecutable("exctags", "tags").' -R'
 
-" CtrlP gf alternative
-nmap <leader>gf :<C-u>execute ':CtrlP '.g:shs_project_dir<cr><C-\>f
+" GFiles, fallback Files .
+function! FZFTryGFiles(dir)
+	let err = system("git rev-parse --is-inside-work-tree")
+	if v:shell_error == 0
+		exec ":GFiles"
+	else
+		exec ":Files ".a:dir
+	endif
+endfunction
 
-if executable('fzy')
-	" Integrate fzy
-	function! FzyCommand(choice_command, vim_command)
-		try
-			let output = system(a:choice_command . " | fzy -l 20")
-		catch /Vim:Interrupt/
-			" Swallow errors from ^C, allow redraw! below
-		endtry
-		redraw!
-		if v:shell_error == 0 && !empty(output)
-			exec a:vim_command . ' ' . output
-		endif
-	endfunction
+function! FZFFile()
+	call fzf#vim#gitfiles(g:shs_project_dir, { 'options': [ '--query', expand("<cfile>"), '--select-1', '--exit-0' ] })
+endfunction
 
-	nnoremap <silent> <C-P> :<C-u>call FzyCommand(printf(g:ctrlp_user_command, "."), ":e")<cr>
-	nnoremap <silent> <Esc>Oc :<C-u>call FzyCommand(printf(g:ctrlp_user_command, "."), ":e")<cr>
-	nnoremap <silent> <Esc>[C :<C-u>call FzyCommand(printf(g:ctrlp_user_command, "."), ":e")<cr>
-	nnoremap <silent> <Esc>[1;5C :<C-u>call FzyCommand(printf(g:ctrlp_user_command, "."), ":e")<cr>
-	nnoremap <silent> <Esc>Od :<C-u>call FzyCommand(printf(g:ctrlp_user_command, g:shs_project_dir), ":e")<cr>
-	nnoremap <silent> <Esc>[D :<C-u>call FzyCommand(printf(g:ctrlp_user_command, g:shs_project_dir), ":e")<cr>
-	nnoremap <silent> <Esc>[1;5D :<C-u>call FzyCommand(printf(g:ctrlp_user_command, g:shs_project_dir), ":e")<cr>
-	nnoremap <silent> <leader>e :<C-u>call FzyCommand(printf(g:ctrlp_user_command, g:shs_project_dir), ":e")<cr>
-else
-	" Fall back to CtrlP
-	"
-	" Ctrl+up	: buffer list
-	" Ctrl+down	: ctags list
-	" Ctrl+left	: file list from current dir
-	" Ctrl+right	: file list (project dir)
-	nnoremap <silent> <Esc>Oc :<C-u>CtrlPCurFile<cr>
-	nnoremap <silent> <Esc>Od :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
+nmap <leader>gf :<C-u>:call FZFFile()<cr>
 
-	" Other console bindings (compatibility)
-	nnoremap <silent> <Esc>[C :<C-u>CtrlPCurFile<cr>
-	nnoremap <silent> <Esc>[1;5C :<C-u>CtrlPCurFile<cr>
-	nnoremap <silent> <Esc>[D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
-	nnoremap <silent> <Esc>[1;5D :<C-u>execute ':CtrlP '.g:shs_project_dir<cr>
-endif
+nnoremap <silent> <C-P> <C-u>:call FZFTryGFiles(".")<cr>
+nnoremap <silent> <Esc>Oc :<C-u>:Files .<cr>
+nnoremap <silent> <Esc>[C :<C-u>:Files .<cr>
+nnoremap <silent> <Esc>[1;5C :<C-u>:Files .<cr>
+nnoremap <silent> <Esc>Od :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <Esc>[D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <Esc>[1;5D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <leader>e :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
