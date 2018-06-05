@@ -6,6 +6,7 @@ ZSH_MODULES=""
 VIM_PLUGINS="\
 	tpope/vim-fugitive \
 	tpope/vim-unimpaired \
+	tpope/vim-surround \
 	bling/vim-airline \
 	rust-lang/rust.vim \
 	vim-syntastic/syntastic \
