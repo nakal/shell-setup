@@ -44,8 +44,5 @@ endif
 set nospell spelllang=en_us,de
 set spellfile=~/.vim/spell/spellfile.add
 
-for s:v in split(glob("~/.vim/pack/vim/start/*/doc"))
-	execute "helptags" s:v
-endfor
 syntax on
 filetype plugin indent on

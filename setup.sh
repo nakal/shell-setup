@@ -257,6 +257,11 @@ git_update_repositories $VIM_COLORSCHEMES
 ln -s vim-atom-dark/colors/atom-dark.vim .
 ln -s vim-atom-dark/colors/atom-dark-256.vim .
 
+cd $HOME/.vim/pack
+for docdir in `ls -d vim/*/*/doc`; do
+	vim -u NONE -c "helptags $docdir" -c q -T dumb
+done
+
 cd $HOME
 
 DIFFH=`which diff-highlight`;
