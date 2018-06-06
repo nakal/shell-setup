@@ -27,3 +27,8 @@ zstyle ':completion:*:*:git:*:aliases' list-colors '=(#b)* (-- *)=33=0'
 # Completion commands
 zstyle ':completion:*:*:kill:*:processes' command 'ps -x -o pid= -o command='
 zstyle ':completion:*:*:kill:*' ignored-patterns '0'
+
+fzfpath="/usr/local/share/examples/fzf/shell"
+if [ -e "$fzfpath/completion.zsh" ]; then
+	. $fzfpath/completion.zsh
+fi

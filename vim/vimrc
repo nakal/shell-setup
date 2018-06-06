@@ -4,7 +4,9 @@ if &compatible
 	set nocompatible
 endif
 
-colorscheme atom-dark-256
+"let g:onedark_terminal_italics = 1
+syntax on
+colorscheme onedark
 
 augroup fix_color_scheme
        autocmd!

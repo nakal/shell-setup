@@ -44,5 +44,4 @@ endif
 set nospell spelllang=en_us,de
 set spellfile=~/.vim/spell/spellfile.add
 
-syntax on
 filetype plugin indent on

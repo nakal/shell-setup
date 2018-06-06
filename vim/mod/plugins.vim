@@ -32,7 +32,7 @@ endfunction
 
 nmap <leader>gf :<C-u>:call FZFFile()<cr>
 
-nnoremap <silent> <C-P> <C-u>:call FZFTryGFiles(".")<cr>
+nnoremap <silent> <C-P> :call FZFTryGFiles(".")<cr>
 nnoremap <silent> <Esc>Oc :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[C :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>:Files .<cr>
@@ -64,30 +64,27 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
 
-" Syntastic
-nnoremap <silent> <leader>ss :SyntasticCheck<CR>
-nnoremap <silent> <leader>si :SyntasticInfo<CR>
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {
-	\ "mode": "passive",
-	\ "active_filetypes": [],
-	\ "passive_filetypes": [] }
+" ALE
+let s:clang_checker = GetFirstExecutable('clang-check', 'clang-check60', 'clang-check50', 'clang-check40')
+let s:clang_tidy = GetFirstExecutable('clang-tidy', 'clang-tidy60', 'clang-tidy50', 'clang-tidy40')
+let s:clang_c_compiler = GetFirstExecutable('clang', 'clang60', 'clang50', 'clang40')
+let s:clang_cpp_compiler = GetFirstExecutable('clang++', 'clang++60', 'clang++50', 'clang++40')
 
-let s:clang_checker = GetFirstExecutable("clang-check", "clang-check50", "clang-check40")
-let s:clang_tidy = GetFirstExecutable("clang-tidy", "clang-tidy50", "clang-tidy40")
-let s:clang_c_compiler = GetFirstExecutable("clang", "clang50", "clang40")
-let s:clang_cpp_compiler = GetFirstExecutable("clang++", "clang++50", "clang++40")
-
-let g:syntastic_c_checkers = ["clang"]
-let g:syntastic_cpp_checkers = ["clang"]
-let g:syntastic_c_compiler = s:clang_c_compiler
-let g:syntastic_cpp_compiler = s:clang_cpp_compiler
-let g:syntastic_clang_check_exec = s:clang_checker
-let g:syntastic_clang_tidy_exec = s:clang_tidy
-let g:syntastic_c_clang_check_post_args = ""
-let g:syntastic_c_clang_tidy_post_args = ""
-let g:syntastic_cpp_clang_check_post_args = ""
-let g:syntastic_cpp_clang_tidy_post_args = ""
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_cpp_clangcheck_executable = s:clang_checker
+let g:ale_cpp_clangtidy_executable = s:clang_tidy
+let g:ale_linters = {
+\   'c': ['cppcheck', 'clangtidy'],
+\   'cpp': ['clangcheck', 'cppcheck', 'clangtidy'],
+\}
+let g:ale_cpp_clangtidy_checks = [
+\	'*',
+\	'-fuchsia-default-arguments',
+\	'-hicpp-braces-around-statements',
+\	'-google-readability-braces-around-statements',
+\	'-readability-braces-around-statements',
+\	'-readability-named-parameter',
+\]

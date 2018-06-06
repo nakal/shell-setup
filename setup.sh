@@ -8,11 +8,11 @@ VIM_PLUGINS="\
 	tpope/vim-unimpaired \
 	tpope/vim-surround \
 	bling/vim-airline \
-	rust-lang/rust.vim \
-	vim-syntastic/syntastic \
 	airblade/vim-gitgutter \
 	junegunn/fzf \
 	junegunn/fzf.vim \
+	sheerun/vim-polyglot \
+	w0rp/ale \
 	"
 
 # Git repo helper (clone or update a repository)
@@ -163,6 +163,7 @@ REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
 	.git_template .clang-format .diff-highlight \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
+	.vim/colors/onedark.vim .vim/autoload/onedark.vim
 	"
 
 for df in $REMOVE_FILES; do
@@ -240,23 +241,24 @@ ln -s $SCRIPT_HOME/mutt/gpg.rc .
 ln -s $SCRIPT_HOME/mutt/mutt .
 
 echo "[shell-setup] Preparing vim and plugins..."
-cd $HOME
-mkdir -p .vim/pack/vim/start .vim/pack/vim/opt .vim/colors
-touch $HOME/.vim/.by-nakal
-test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 cd $HOME/.vim
+rm -rf plugins autoload colors
+mkdir -p pack/vim/start pack/vim/opt colors autoload themes
+touch .by-nakal
+test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 ln -s $SCRIPT_HOME/vim/mod .
 
-rm -rf autoload plugins
 cd pack/vim/start
 git_update_repositories $VIM_PLUGINS
 
-cd $HOME/.vim/colors
-VIM_COLORSCHEMES="gosukiwi/vim-atom-dark"
+cd $HOME/.vim/themes
+VIM_COLORSCHEMES="joshdick/onedark.vim"
 git_update_repositories $VIM_COLORSCHEMES
-ln -s vim-atom-dark/colors/atom-dark.vim .
-ln -s vim-atom-dark/colors/atom-dark-256.vim .
+cd $HOME/.vim/colors
+ln -s ../themes/onedark.vim/colors/onedark.vim .
+cd $HOME/.vim/autoload
+ln -s ../themes/onedark.vim/autoload/onedark.vim .
 
 cd $HOME/.vim/pack
 for docdir in `ls -d vim/*/*/doc`; do

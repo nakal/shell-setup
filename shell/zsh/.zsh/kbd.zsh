@@ -52,3 +52,8 @@ else
 	bindkey "Od" zsh_fzf
 	bindkey "Oc" zsh_fzf_curdir
 fi
+
+fzfpath="/usr/local/share/examples/fzf/shell"
+if [ -e "$fzfpath/key-bindings.zsh" ]; then
+	. $fzfpath/key-bindings.zsh
+fi
