@@ -63,6 +63,7 @@ let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 set laststatus=2
+let g:airline_theme='onedark'
 
 " ALE
 let s:clang_checker = GetFirstExecutable('clang-check', 'clang-check60', 'clang-check50', 'clang-check40')

@@ -243,7 +243,7 @@ ln -s $SCRIPT_HOME/mutt/mutt .
 echo "[shell-setup] Preparing vim and plugins..."
 cd $HOME/.vim
 rm -rf plugins autoload colors
-mkdir -p pack/vim/start pack/vim/opt colors autoload themes
+mkdir -p pack/vim/start pack/vim/opt colors autoload/airline/themes themes
 touch .by-nakal
 test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 ln -s $SCRIPT_HOME/vim/vimrc .
@@ -259,6 +259,8 @@ cd $HOME/.vim/colors
 ln -s ../themes/onedark.vim/colors/onedark.vim .
 cd $HOME/.vim/autoload
 ln -s ../themes/onedark.vim/autoload/onedark.vim .
+cd airline/themes
+ln -s ../../../themes/onedark.vim/autoload/airline/themes/onedark.vim .
 
 cd $HOME/.vim/pack
 for docdir in `ls -d vim/*/*/doc`; do
