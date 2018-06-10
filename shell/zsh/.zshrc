@@ -10,6 +10,5 @@ source ~/.zsh/kbd.zsh
 source ~/.zsh/completion.zsh
 source ~/.zsh/history.zsh
 
-if [ -f ~/.zshrc_local ]; then
-	source ~/.zshrc_local
-fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local

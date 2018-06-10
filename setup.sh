@@ -90,6 +90,9 @@ else
 	exit 1
 fi
 
+# Add local binary directory
+mkdir -p .local/bin
+
 OS=`uname -s`
 REQUIRED_PACKAGES_OpenBSD="\
 	git vim zsh ripgrep colorls \
@@ -102,6 +105,12 @@ REQUIRED_PACKAGES_FreeBSD="\
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg neomutt offlineimap procmail abook urlview lynx ripgrep \
+	"
+REQUIRED_PACKAGES_Linux="\
+	git vim zsh tmux \
+	"
+RECOMMENDED_PACKAGES_Linux="\
+	exuberant-ctags gnupg2 neomutt offlineimap procmail abook urlview lynx
 	"
 . "$SCRIPT_HOME/include/packages.sh"
 check_packages
@@ -123,15 +132,10 @@ if [ $? -ne 0 ]; then
 fi
 echo "-> tmux is ok, good."
 
-echo "-> Checking mutt..."
+echo "-> Checking (neo)mutt..."
 MUTT_IS_OK=1
 mutt -v > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-	mutt -v | grep -q '+USE_FLOCK'
-	if [ $? -ne 0 ]; then
-		MUTT_IS_OK=0
-		echo "*** FLOCK missing"
-	fi
 	mutt -v | grep -q '+CRYPT_BACKEND_GPGME'
 	if [ $? -ne 0 ]; then
 		MUTT_IS_OK=0
@@ -148,22 +152,37 @@ if [ $? -eq 0 ]; then
 		echo "*** Colors (NCURSES) missing"
 	fi
 else
-	echo "*** mutt not found, skipping checks."
-	MUTT_IS_OK=0
+	neomutt -v > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		neomutt -v | grep -q '+gpgme'
+		if [ $? -ne 0 ]; then
+			MUTT_IS_OK=0
+			echo "*** GPGME missing"
+		fi
+		neomutt -v | grep -q '+color'
+		if [ $? -ne 0 ]; then
+			MUTT_IS_OK=0
+			echo "*** Colors missing"
+		fi
+	else
+		echo "*** mutt/neomutt not found, skipping checks."
+		MUTT_IS_OK=0
+	fi
 fi
 if [ $MUTT_IS_OK -ne 1 ]; then
-	echo "*** WARNING: mutt check failed."
+	echo "*** WARNING: mutt/neomutt check failed."
 else
-	echo "-> mutt is ok, good."
+	echo "-> (neo)mutt is ok, good."
 fi
 
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
 	.gitignore_global .gitconfig .ctags \
-	.git_template .clang-format .diff-highlight \
+	.git_template .clang-format \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
-	.vim/colors/onedark.vim .vim/autoload/onedark.vim
+	.vim/colors/onedark.vim .vim/autoload/onedark.vim \
+	.local/bin/fzf .local/diff-highlight \
 	"
 
 for df in $REMOVE_FILES; do
@@ -234,13 +253,13 @@ touch $HOME/.mutt/.by-nakal
 cd $HOME/.mutt
 ln -s $SCRIPT_HOME/mutt/muttrc .
 ln -s $SCRIPT_HOME/mutt/colors.muttrc .
-ln -s $SCRIPT_HOME/mutt/urls.sh .
 ln -s $SCRIPT_HOME/mutt/edit_expires .
 ln -s $SCRIPT_HOME/mutt/sync-notmuch .
 ln -s $SCRIPT_HOME/mutt/gpg.rc .
 ln -s $SCRIPT_HOME/mutt/mutt .
 
 echo "[shell-setup] Preparing vim and plugins..."
+mkdir -p $HOME/.vim
 cd $HOME/.vim
 rm -rf plugins autoload colors
 mkdir -p pack/vim/start pack/vim/opt colors autoload/airline/themes themes
@@ -267,23 +286,30 @@ for docdir in `ls -d vim/*/*/doc`; do
 	vim -u NONE -c "helptags $docdir" -c q -T dumb
 done
 
+if [ "$OS" = "Linux" ]; then
+	echo "[shell-setup] Installing fzf..."
+	yes | $HOME/.vim/pack/vim/start/fzf/install
+	cd $HOME/.local/bin
+	ln -s ../../.vim/pack/vim/start/fzf/bin/fzf .
+fi
+
 cd $HOME
 
 DIFFH=`which diff-highlight`;
-if [ -n "$DIFFH" ]; then
-	ln -s "$DIFFH" .diff-highlight
-else
+if [ -z "$DIFFH" ]; then
 	# OS specific setup
+	cd $HOME/.local/bin
 	case "$OS" in
 		FreeBSD)
-			ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight .diff-highlight;
+			ln -s /usr/local/share/git-core/contrib/diff-highlight/diff-highlight diff-highlight;
 			ln -s /usr/share/examples/indent/indent.pro .indent.pro;
 			;;
 		Linux)
-			ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight .diff-highlight;
+			test -d /usr/share/doc/git/contrib/diff-highlight && \
+				ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight diff-highlight;
 			;;
 		*)
-			ln -s $SCRIPT_HOME/git/.diff-highlight.fallback .diff-highlight;
+			ln -s $SCRIPT_HOME/git/.diff-highlight.fallback diff-highlight;
 			;;
 	esac
 fi

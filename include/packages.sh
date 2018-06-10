@@ -48,8 +48,40 @@ check_packages_OpenBSD() {
 	rm "$tmpfile"
 }
 
+check_package_list_Linux() {
+	ret=0
+
+	for pkg in $@; do
+		if ! dpkg -s $pkg > /dev/null; then
+			echo "*** System installation missing package $pkg"
+			ret=1
+		else
+			echo "-> $pkg is installed"
+		fi
+	done
+
+	return $ret
+}
+
+check_packages_Linux() {
+	if [ ! -e /etc/debian_version ]; then
+		echo "WARNING: Only Debian Linux supported."
+		exit 0
+	fi
+	check_package_list_Linux $REQUIRED_PACKAGES_Linux
+	if [ $? -ne 0 ]; then
+		echo "ERROR: missing required packages"
+		exit 1
+	fi
+	echo "Checking recommended packages..."
+	check_package_list_Linux $RECOMMENDED_PACKAGES_Linux
+	if [ $? -ne 0 ]; then
+		echo "WARNING: missing recommended packages"
+	fi
+}
+
 check_packages() {
-	if [ "$OS" = "FreeBSD" ] || [ "$OS" = "OpenBSD" ]; then
+	if [ "$OS" = "FreeBSD" ] || [ "$OS" = "OpenBSD" ] || [ "$OS" = "Linux" ]; then
 		echo "Checking required packages..."
 		check_packages_${OS}
 	else
