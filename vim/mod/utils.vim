@@ -18,8 +18,13 @@ function! GetFirstDirectory(fallback, ...)
 	return a:fallback
 endfunction
 
-" Fixups for colorscheme
+" Helpers for colorscheme
 function! FixColorscheme()
        highlight! IncSearch ctermfg=172 ctermbg=16
        highlight! Error term=reverse ctermfg=white ctermbg=red guifg=white guibg=red
+endfun
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun

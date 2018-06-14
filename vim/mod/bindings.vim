@@ -12,4 +12,5 @@ function! Browser ()
     exec ":silent !firefox ".line
 endfunction
 
-nnoremap <silent> <leader>w :call Browser ()<CR>
+nnoremap <silent> <leader>w :call Browser()<CR>
+nnoremap <silent> <leader>s :call SynGroup()<CR>
