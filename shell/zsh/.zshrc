@@ -12,3 +12,5 @@ source ~/.zsh/history.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc_local ] && source ~/.zshrc_local
+
+true
