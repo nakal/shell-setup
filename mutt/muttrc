@@ -56,22 +56,18 @@ set sidebar_divider_char='|'
 #set sidebar_format='%B%*  %N'
 set sidebar_format='%B%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_folder_indent=yes
-bind index \e[A sidebar-prev
-bind index \eOa sidebar-prev
-bind index \e[B sidebar-next
-bind index \eOb sidebar-next
-bind index \e[C sidebar-open
-bind index \eOc sidebar-open
-bind pager \e[A sidebar-prev
-bind pager \eOa sidebar-prev
-bind pager \e[B sidebar-next
-bind pager \eOb sidebar-next
-bind pager \e[C sidebar-open
-bind pager \eOc sidebar-open
-bind index "\\" next-unread-mailbox
-bind pager "\\" next-unread-mailbox
+bind index,pager \e[A sidebar-prev
+bind index,pager \eOa sidebar-prev
+bind index,pager \e[B sidebar-next
+bind index,pager \eOb sidebar-next
+bind index,pager \e[C sidebar-open
+bind index,pager \eOc sidebar-open
+bind index,pager <C-Up> sidebar-prev
+bind index,pager <C-Down> sidebar-next
+bind index,pager "\\" next-unread-mailbox
 macro index,pager \c? <change-folder>=INBOX<return>
 macro index,pager \cH <change-folder>=INBOX<return>
+macro index,pager <BackSpace> <change-folder>=INBOX<return>
 bind index \e[7~ first-entry
 bind index \e[8~ last-entry
 bind pager \e[7~ top
