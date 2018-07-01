@@ -91,6 +91,7 @@ else
 fi
 
 # Add local binary directory
+cd $HOME
 mkdir -p .local/bin
 
 OS=`uname -s`
