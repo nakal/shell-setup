@@ -102,10 +102,11 @@ RECOMMENDED_PACKAGES_OpenBSD="\
 	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
-	git vim tmux zsh fzf \
+	git vim tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg neomutt offlineimap procmail abook urlview lynx ripgrep \
+	fzf \
 	"
 REQUIRED_PACKAGES_Linux="\
 	git vim zsh tmux \
