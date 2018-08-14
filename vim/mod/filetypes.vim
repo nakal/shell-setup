@@ -40,7 +40,7 @@ function! C_Setup()
 	call SetupFolds()
 	nnoremap <silent> <leader>i :call Indent_C()<CR>
 	highlight ExtraWhitespace ctermbg=darkred ctermfg=darkred guibg=darkred guifg=darkred
-	call matchadd('ExtraWhitespace', '^     \+\|^\t\+         \+\|\s\+$\| \+\ze\t', 100)
+	call matchadd('ExtraWhitespace', '\s\+$\| \+\ze\t', 100)
 endfunction
 
 " Follow the FreeBSD style(9).
