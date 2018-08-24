@@ -4,5 +4,6 @@ set -e
 dir="`git rev-parse --git-dir`"
 trap 'rm -f "$dir/$$.tags"' EXIT
 git ls-files | \
-  exctags --tag-relative -L - -f"$dir/$$.tags" --languages=-javascript,sql
+  exctags --tag-relative -L - -f"$dir/$$.tags" \
+	  --languages=-javascript,sql --exclude=*.vim
 mv "$dir/$$.tags" "$dir/tags"
