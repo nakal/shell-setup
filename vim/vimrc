@@ -8,11 +8,6 @@ endif
 syntax on
 colorscheme onedark
 
-augroup fix_color_scheme
-       autocmd!
-       autocmd ColorScheme * call FixColorscheme()
-augroup end
-
 source ~/.vim/mod/utils.vim
 source ~/.vim/mod/set.vim
 source ~/.vim/mod/bindings.vim
@@ -29,3 +24,9 @@ set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '
 
 source ~/.vim/mod/project.vim
 source ~/.vim/mod/plugins.vim
+
+call FixColorscheme()
+augroup fix_color_scheme
+       autocmd!
+       autocmd ColorScheme * call FixColorscheme()
+augroup end

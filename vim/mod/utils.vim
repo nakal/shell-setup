@@ -22,6 +22,7 @@ endfunction
 function! FixColorscheme()
        highlight! IncSearch ctermfg=172 ctermbg=16
        highlight! Error term=reverse ctermfg=white ctermbg=red guifg=white guibg=red
+       highlight! MatchParen term=NONE ctermfg=7 ctermbg=39 gui=underline guifg=#61AFEF
 endfun
 
 function! SynGroup()
