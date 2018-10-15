@@ -24,7 +24,7 @@ bindkey '^b' vi-backward-blank-word
 zsh_fzf() {
 	fzf_dir="$1"
 	if test -z "$fzf_dir"; then
-		fzf_dir="b:shs_project_dir"
+		fzf_dir="g:shs_project_dir"
 	else
 		fzf_dir="\"$fzf_dir\""
 	fi

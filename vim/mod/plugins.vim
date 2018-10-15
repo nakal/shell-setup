@@ -13,7 +13,7 @@ nnoremap <silent> <Esc>[B :<C-u>Tags<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>Tags<cr>
 
 " FZF gf alternative
-"nmap <leader>gf :<C-u>execute ':GFiles '.b:shs_project_dir.' h'<cr>
+"nmap <leader>gf :<C-u>execute ':GFiles '.g:shs_project_dir.' h'<cr>
 let g:fzf_tags_command = GetFirstExecutable("exctags", "tags").' -R'
 
 " GFiles, fallback Files .
@@ -27,7 +27,7 @@ function! FZFTryGFiles(dir)
 endfunction
 
 function! FZFFile()
-	call fzf#vim#gitfiles(b:shs_project_dir, { 'options': [ '--query', expand("<cfile>"), '--select-1', '--exit-0' ] })
+	call fzf#vim#gitfiles(g:shs_project_dir, { 'options': [ '--query', expand("<cfile>"), '--select-1', '--exit-0' ] })
 endfunction
 
 nmap <leader>gf :<C-u>:call FZFFile()<cr>
@@ -36,10 +36,10 @@ nnoremap <silent> <C-P> :call FZFTryGFiles(".")<cr>
 nnoremap <silent> <Esc>Oc :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[C :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>:Files .<cr>
-nnoremap <silent> <Esc>Od :<C-u>call FZFTryGFiles(b:shs_project_dir)<cr>
-nnoremap <silent> <Esc>[D :<C-u>call FZFTryGFiles(b:shs_project_dir)<cr>
-nnoremap <silent> <Esc>[1;5D :<C-u>call FZFTryGFiles(b:shs_project_dir)<cr>
-nnoremap <silent> <leader>e :<C-u>call FZFTryGFiles(b:shs_project_dir)<cr>
+nnoremap <silent> <Esc>Od :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <Esc>[D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <Esc>[1;5D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+nnoremap <silent> <leader>e :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -91,14 +91,14 @@ let g:ale_cpp_clangtidy_checks = [
 \]
 
 " Read project-local .vimrc, if any
-let s:vimrc_path = b:shs_project_dir . '/.vimrc'
+let s:vimrc_path = g:shs_project_dir . '/.vimrc'
 if filereadable(s:vimrc_path)
 	execute 'source' s:vimrc_path
 endif
 
 " Add project-local ctags database, if any
 " This is needed when CWD != project dir
-let s:ctags_path = b:shs_project_dir . '/.git/ctags'
+let s:ctags_path = g:shs_project_dir . '/.git/ctags'
 if filereadable(s:ctags_path)
 	set tags+=s:vimrc_path
 endif
@@ -107,7 +107,7 @@ endif
 
 if has('cscope')
 	function! Cscope_load ()
-		let l:cscope_path = b:shs_project_dir . '/.git/cscope.db'
+		let l:cscope_path = g:shs_project_dir . '/.git/cscope.db'
 		if filereadable(l:cscope_path)
 			execute 'cs add' l:cscope_path
 		endif
