@@ -105,7 +105,7 @@ REQUIRED_PACKAGES_FreeBSD="\
 	git vim tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
-	ctags gnupg neomutt offlineimap procmail abook urlview lynx ripgrep \
+	ctags gnupg neomutt offlineimap procmail abook urlview lynx fd-find \
 	fzf \
 	"
 REQUIRED_PACKAGES_Linux="\

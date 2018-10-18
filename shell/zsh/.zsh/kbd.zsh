@@ -54,6 +54,10 @@ else
 fi
 
 fzfpath="/usr/local/share/examples/fzf/shell"
+if which fd > /dev/null; then
+	FZF_CTRL_T_COMMAND="fd"
+	FZF_ALT_C_COMMAND="fd -H -t d"
+fi
 if [ -e "$fzfpath/key-bindings.zsh" ]; then
 	. $fzfpath/key-bindings.zsh
 fi
