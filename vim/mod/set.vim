@@ -24,6 +24,7 @@ set secure
 
 set vb
 set modeline
+set noshowmode
 set noexpandtab
 set shiftwidth=8
 set tabstop=8
