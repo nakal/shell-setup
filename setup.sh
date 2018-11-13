@@ -184,7 +184,7 @@ REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	.vim/colors/onedark.vim .vim/autoload/onedark.vim \
-	.local/bin/fzf .local/diff-highlight \
+	.local/bin/fzf .local/diff-highlight .config/nvim \
 	"
 
 for df in $REMOVE_FILES; do
@@ -199,7 +199,7 @@ echo "[shell-setup] Removing old softlinks..."
 rm -f $REMOVE_FILES
 
 # tidy up vim
-echo "Inspecting vim configuration..."
+echo "Inspecting (neo)vim configuration..."
 if [ -d $HOME/.vim ]; then
 	if [ -f $HOME/.vim/.by-nakal ]; then
 		echo "It's my own vim configuration. Keeping..."
@@ -269,8 +269,11 @@ touch .by-nakal
 test -d $HOME/.cache/vim || mkdir -p $HOME/.cache/vim
 ln -s $SCRIPT_HOME/vim/vimrc .
 ln -s $SCRIPT_HOME/vim/mod .
+mkdir -p $HOME/.config
+cd $HOME/.config
+ln -s $SCRIPT_HOME/vim nvim
 
-cd pack/vim/start
+cd $HOME/.vim/pack/vim/start
 git_update_repositories $VIM_PLUGINS
 
 cd $HOME/.vim/themes

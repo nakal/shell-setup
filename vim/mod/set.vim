@@ -12,11 +12,13 @@ set smartcase
 set showmatch
 let c_space_errors=1
 
+if !has('nvim')
 if v:version >= 704
 	set cryptmethod=blowfish2
 else
 	" unsecure, but Debian likes it
 	set cryptmethod=blowfish
+endif
 endif
 
 set exrc
