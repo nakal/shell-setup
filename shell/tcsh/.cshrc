@@ -14,7 +14,7 @@ alias l		ll
 alias ..	cd ..
 alias ...	cd ../..
 
-alias vi	vim
+alias vi	nvim
 
 # A righteous umask
 umask 22
@@ -22,7 +22,7 @@ umask 22
 set path = (/sbin /bin /usr/sbin /usr/bin /usr/games /usr/local/sbin /usr/local/bin $HOME/bin)
 limit coredumpsize unlimited
 
-setenv	EDITOR	vim
+setenv	EDITOR	nvim
 setenv	PAGER	less
 setenv	BLOCKSIZE	K
 setenv LSCOLORS gxfxcxdxbxegedabagacad

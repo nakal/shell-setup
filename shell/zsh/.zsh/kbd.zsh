@@ -30,9 +30,9 @@ zsh_fzf() {
 	fi
 	fzf_cmd="call FZFTryGFiles($fzf_dir)"
 	if [ -n "$DISPLAY" ] && [ -n "$DEFAULT_X_TERMINAL" ]; then
-		(${DEFAULT_X_TERMINAL} -e vim -c "$fzf_cmd" 2>/dev/null) &
+		(${DEFAULT_X_TERMINAL} -e ${EDITOR} -c "$fzf_cmd" 2>/dev/null) &
 	else
-		</dev/tty vim -c "$fzf_cmd"
+		</dev/tty ${EDITOR} -c "$fzf_cmd"
 	fi
 }
 

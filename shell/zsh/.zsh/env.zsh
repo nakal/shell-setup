@@ -1,6 +1,6 @@
 # Environment settings
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
