@@ -5,12 +5,17 @@
 " inoremap <silent> <Esc>[8~ <Esc>$a
 
 " FZF bindings
+if !has('nvim')
 nnoremap <silent> <Esc>Oa :<C-u>Buffers<cr>
 nnoremap <silent> <Esc>Ob :<C-u>Tags<cr>
 nnoremap <silent> <Esc>[A :<C-u>Buffers<cr>
 nnoremap <silent> <Esc>[1;5A :<C-u>Buffers<cr>
 nnoremap <silent> <Esc>[B :<C-u>Tags<cr>
 nnoremap <silent> <Esc>[1;5B :<C-u>Tags<cr>
+else
+nnoremap <silent> <C-Up> :<C-u>Buffers<cr>
+nnoremap <silent> <C-Down> :<C-u>Tags<cr>
+endif
 
 " FZF gf alternative
 "nmap <leader>gf :<C-u>execute ':GFiles '.g:shs_project_dir.' h'<cr>
@@ -33,12 +38,17 @@ endfunction
 nmap <leader>gf :<C-u>:call FZFFile()<cr>
 
 nnoremap <silent> <C-P> :call FZFTryGFiles(".")<cr>
+if !has('nvim')
 nnoremap <silent> <Esc>Oc :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[C :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>[1;5C :<C-u>:Files .<cr>
 nnoremap <silent> <Esc>Od :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
 nnoremap <silent> <Esc>[D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
 nnoremap <silent> <Esc>[1;5D :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+else
+nnoremap <silent> <C-Right> :<C-u>:Files .<cr>
+nnoremap <silent> <C-Left> :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
+endif
 nnoremap <silent> <leader>e :<C-u>call FZFTryGFiles(g:shs_project_dir)<cr>
 
 " Fugitive
