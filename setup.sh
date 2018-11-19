@@ -13,6 +13,7 @@ VIM_PLUGINS="\
 	junegunn/fzf.vim \
 	sheerun/vim-polyglot \
 	w0rp/ale \
+	Shougo/deoplete.nvim \
 	"
 
 # Git repo helper (clone or update a repository)
@@ -102,11 +103,11 @@ RECOMMENDED_PACKAGES_OpenBSD="\
 	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
-	git vim neovim tmux zsh \
+	git neovim tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg neomutt offlineimap procmail abook urlview lynx fd-find \
-	fzf \
+	fzf py36-pip \
 	"
 REQUIRED_PACKAGES_Linux="\
 	git vim zsh tmux \

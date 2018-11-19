@@ -139,3 +139,8 @@ if has('cscope')
 
 	silent call Cscope_load()
 endif
+
+if has('nvim') && has('python3')
+	let g:deoplete#enable_at_startup = 1
+	let g:python3_host_prog = "/usr/local/bin/python3.6"
+endif
