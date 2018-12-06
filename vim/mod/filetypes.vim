@@ -93,7 +93,7 @@ endfunction
 function! Indent_Cpp()
 	let oldformat = &fileformat
 	setlocal fileformat=unix
-	silent exec ":%!" . GetFirstExecutable("clang-format", "clang-format50", "clanf-format40") . " -style=file"
+	silent exec ":%!" . GetFirstExecutable("clang-format", "clang-format70", "clang-format60") . " -style=file"
 	let &fileformat=oldformat
 endfun
 
