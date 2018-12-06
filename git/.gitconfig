@@ -5,14 +5,14 @@
 	status = auto
 	ui = true
 [core]
-	editor = vim
+	editor = $EDITOR
 	excludesfile = ~/.gitignore_global
 [diff]
-	tool = vimdiff
 	compactionHeuristics = true
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+	tool = vimdiff4
+[mergetool "vimdiff4"]
+	cmd = $EDITOR -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [push]
 	default = simple
 [difftool]
