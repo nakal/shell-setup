@@ -1,6 +1,5 @@
 # Environment settings
 
-export EDITOR='nvim'
 export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
@@ -8,6 +7,12 @@ export EXA_COLORS='di=36:da=0:uu=1:gu=1'
 export GOROOT='/usr/local/go'
 
 source ~/.zsh/path.zsh
+
+if which -s nvim > /dev/null; then
+	export EDITOR='nvim'
+else
+	export EDITOR='vim'
+fi
 
 if [ -n "$DISPLAY" ]; then
 	for termtype in xterm urxvt; do

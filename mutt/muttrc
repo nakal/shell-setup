@@ -15,7 +15,7 @@ set signature="~/.mutt/signature"
 set fast_reply
 set include
 set reverse_name
-set my_editor="nvim -c 'normal Go' -c ':startinsert'"
+set my_editor="$EDITOR -c 'normal Go' -c ':startinsert'"
 set editor=$my_editor
 set send_charset="us-ascii:utf-8"
 

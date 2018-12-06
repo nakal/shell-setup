@@ -14,20 +14,26 @@ alias l		ll
 alias ..	cd ..
 alias ...	cd ../..
 
-alias vi	nvim
-
 # A righteous umask
 umask 22
 
 set path = (/sbin /bin /usr/sbin /usr/bin /usr/games /usr/local/sbin /usr/local/bin $HOME/bin)
 limit coredumpsize unlimited
 
-setenv	EDITOR	nvim
 setenv	PAGER	less
 setenv	BLOCKSIZE	K
 setenv LSCOLORS gxfxcxdxbxegedabagacad
 setenv GOROOT /usr/local/go
 setenv TERM screen-256color
+
+which nvim > /dev/null
+if ($? == 0) then
+	setenv	EDITOR	nvim
+else
+	setenv	EDITOR	vim
+endif
+
+alias vi	$EDITOR
 
 if ($?prompt) then
 
