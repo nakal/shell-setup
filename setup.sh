@@ -288,9 +288,16 @@ cd airline/themes
 ln -s ../../../themes/onedark.vim/autoload/airline/themes/onedark.vim .
 
 cd $HOME/.vim/pack
-for docdir in `ls -d vim/*/*/doc`; do
-	vim -u NONE -c "helptags $docdir" -c q -T dumb
-done
+case $EDITOR in
+	nvim) vimopt='-es';;
+	vim) vimopt='-T dumb';;
+	*) vimopt='';;
+esac
+if [ -n "$vimopt" ]; then
+	for docdir in `ls -d vim/*/*/doc`; do
+		"$EDITOR" -u NONE -c "helptags $docdir" -c q $vimopt
+	done
+fi
 
 if [ "$OS" = "Linux" ]; then
 	echo "[shell-setup] Installing fzf..."
