@@ -74,6 +74,8 @@ bind pager \e[7~ top
 bind pager \e[8~ bottom
 
 # Spam
+spam "X-Bogosity: Spam, tests=bogofilter, spamicity=" "98+/BF"
+spam "X-Bogosity: Unsure, tests=bogofilter, spamicity=" "50+/BF"
 macro index,pager X <save-message>=Spam.LearnSpam<return> "Learn the message as spam"
 macro index,pager H <save-message>=Spam.LearnHam<return> "Learn the message as ham"
 
