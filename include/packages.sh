@@ -11,13 +11,26 @@ check_packages_FreeBSD() {
 	if [ $? -ne 0 ]; then
 		echo "WARNING: Some recommended packages are not installed."
 	fi
+
+	echo "Checking (neo)vim package..."
+	pkg info neovim > /dev/null
+	if [ $? -ne 0 ]; then
+		pkg info vim
+		if [ $? -ne 0 ]; then
+			echo "ERROR: neovim and vim are not installed."
+			exit 1
+		else
+			echo "WARNING: neovim is not installed, " \
+				"falling back to vim."
+		fi
+	fi
 }
 
 parse_package_list_OpenBSD() {
 	ret=0
 	tmpfile=$1
 	shift
-	for pkg in $@; do
+	for pkg in "$@"; do
 		if ! egrep -q "^$pkg" "$tmpfile"; then
 			echo "*** System installation missing package $pkg"
 			ret=1

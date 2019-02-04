@@ -37,7 +37,7 @@ git_update_repositories()
 	TMPD=../.tmp-active
 	rm -rf "$TMPD"
 	mkdir "$TMPD"
-	for d in $@; do
+	for d in "$@"; do
 		NAME=`basename "$d"`
 		mv "$NAME" "$TMPD"
 	done
@@ -54,7 +54,7 @@ git_update_repositories()
 	done
 	rmdir "$TMPD"
 
-	for r in $@; do
+	for r in "$@"; do
 		NAME=`basename "$r"`
 		git_init_dir "https://github.com/$r" "$NAME"
 	done
@@ -103,7 +103,7 @@ RECOMMENDED_PACKAGES_OpenBSD="\
 	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
-	git neovim tmux zsh \
+	git tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg neomutt offlineimap procmail abook urlview lynx fd-find \
