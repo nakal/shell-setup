@@ -91,7 +91,9 @@ function git_status() {
 
 				if [ "$rebasing" = "1" ]; then
 					echo -n "%K{170}%F{white}"
-					ref=$(basename $(cat "$curgitpath/rebase-apply/head-name"))
+					if [ -f "$curgitpath/rebase-apply/head-name" ]; then
+						ref=$(basename $(cat "$curgitpath/rebase-apply/head-name"))
+					fi
 				fi
 
 				if [ "$conflicted" != "0" ]; then
