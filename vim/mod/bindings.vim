@@ -9,8 +9,8 @@ nnoremap <silent> <leader>n :<C-u>bn<cr>
 function! Browser ()
     let line = getline (".")
     let line = matchstr (line, "http[^ ]*")
-    exec ":silent !firefox ".line
+    exec ":silent !$BROWSER ".line
 endfunction
 
-nnoremap <silent> <leader>w :call Browser()<CR>
+nnoremap <silent> <leader>ow :call Browser()<CR>
 nnoremap <silent> <leader>s :call SynGroup()<CR>
