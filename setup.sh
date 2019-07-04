@@ -14,7 +14,6 @@ VIM_PLUGINS="\
 	sheerun/vim-polyglot \
 	w0rp/ale \
 	Shougo/deoplete.nvim \
-	tbabej/taskwiki \
 	vimwiki/vimwiki \
 	powerman/vim-plugin-AnsiEsc \
 	"
