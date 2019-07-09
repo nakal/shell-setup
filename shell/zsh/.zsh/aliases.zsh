@@ -13,6 +13,10 @@ else
 	esac
 fi
 
+if ! which fd > /dev/null 2>&1 && which fdfind > /dev/null 2>&1; then
+	alias fd='fdfind'
+fi
+
 alias l='ls -l'
 alias ..='cd ..'
 alias ...='cd ../..'
