@@ -1,7 +1,3 @@
-source ~/.mutt/local.muttrc
-source ~/.mutt/colors.muttrc
-source ~/.mutt/gpg.rc
-
 # System
 unset suspend
 unset wait_key
@@ -114,5 +110,9 @@ set crypt_verify_sig
 set pgp_show_unusable=no
 set pgp_use_gpg_agent
 set pgp_timeout=3600
+
+source ~/.mutt/local.muttrc
+source ~/.mutt/colors.muttrc
+source ~/.mutt/gpg.rc
 
 source ~/.mutt/add.mailboxes

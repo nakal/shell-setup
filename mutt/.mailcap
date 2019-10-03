@@ -1,4 +1,8 @@
 application/pdf; xpdf %s; test=test $DISPLAY
 application/x-pdf; xpdf %s; test=test $DISPLAY
 text/html; lynx -stdin -dump -display_charset=UTF-8 -image_links; copiousoutput
+image/*; iiview %s; test=test $DISPLAY
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; $HOME/.office.sh %s; test=test $DISPLAY
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; $HOME/.office.sh %s; test=test $DISPLAY
+application/msword; $HOME/.office.sh %s; test=test $DISPLAY
 */*; $BROWSER %s; test=test $DISPLAY

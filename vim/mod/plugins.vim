@@ -76,10 +76,10 @@ set laststatus=2
 let g:airline_theme='onedark'
 
 " ALE
-let s:clang_checker = GetFirstExecutable('clang-check', 'clang-check70', 'clang-check60')
-let s:clang_tidy = GetFirstExecutable('clang-tidy', 'clang-tidy70', 'clang-tidy60')
-let s:clang_c_compiler = GetFirstExecutable('clang', 'clang70', 'clang60')
-let s:clang_cpp_compiler = GetFirstExecutable('clang++', 'clang++70', 'clang++60')
+let s:clang_checker = GetFirstExecutable('clang-check', 'clang-check90', 'clang-check80')
+let s:clang_tidy = GetFirstExecutable('clang-tidy', 'clang-tidy90', 'clang-tidy80')
+let s:clang_c_compiler = GetFirstExecutable('clang', 'clang90', 'clang80')
+let s:clang_cpp_compiler = GetFirstExecutable('clang++', 'clang++90', 'clang++80')
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'E'
