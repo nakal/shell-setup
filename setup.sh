@@ -237,6 +237,9 @@ ln -s $SCRIPT_HOME/mutt/.mailcap .
 ln -s $SCRIPT_HOME/mutt/.urlview .
 ln -s $SCRIPT_HOME/misc/.clang-format .
 
+# Prepare local mutt configuration
+test -f .mutt/local.colors.muttrc || touch .mutt/local.colors.muttrc
+
 echo Checking local tmux configuration...
 if [ -r "$HOME/.tmux.local" ]; then
 	echo "Already exists (skipping)."
