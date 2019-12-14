@@ -50,6 +50,6 @@ color quoted3		color58		color234
 color quoted4		color52		color234
 color signature		color117	color234
 
-source local.colors.muttrc
+source ~/.mutt/local.colors.muttrc
 
 color index		color237	color234 ~D	# deleted
