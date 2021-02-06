@@ -15,7 +15,7 @@ check_packages_FreeBSD() {
 	echo "Checking (neo)vim package..."
 	pkg info neovim > /dev/null
 	if [ $? -ne 0 ]; then
-		pkg info vim
+		pkg info vim > /dev/null || pkg info vim-console > /dev/null
 		if [ $? -ne 0 ]; then
 			echo "ERROR: neovim and vim are not installed."
 			exit 1
