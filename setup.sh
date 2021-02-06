@@ -102,21 +102,21 @@ REQUIRED_PACKAGES_OpenBSD="\
 	git vim zsh ripgrep colorls \
 	"
 RECOMMENDED_PACKAGES_OpenBSD="\
-	ectags gnupg-2 gpgme mutt offlineimap procmail abook urlview lynx \
+	ectags gnupg-2 gpgme lynx \
 "
 REQUIRED_PACKAGES_FreeBSD="\
 	git tmux zsh \
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
-	ctags gnupg neomutt offlineimap procmail abook urlview lynx fd-find \
+	ctags gnupg lynx fd-find \
 	fzf py36-pip \
 	"
 REQUIRED_PACKAGES_Linux="\
 	git neovim zsh tmux \
 	"
 RECOMMENDED_PACKAGES_Linux="\
-	exuberant-ctags gnupg2 neomutt offlineimap procmail abook \
-	urlview lynx python3-pip fzf ripgrep fd-find \
+	exuberant-ctags gnupg2 \
+	lynx python3-pip fzf ripgrep fd-find \
 	taskwarrior timewarrior tasksh \
 	"
 . "$SCRIPT_HOME/include/packages.sh"
@@ -138,49 +138,6 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 echo "-> tmux is ok, good."
-
-echo "-> Checking (neo)mutt..."
-MUTT_IS_OK=1
-mutt -v > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-	mutt -v | grep -q '+CRYPT_BACKEND_GPGME'
-	if [ $? -ne 0 ]; then
-		MUTT_IS_OK=0
-		echo "*** GPGME missing"
-	fi
-	mutt -v | egrep -q '(patch.*\.sidebar\.|USE_SIDEBAR)'
-	if [ $? -ne 0 ]; then
-		MUTT_IS_OK=0
-		echo "*** SIDEBAR patch missing"
-	fi
-	mutt -v | grep -q '+HAVE_COLOR'
-	if [ $? -ne 0 ]; then
-		MUTT_IS_OK=0
-		echo "*** Colors (NCURSES) missing"
-	fi
-else
-	neomutt -v > /dev/null 2>&1
-	if [ $? -eq 0 ]; then
-		neomutt -v | grep -q '+gpgme'
-		if [ $? -ne 0 ]; then
-			MUTT_IS_OK=0
-			echo "*** GPGME missing"
-		fi
-		neomutt -v | grep -q '+color'
-		if [ $? -ne 0 ]; then
-			MUTT_IS_OK=0
-			echo "*** Colors missing"
-		fi
-	else
-		echo "*** mutt/neomutt not found, skipping checks."
-		MUTT_IS_OK=0
-	fi
-fi
-if [ $MUTT_IS_OK -ne 1 ]; then
-	echo "*** WARNING: mutt/neomutt check failed."
-else
-	echo "-> (neo)mutt is ok, good."
-fi
 
 cd $HOME
 REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
@@ -233,12 +190,7 @@ ln -s $SCRIPT_HOME/tmux/.tmux.conf .
 ln -s $SCRIPT_HOME/git/.gitignore_global .
 ln -s $SCRIPT_HOME/git/.gitconfig .
 ln -s $SCRIPT_HOME/git/template .git_template
-ln -s $SCRIPT_HOME/mutt/.mailcap .
-ln -s $SCRIPT_HOME/mutt/.urlview .
 ln -s $SCRIPT_HOME/misc/.clang-format .
-
-# Prepare local mutt configuration
-test -f .mutt/local.colors.muttrc || touch .mutt/local.colors.muttrc
 
 echo Checking local tmux configuration...
 if [ -r "$HOME/.tmux.local" ]; then
@@ -256,17 +208,6 @@ cd $HOME/.zsh
 ln -s $SCRIPT_HOME/shell/zsh/.zsh/*.zsh .
 cd modules
 git_update_repositories $ZSH_MODULES
-
-echo "[shell-setup] Setting up mutt..."
-mkdir -p $HOME/.mutt
-touch $HOME/.mutt/.by-nakal
-cd $HOME/.mutt
-ln -s $SCRIPT_HOME/mutt/muttrc .
-ln -s $SCRIPT_HOME/mutt/colors.muttrc .
-ln -s $SCRIPT_HOME/mutt/edit_expires .
-ln -s $SCRIPT_HOME/mutt/sync-notmuch .
-ln -s $SCRIPT_HOME/mutt/gpg.rc .
-ln -s $SCRIPT_HOME/mutt/mutt .
 
 echo "[shell-setup] Preparing vim and plugins..."
 mkdir -p $HOME/.vim

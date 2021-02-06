@@ -12,9 +12,6 @@ about the configuration done for the specific piece of software.
 		* advanced configuration for developers
 * version control system:
 	* [git](git/README.md)
-* mail:
-	* [neomutt](mutt/README.md)
-		* lynx and urlview integration
 * utils:
 	* (ex)ctags
 	* git
@@ -23,7 +20,7 @@ about the configuration done for the specific piece of software.
 * syscons (FreeBSD)
 	* keymap file with swapped ESC and CAPSLOCK
 
-## Small warning
+## Short warning
 
 The setup script used here will modify configurations and startup files
 in your home directory. Please be aware of this fact!
@@ -39,7 +36,7 @@ important data.
 
 For those who read the warnings above proceed with these steps:
 
-0. **Make a backup of your $HOME**
+0. **Make sure, you have got a working backup of your $HOME**
 1. Clone the project.
 2. When you have FreeBSD, you can directly execute the script
    `setup.sh`. If you are not on FreeBSD, you will need

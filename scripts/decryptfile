@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [ $# -gt 0 ]; then
+
+	INFILE="$1"
+	if [ "${INFILE%%.enc}" == "${INFILE}" ]; then
+		echo "The file is not encrypted (extension)!" >&2
+		exit 1
+	fi
+
+	if [ $# -eq 2 ]; then
+		OUTFILE="$2"
+		if [ "${OUTFILE%%.enc}" != "${OUTFILE}" ]; then
+			echo "The output file shouldn't have extension \"enc\"!" >&2
+			exit 1
+		fi
+		if [ -e "${OUTFILE}" ]; then
+			echo "Not overwriting file ${OUTFILE}." >&2
+			exit 1
+		fi
+		exec openssl enc -d -aes-256-cbc -pbkdf2 -in "${INFILE}" -out "${OUTFILE}"
+	else
+		if [ $# -gt 2 ]; then
+			echo "Syntax: $0 [ input-file [ output-file.enc ] ]" >&2
+			exit 1
+		fi
+	fi
+	exec openssl enc -d -aes-256-cbc -pbkdf2 -in "${INFILE}"
+fi
+
+exec openssl enc -d -aes-256-cbc -pbkdf2
