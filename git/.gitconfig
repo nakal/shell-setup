@@ -27,6 +27,7 @@
 	path = ~/.gitconfig_local
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = master
 [log]
 	decorate = true
 [alias]
