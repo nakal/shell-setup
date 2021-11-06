@@ -142,7 +142,7 @@ endif
 
 if has('nvim') && has('python3')
 	let g:deoplete#enable_at_startup = 1
-	let g:python3_host_prog = GetFirstExecutable("python", "python3", "python3.7", "python3.8")
+	let g:python3_host_prog = GetFirstExecutable("python", "python3", "python3.8")
 endif
 
 let g:vimwiki_list = [{'path': '~/.vim/wiki/'}]
