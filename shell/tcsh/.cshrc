@@ -64,10 +64,4 @@ if ($?prompt) then
 
 endif
 
-set HOSTHASH=`echo -n $HOST:r:e$USER | sha256`
-if ($HOSTHASH == "9cc9bab29b2db5337f4983ba2438b2667a6fac5a6f26baa8522995b607460647") then
-	set fignore = source
-	setenv ANDROID_SDK_HOME /home/${USER}/src/android-sdk-linux
-endif
-
-unset HOSTHASH
+test -r ~/.cshrc_local && source ~/.cshrc_local
