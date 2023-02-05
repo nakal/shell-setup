@@ -146,7 +146,7 @@ REMOVE_FILES=".cshrc .tmux.conf .tmux.conf.sys .indent.pro \
 	.zshrc .vim/vimrc .vim/mod .mailcap .urlview \
 	.vim/colors/atom-dark-256.vim .vim/colors/atom-dark.vim \
 	.vim/colors/onedark.vim .vim/autoload/onedark.vim \
-	.local/bin/fzf .local/diff-highlight .config/nvim \
+	.local/bin/fzf .local/bin/diff-highlight .config/nvim \
 	"
 
 for df in $REMOVE_FILES; do
@@ -256,9 +256,11 @@ fi
 
 cd $HOME
 
+echo "[shell-setup] Checking for diff-highlight..."
 DIFFH=`which diff-highlight`;
 if [ -z "$DIFFH" ]; then
 	# OS specific setup
+	echo "Need to install a linked script."
 	cd $HOME/.local/bin
 	case "$OS" in
 		FreeBSD)
@@ -266,13 +268,28 @@ if [ -z "$DIFFH" ]; then
 			ln -s /usr/share/examples/indent/indent.pro .indent.pro;
 			;;
 		Linux)
-			test -d /usr/share/doc/git/contrib/diff-highlight && \
+			if [ -x /usr/share/doc/git/contrib/diff-highlight/diff-highlight ]; then
 				ln -s /usr/share/doc/git/contrib/diff-highlight/diff-highlight diff-highlight;
+			else
+				echo "Warning: diff-highlight from git contribution package is not available."
+				if [ -r /usr/share/doc/git/contrib/diff-highlight/diff-highlight.perl ]; then
+					echo "	Fix it! Change into the directory"
+					echo "  /usr/share/doc/git/contrib/diff-highlight"
+					echo "  and run \"make\"."
+					exit 1
+				else
+					echo "  Linking diff-highlight fallback script."
+					ln -s $SCRIPT_HOME/git/.diff-highlight.fallback diff-highlight;
+				fi
+			fi
 			;;
 		*)
+			echo "Unknown system, linking diff-highlight fallback script."
 			ln -s $SCRIPT_HOME/git/.diff-highlight.fallback diff-highlight;
 			;;
 	esac
+else
+	echo "Skipping, is installed natively."
 fi
 
 if [ "$OS" = "FreeBSD" ] && [ ! -r /usr/share/syscons/keymaps/us.capsescswap.kbd ]; then
