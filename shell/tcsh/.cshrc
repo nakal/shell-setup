@@ -62,6 +62,9 @@ if ($?prompt) then
 		bindkey -k down history-search-forward
 	endif
 
+	complete service 'c/-/(e l r v)/' 'p/1/`service -l`/' \
+		'n/*/(start stop reload restart \
+		status rcvar onestart onestop)/'
 endif
 
 test -r ~/.cshrc_local && source ~/.cshrc_local
