@@ -19,9 +19,6 @@ if !empty(glob(s:vimrc_local_name))
 	execute 'source' s:vimrc_local_name
 endif
 
-set printoptions=paper:a4
-set printexpr=system('/usr/local/bin/lpr'\ .\ (&printdevice\ ==\ ''\ ?\ ''\ :\ '\ -P'\ .\ &printdevice)\ .\ '\ '\ .\ v:fname_in)\ .\ delete(v:fname_in)\ +\ v:shell_error
-
 source ~/.vim/mod/project.vim
 source ~/.vim/mod/plugins.vim
 

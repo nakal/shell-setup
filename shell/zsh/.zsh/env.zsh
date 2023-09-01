@@ -4,7 +4,11 @@ export PAGER='less'
 export BLOCKSIZE='K'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 export EXA_COLORS='di=36:da=0:uu=1:gu=1'
-export GOROOT='/usr/local/go'
+if [ "$OS" = "FreeBSD" ];then
+	export GOROOT='/usr/local/go'
+else
+	export GOROOT='/usr/share/go'
+fi
 
 source ~/.zsh/path.zsh
 
