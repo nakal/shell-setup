@@ -31,7 +31,14 @@
 [log]
 	decorate = true
 [alias]
-	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold 156)%h%C(reset) - %C(dim white)(%ar)%C(reset) %C(normal)%s%C(reset) %C(bold white)<%an>%C(reset)%C(156)%d%C(reset)' --all
-	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold 156)%h%C(reset) - %C(dim 208)%aD%C(reset) %C(dim white)(%ar)%C(reset)%C(156)%d%C(reset)%n''          %C(normal)%s%C(reset) %C(bold white)<%an>%C(reset)' --all
+	lg = lg1
+	lg1 = lg1-specific --all
+	lg2 = lg2-specific --all
+	lg3 = lg3-specific --all
+
+	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+
 [pull]
 	rebase = false

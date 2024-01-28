@@ -14,8 +14,6 @@ VIM_PLUGINS="\
 	sheerun/vim-polyglot \
 	w0rp/ale \
 	Shougo/deoplete.nvim \
-	vimwiki/vimwiki \
-	powerman/vim-plugin-AnsiEsc \
 	"
 
 # Git repo helper (clone or update a repository)
@@ -109,7 +107,7 @@ REQUIRED_PACKAGES_FreeBSD="\
 	"
 RECOMMENDED_PACKAGES_FreeBSD="\
 	ctags gnupg lynx fd-find \
-	fzf py36-pip \
+	fzf py39-pip \
 	"
 REQUIRED_PACKAGES_Linux="\
 	git neovim zsh tmux \
@@ -117,7 +115,6 @@ REQUIRED_PACKAGES_Linux="\
 RECOMMENDED_PACKAGES_Linux="\
 	exuberant-ctags gnupg2 \
 	lynx python3-pip fzf ripgrep fd-find \
-	taskwarrior timewarrior tasksh \
 	"
 . "$SCRIPT_HOME/include/packages.sh"
 check_packages

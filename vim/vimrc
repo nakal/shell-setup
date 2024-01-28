@@ -1,5 +1,5 @@
 scriptencoding utf-8
-lang C
+lang C.UTF-8
 if &compatible
 	set nocompatible
 endif

@@ -1,3 +1,4 @@
+set encoding=utf-8
 set shell=sh
 set shortmess+=I
 set runtimepath+=$GOROOT/misc/vim
