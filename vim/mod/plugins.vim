@@ -17,6 +17,7 @@ nnoremap <silent> <C-Down> :<C-u>Tags<cr>
 
 " FZF gf alternative
 "nmap <leader>gf :<C-u>execute ':GFiles '.g:shs_project_dir.' h'<cr>
+let g:fzf_vim = {}
 let g:fzf_tags_command = GetFirstExecutable("exctags", "tags").' -R'
 
 " GFiles, fallback Files .

@@ -9,6 +9,7 @@ VIM_PLUGINS="\
 	tpope/vim-surround \
 	bling/vim-airline \
 	airblade/vim-gitgutter \
+	junegunn/fzf \
 	junegunn/fzf.vim \
 	sheerun/vim-polyglot \
 	w0rp/ale \
