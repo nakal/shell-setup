@@ -9,7 +9,6 @@ VIM_PLUGINS="\
 	tpope/vim-surround \
 	bling/vim-airline \
 	airblade/vim-gitgutter \
-	junegunn/fzf \
 	junegunn/fzf.vim \
 	sheerun/vim-polyglot \
 	w0rp/ale \
@@ -242,13 +241,6 @@ if [ -n "$vimopt" ]; then
 	for docdir in `ls -d vim/*/*/doc`; do
 		"$EDITOR" -u NONE -c "helptags $docdir" -c q $vimopt
 	done
-fi
-
-if [ "$OS" = "Linux" ]; then
-	echo "[shell-setup] Installing fzf..."
-	yes | $HOME/.vim/pack/vim/start/fzf/install
-	cd $HOME/.local/bin
-	ln -s ../../.vim/pack/vim/start/fzf/bin/fzf .
 fi
 
 cd $HOME
