@@ -20,8 +20,8 @@ umask 22
 set path = (/sbin /bin /usr/sbin /usr/bin /usr/games /usr/local/sbin /usr/local/bin $HOME/bin)
 limit coredumpsize unlimited
 
-setenv	PAGER	less
-setenv	BLOCKSIZE	K
+setenv PAGER less
+setenv BLOCKSIZE K
 setenv LSCOLORS gxfxcxdxbxegedabagacad
 setenv GOROOT /usr/local/go
 setenv TERM screen-256color
@@ -34,6 +34,7 @@ else
 endif
 
 alias vi	$EDITOR
+alias vim	$EDITOR
 
 if ($?prompt) then
 
