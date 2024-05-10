@@ -53,11 +53,19 @@ else
 	bindkey "Oc" zsh_fzf_curdir
 fi
 
-fzfpath="/usr/local/share/examples/fzf/shell"
-if which fd > /dev/null; then
-	FZF_CTRL_T_COMMAND="fd"
-	FZF_ALT_C_COMMAND="fd -H -t d"
+fzfpath="/usr/share/doc/fzf/examples"
+if ! test -d "$fzfpath"; then
+	fzfpath="/usr/local/share/examples/fzf/shell"
 fi
+
+if which fdfind > /dev/null; then
+	fd=fdfind
+else
+	fd=fd
+fi
+FZF_CTRL_T_COMMAND="$fd"
+FZF_ALT_C_COMMAND="$fd -H -t d"
+
 if [ -e "$fzfpath/key-bindings.zsh" ]; then
 	. $fzfpath/key-bindings.zsh
 fi
