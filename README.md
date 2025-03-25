@@ -1,6 +1,6 @@
 # Repository moved and won't be updated here
 
-| Repository moved to: `https://codeberg.org/nakal/xmonad-conf` |
+| Repository moved to: `https://codeberg.org/nakal/shell-setup` |
 |---|
 
 # nakal's shell configuration
